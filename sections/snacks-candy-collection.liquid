@@ -18,8 +18,6 @@
     background-color: {{ section.settings.section_bg_color }};
     padding-top: {{ section.settings.section_padding_top }}px;
     padding-bottom: {{ section.settings.section_padding_bottom }}px;
-    width: 100%;
-    box-sizing: border-box;
   }
 
   .snc-{{ section.id }} {
@@ -35,16 +33,14 @@
     --btn-txt: {{ section.settings.button_text_color }};
     --btn-border: {{ section.settings.button_border_color }};
     --section-title-color: {{ section.settings.title_color }};
-    width: 100%;
-    max-width: 100%;
+    max-width: 1400px;
     margin: 0 auto;
-    padding: 0 2%;
-    box-sizing: border-box;
+    padding: 0 16px;
   }
 
   /* ── Section Title ── */
   .snc-heading {
-    font-size: clamp(16px, 2vw, 22px);
+    font-size: 22px;
     font-weight: 700;
     color: var(--section-title-color);
     margin-bottom: 20px;
@@ -54,15 +50,13 @@
   /* ── Main Layout ── */
   .snc-layout {
     display: flex;
-    gap: clamp(8px, 1.2vw, 16px);
+    gap: 16px;
     align-items: stretch;
-    width: 100%;
-    box-sizing: border-box;
   }
 
   /* ── Left Banner ── */
   .snc-banner {
-    flex: 0 0 clamp(100px, 16vw, 220px);
+    flex: 0 0 220px;
     min-width: 0;
     border-radius: 0px;
     overflow: hidden;
@@ -84,10 +78,8 @@
     flex: 1;
     display: grid;
     grid-template-columns: repeat({{ columns_desktop }}, 1fr);
-    gap: clamp(8px, 1.2vw, 16px);
+    gap: 16px;
     min-width: 0;
-    width: 100%;
-    box-sizing: border-box;
   }
 
   /* ── Product Card ── */
@@ -100,9 +92,6 @@
     flex-direction: column;
     transition: box-shadow 0.2s ease, transform 0.2s ease;
     position: relative;
-    min-width: 0;
-    width: 100%;
-    box-sizing: border-box;
   }
 
   .snc-card:hover {
@@ -117,7 +106,7 @@
     left: 10px;
     background: var(--badge-bg);
     color: var(--badge-txt);
-    font-size: clamp(9px, 0.8vw, 11px);
+    font-size: 11px;
     font-weight: 700;
     padding: 3px 8px;
     border-radius: 0px;
@@ -162,7 +151,6 @@
     position: relative;
     overflow: hidden;
     background: #f6f6f6;
-    width: 100%;
   }
 
   {% case section.settings.image_ratio %}
@@ -180,7 +168,7 @@
     object-fit: contain;
     display: block;
     transition: opacity 0.3s ease;
-    padding: clamp(6px, 1vw, 12px);
+    padding: 12px;
     box-sizing: border-box;
   }
 
@@ -195,7 +183,7 @@
 
   /* ── Card Body ── */
   .snc-card-body {
-    padding: clamp(8px, 1vw, 12px) clamp(8px, 1.2vw, 14px) clamp(10px, 1.2vw, 14px);
+    padding: 12px 14px 14px;
     display: flex;
     flex-direction: column;
     flex: 1;
@@ -203,7 +191,7 @@
   }
 
   .snc-vendor {
-    font-size: clamp(9px, 0.8vw, 11px);
+    font-size: 11px;
     color: var(--vendor-color);
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -222,9 +210,9 @@
     overflow: hidden;
   }
 
-  .snc-title.size-small  { font-size: clamp(10px, 0.9vw, 12px); }
-  .snc-title.size-medium { font-size: clamp(11px, 1.1vw, 14px); }
-  .snc-title.size-large  { font-size: clamp(13px, 1.3vw, 16px); }
+  .snc-title.size-small  { font-size: 12px; }
+  .snc-title.size-medium { font-size: 14px; }
+  .snc-title.size-large  { font-size: 16px; }
 
   .snc-price-row {
     display: flex;
@@ -234,13 +222,13 @@
     margin-top: 2px;
   }
 
-  .snc-price      { color: var(--price-color); font-size: clamp(11px, 1.1vw, 14px); font-weight: 700; }
-  .snc-compare    { color: #aaa; font-size: clamp(10px, 0.9vw, 12px); text-decoration: line-through; }
-  .snc-sale-price { color: var(--sale-color); font-size: clamp(11px, 1.1vw, 14px); font-weight: 700; }
+  .snc-price      { color: var(--price-color); font-size: 14px; font-weight: 700; }
+  .snc-compare    { color: #aaa; font-size: 12px; text-decoration: line-through; }
+  .snc-sale-price { color: var(--sale-color); font-size: 14px; font-weight: 700; }
 
   /* ── Stock ── */
   .snc-stock {
-    font-size: clamp(10px, 0.9vw, 12px);
+    font-size: 12px;
     font-weight: 500;
     display: flex;
     align-items: center;
@@ -263,8 +251,8 @@
     color: var(--btn-txt);
     border: 1.5px solid var(--btn-border);
     border-radius: 0px;
-    padding: clamp(7px, 0.8vw, 10px) clamp(6px, 1vw, 12px);
-    font-size: clamp(10px, 0.85vw, 12px);
+    padding: 10px 12px;
+    font-size: 12px;
     font-weight: 700;
     letter-spacing: 0.8px;
     text-transform: uppercase;
@@ -294,7 +282,7 @@
 
   .snc-qv-modal {
     background: #fff;
-    border-radius: 0px;
+    border-radius: 12px;
     max-width: 680px;
     width: 100%;
     max-height: 85vh;
@@ -337,18 +325,13 @@
   /* ── Responsive ── */
   @media (max-width: 900px) {
     .snc-grid { grid-template-columns: repeat({{ columns_mobile }}, 1fr); }
-    .snc-banner { flex: 0 0 clamp(80px, 14vw, 140px); }
+    .snc-banner { flex: 0 0 140px; }
   }
 
   @media (max-width: 600px) {
     .snc-layout { flex-direction: column; }
-    .snc-banner { flex: none; height: 180px; width: 100%; }
+    .snc-banner { flex: none; height: 180px; }
     .snc-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-
-  @media (max-width: 400px) {
-    .snc-grid { grid-template-columns: repeat(1, 1fr); }
-    .snc-{{ section.id }} { padding: 0 10px; }
   }
 </style>
 
@@ -555,15 +538,19 @@
 
 <script>
 (function() {
+  /* ── Quick View helpers ── */
   window.sncOpenQuickView = function(triggerEl, sectionId) {
     var productUrl = triggerEl.getAttribute('data-product-url');
     if (!productUrl) return;
+
     var overlay = document.getElementById('sncQvOverlay-' + sectionId);
     var content = document.getElementById('sncQvContent-' + sectionId);
     if (!overlay || !content) return;
+
     content.innerHTML = '<p class="snc-qv-loading">Loading&hellip;</p>';
     overlay.classList.add('is-open');
     document.body.style.overflow = 'hidden';
+
     fetch(productUrl + '?view=quick-view')
       .then(function(res) { return res.text(); })
       .then(function(html) {
@@ -573,17 +560,25 @@
         content.innerHTML = main ? main.innerHTML : html;
       })
       .catch(function() {
-        content.innerHTML = '<p style="color:#e00;text-align:center;padding:20px 0;">Could not load product. <a href="' + productUrl + '" style="color:inherit;font-weight:700;">View product page &rarr;</a></p>';
+        content.innerHTML =
+          '<p style="color:#e00;text-align:center;padding:20px 0;">' +
+          'Could not load product. ' +
+          '<a href="' + productUrl + '" style="color:inherit;font-weight:700;">View product page &rarr;</a>' +
+          '</p>';
       });
   };
+
   window.sncCloseModal = function(sectionId) {
     var overlay = document.getElementById('sncQvOverlay-' + sectionId);
     if (overlay) overlay.classList.remove('is-open');
     document.body.style.overflow = '';
   };
+
   window.sncCloseOnBackdrop = function(event, sectionId) {
     if (event.target === event.currentTarget) sncCloseModal(sectionId);
   };
+
+  /* Close on Escape key */
   document.addEventListener('keydown', function(e) {
     if (e.key !== 'Escape') return;
     document.querySelectorAll('.snc-qv-overlay.is-open').forEach(function(el) {
@@ -600,44 +595,229 @@
   "tag": "section",
   "class": "snacks-candy-section",
   "settings": [
+
     { "type": "header", "content": "Section Title" },
-    { "type": "checkbox", "id": "show_section_title", "label": "Show Section Title", "default": true },
-    { "type": "text", "id": "section_title", "label": "Section Heading", "default": "Snacks & Candy" },
-    { "type": "color", "id": "title_color", "label": "Title Color", "default": "#111111" },
+    {
+      "type": "checkbox",
+      "id": "show_section_title",
+      "label": "Show Section Title",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Heading",
+      "default": "Snacks & Candy"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#111111"
+    },
+
     { "type": "header", "content": "Collection & Banner" },
-    { "type": "collection", "id": "collection", "label": "Select Collection" },
-    { "type": "image_picker", "id": "fallback_banner_image", "label": "Fallback Banner Image", "info": "Used only if the selected collection has no featured image" },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Select Collection"
+    },
+    {
+      "type": "image_picker",
+      "id": "fallback_banner_image",
+      "label": "Fallback Banner Image",
+      "info": "Used only if the selected collection has no featured image"
+    },
+
     { "type": "header", "content": "Product Grid" },
-    { "type": "range", "id": "products_to_show", "label": "Number of Products to Show", "min": 2, "max": 12, "step": 1, "default": 3 },
-    { "type": "range", "id": "columns_desktop", "label": "Columns on Desktop", "min": 2, "max": 6, "step": 1, "default": 3 },
-    { "type": "range", "id": "columns_mobile", "label": "Columns on Mobile", "min": 1, "max": 3, "step": 1, "default": 2 },
-    { "type": "select", "id": "image_ratio", "label": "Image Aspect Ratio", "options": [{ "value": "square", "label": "Square (1:1)" }, { "value": "portrait", "label": "Portrait (3:4)" }, { "value": "landscape", "label": "Landscape (4:3)" }], "default": "square" },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "label": "Number of Products to Show",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "label": "Columns on Desktop",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "columns_mobile",
+      "label": "Columns on Mobile",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Image Aspect Ratio",
+      "options": [
+        { "value": "square",    "label": "Square (1:1)" },
+        { "value": "portrait",  "label": "Portrait (3:4)" },
+        { "value": "landscape", "label": "Landscape (4:3)" }
+      ],
+      "default": "square"
+    },
+
     { "type": "header", "content": "Discount Badge" },
-    { "type": "color", "id": "badge_color", "label": "Badge Background", "default": "#1a7a4a" },
-    { "type": "color", "id": "badge_text_color", "label": "Badge Text Color", "default": "#ffffff" },
+    {
+      "type": "color",
+      "id": "badge_color",
+      "label": "Badge Background",
+      "default": "#1a7a4a"
+    },
+    {
+      "type": "color",
+      "id": "badge_text_color",
+      "label": "Badge Text Color",
+      "default": "#ffffff"
+    },
+
     { "type": "header", "content": "Product Info" },
-    { "type": "checkbox", "id": "show_vendor", "label": "Show Product Vendor", "default": true },
-    { "type": "color", "id": "vendor_color", "label": "Vendor Label Color", "default": "#888888" },
-    { "type": "color", "id": "product_title_color", "label": "Product Title Color", "default": "#111111" },
-    { "type": "select", "id": "product_title_size", "label": "Product Title Size", "options": [{ "value": "small", "label": "Small" }, { "value": "medium", "label": "Medium" }, { "value": "large", "label": "Large" }], "default": "medium" },
-    { "type": "color", "id": "price_color", "label": "Regular Price Color", "default": "#111111" },
-    { "type": "color", "id": "sale_price_color", "label": "Sale Price Color", "default": "#cc0000" },
-    { "type": "checkbox", "id": "show_stock_label", "label": "Show Stock Label", "default": true },
-    { "type": "color", "id": "instock_color", "label": "In Stock Color", "default": "#1a7a4a" },
-    { "type": "color", "id": "outofstock_color", "label": "Out of Stock Color", "default": "#cc0000" },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "Show Product Vendor",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "vendor_color",
+      "label": "Vendor Label Color",
+      "default": "#888888"
+    },
+    {
+      "type": "color",
+      "id": "product_title_color",
+      "label": "Product Title Color",
+      "default": "#111111"
+    },
+    {
+      "type": "select",
+      "id": "product_title_size",
+      "label": "Product Title Size",
+      "options": [
+        { "value": "small",  "label": "Small" },
+        { "value": "medium", "label": "Medium" },
+        { "value": "large",  "label": "Large" }
+      ],
+      "default": "medium"
+    },
+    {
+      "type": "color",
+      "id": "price_color",
+      "label": "Regular Price Color",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "sale_price_color",
+      "label": "Sale Price Color",
+      "default": "#cc0000"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_stock_label",
+      "label": "Show Stock Label",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "instock_color",
+      "label": "In Stock Color",
+      "default": "#1a7a4a"
+    },
+    {
+      "type": "color",
+      "id": "outofstock_color",
+      "label": "Out of Stock Color",
+      "default": "#cc0000"
+    },
+
     { "type": "header", "content": "Quick View" },
-    { "type": "checkbox", "id": "enable_quick_view", "label": "Enable Quick View (Eye Icon)", "default": true },
+    {
+      "type": "checkbox",
+      "id": "enable_quick_view",
+      "label": "Enable Quick View (Eye Icon)",
+      "default": true
+    },
+
     { "type": "header", "content": "Button" },
-    { "type": "text", "id": "button_label", "label": "Button Label", "default": "CHOOSE OPTIONS" },
-    { "type": "select", "id": "button_action", "label": "Button Action", "options": [{ "value": "product_page", "label": "Link to Product Page" }, { "value": "quick_add", "label": "Open Quick View Popup" }], "default": "product_page" },
-    { "type": "color", "id": "button_bg_color", "label": "Button Background", "default": "#ffffff" },
-    { "type": "color", "id": "button_text_color", "label": "Button Text Color", "default": "#111111" },
-    { "type": "color", "id": "button_border_color", "label": "Button Border Color", "default": "#111111" },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "CHOOSE OPTIONS"
+    },
+    {
+      "type": "select",
+      "id": "button_action",
+      "label": "Button Action",
+      "options": [
+        { "value": "product_page", "label": "Link to Product Page" },
+        { "value": "quick_add",    "label": "Open Quick View Popup" }
+      ],
+      "default": "product_page"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Button Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button Text Color",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "button_border_color",
+      "label": "Button Border Color",
+      "default": "#111111"
+    },
+
     { "type": "header", "content": "Section Spacing & Background" },
-    { "type": "color", "id": "section_bg_color", "label": "Section Background Color", "default": "#f9f9f9" },
-    { "type": "range", "id": "section_padding_top", "label": "Padding Top (px)", "min": 0, "max": 100, "step": 4, "default": 40 },
-    { "type": "range", "id": "section_padding_bottom", "label": "Padding Bottom (px)", "min": 0, "max": 100, "step": 4, "default": 40 }
+    {
+      "type": "color",
+      "id": "section_bg_color",
+      "label": "Section Background Color",
+      "default": "#f9f9f9"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "label": "Padding Top (px)",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "label": "Padding Bottom (px)",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "default": 40
+    }
+
   ],
-  "presets": [{ "name": "Featured-Collection" }]
+  "presets": [
+    { "name": "Featured-Collection" }
+  ]
 }
 {% endschema %}
+}
