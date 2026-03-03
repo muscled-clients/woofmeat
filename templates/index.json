@@ -1054,7 +1054,7 @@
         "section_title": "Shop by Brand",
         "section_background_color": "#ffffff",
         "columns_desktop": 6,
-        "columns_mobile": "2",
+        "columns_mobile": "3",
         "brands_visible_before_showmore": 12,
         "section_padding_top": 48,
         "section_padding_bottom": 48,
