@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "main": {
+      "type": "sc-subcollections-grid",
+      "settings": {}
+    }
+  },
+  "order": ["main"]
+}

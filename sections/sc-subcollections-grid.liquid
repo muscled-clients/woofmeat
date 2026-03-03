@@ -1,0 +1,49 @@
+{% assign subs = collection.metafields.custom.subcollections.value %}
+
+<section class="subc-wrap">
+  <div class="subc-inner">
+    <h1 class="subc-title">{{ collection.title }}</h1>
+
+    {% if subs != blank and subs.size > 0 %}
+      <div class="subc-grid">
+        {% for sub in subs %}
+          <a class="subc-card" href="{{ sub.url }}">
+            <div class="subc-card-inner">
+              <div class="subc-name">{{ sub.title }}</div>
+
+              {% if sub.featured_image != blank %}
+                <div class="subc-thumb">
+                  <img src="{{ sub.featured_image | image_url: width: 240 }}" alt="{{ sub.title | escape }}" loading="lazy">
+                </div>
+              {% endif %}
+            </div>
+          </a>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="subc-empty">No sub-collections added for this collection.</p>
+    {% endif %}
+  </div>
+</section>
+
+
+<style>
+  .subc-wrap{
+    padding:28px 0}
+  .subc-inner{max-width:1200px;margin:0 auto;padding:0 18px}
+  .subc-title{font-size:22px;font-weight:700;margin:0 0 18px}
+  .subc-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+  @media (max-width: 900px){.subc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  @media (max-width: 520px){.subc-grid{grid-template-columns:1fr}}
+  .subc-card{text-decoration:none;color:inherit;border:1px solid #e7e7e7;border-radius:10px;background:#fff;transition:.15s}
+  .subc-card:hover{border-color:#b9c9ff;box-shadow:0 3px 14px rgba(0,0,0,.06)}
+  .subc-card-inner{display:flex;align-items:center;justify-content:space-between;padding:18px;min-height:78px}
+  .subc-name{font-size:14px;font-weight:600}
+  .subc-thumb{width:70px;height:70px;display:flex;align-items:center;justify-content:center}
+  .subc-thumb img{max-width:70px;max-height:70px;object-fit:contain}
+  .subc-empty{color:#666}
+</style>
+
+{% schema %}
+{ "name": "SC - Subcollections Grid", "settings": [] }
+{% endschema %}
