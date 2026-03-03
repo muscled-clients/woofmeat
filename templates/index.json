@@ -363,7 +363,7 @@
     },
     "snacks_candy_collection_jAdxGy": {
       "type": "snacks-candy-collection",
-      "name": "Snacks & Candy",
+      "name": "Bakery-collection",
       "settings": {
         "show_section_title": true,
         "section_title": "Bakery",
@@ -1017,8 +1017,8 @@
     "sc_collection_slider_bWtt3e",
     "promoution_grid_1",
     "promotion_grid_2",
-    "snacks_candy_collection_jAdxGy",
     "tabbed_collections_1",
+    "snacks_candy_collection_jAdxGy",
     "overlapping_media_with_content_1",
     "featured_collection_media",
     "snacks_candy_collection_aBW4Ji",
