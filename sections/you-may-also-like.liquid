@@ -1,0 +1,708 @@
+{% comment %}
+  Section: You May Also Like
+  - Fully dynamic via Shopify Theme Customizer
+  - Responsive grid layout
+  - Matches Figma design exactly
+{% endcomment %}
+
+{{ 'you-may-also-like.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="you-may-also-like"
+  style="
+    background-color: {{ section.settings.background_color }};
+    padding-top: {{ section.settings.section_padding_top }}px;
+    padding-bottom: {{ section.settings.section_padding_bottom }}px;
+  "
+>
+  <div class="you-may-also-like__container">
+
+    {% if section.settings.heading != blank %}
+      <h2
+        class="you-may-also-like__heading"
+        style="
+          font-size: {{ section.settings.heading_font_size }}px;
+          color: {{ section.settings.heading_color }};
+          font-weight: {{ section.settings.heading_font_weight }};
+          margin-bottom: {{ section.settings.heading_margin_bottom }}px;
+        "
+      >
+        {{ section.settings.heading }}
+      </h2>
+    {% endif %}
+
+    <div
+      class="you-may-also-like__grid"
+      style="--products-per-row: {{ section.settings.products_per_row }};"
+    >
+      {% for block in section.blocks %}
+        {% if block.type == 'product_card' %}
+          {% assign product_obj = block.settings.product %}
+
+          <div
+            class="product-card"
+            style="
+              border: {{ section.settings.card_border_width }}px solid {{ section.settings.card_border_color }};
+              border-radius: {{ section.settings.card_border_radius }}px;
+              background-color: {{ section.settings.card_background_color }};
+            "
+            {{ block.shopify_attributes }}
+          >
+
+            <a
+              class="product-card__image-wrapper"
+              href="{% if product_obj != blank %}{{ product_obj.url }}{% else %}#{% endif %}"
+              aria-label="{% if product_obj != blank %}{{ product_obj.title }}{% else %}{{ block.settings.custom_title }}{% endif %}"
+              style="background-color: {{ section.settings.image_bg_color }};"
+            >
+              {% if product_obj != blank %}
+                {% if product_obj.featured_image != blank %}
+                  <img
+                    src="{{ product_obj.featured_image | img_url: '400x400', crop: 'center' }}"
+                    alt="{{ product_obj.featured_image.alt | escape }}"
+                    class="product-card__image"
+                    loading="lazy"
+                    width="400"
+                    height="400"
+                  >
+                {% else %}
+                  {{ 'product-1' | placeholder_svg_tag: 'product-card__image product-card__image--placeholder' }}
+                {% endif %}
+              {% elsif block.settings.custom_image != blank %}
+                <img
+                  src="{{ block.settings.custom_image | img_url: '400x400', crop: 'center' }}"
+                  alt="{{ block.settings.custom_title | escape }}"
+                  class="product-card__image"
+                  loading="lazy"
+                  width="400"
+                  height="400"
+                >
+              {% else %}
+                {{ 'product-1' | placeholder_svg_tag: 'product-card__image product-card__image--placeholder' }}
+              {% endif %}
+            </a>
+
+            <div class="product-card__info">
+
+              {% comment %} Vendor / Badge {% endcomment %}
+              {% if section.settings.show_vendor %}
+                <p
+                  class="product-card__vendor"
+                  style="
+                    color: {{ section.settings.vendor_color }};
+                    font-size: {{ section.settings.vendor_font_size }}px;
+                  "
+                >
+                  {% if product_obj != blank %}
+                    {{ product_obj.vendor }}
+                  {% else %}
+                    {{ block.settings.custom_vendor }}
+                  {% endif %}
+                </p>
+              {% endif %}
+
+              {% comment %} Title {% endcomment %}
+              <a
+                class="product-card__title"
+                href="{% if product_obj != blank %}{{ product_obj.url }}{% else %}#{% endif %}"
+                style="
+                  color: {{ section.settings.title_color }};
+                  font-size: {{ section.settings.title_font_size }}px;
+                  font-weight: {{ section.settings.title_font_weight }};
+                "
+              >
+                {% if product_obj != blank %}
+                  {{ product_obj.title }}
+                {% else %}
+                  {{ block.settings.custom_title }}
+                {% endif %}
+              </a>
+
+              {% comment %} Price {% endcomment %}
+              {% if section.settings.show_price %}
+                <p
+                  class="product-card__price"
+                  style="
+                    color: {{ section.settings.price_color }};
+                    font-size: {{ section.settings.price_font_size }}px;
+                    font-weight: {{ section.settings.price_font_weight }};
+                  "
+                >
+                  {% if product_obj != blank %}
+                    {{ product_obj.price | money }}
+                  {% else %}
+                    {{ block.settings.custom_price | money }}
+                  {% endif %}
+                </p>
+              {% endif %}
+
+              {% comment %} Stock Badge {% endcomment %}
+              {% if section.settings.show_stock_badge %}
+                {% assign in_stock = true %}
+                {% if product_obj != blank %}
+                  {% unless product_obj.available %}
+                    {% assign in_stock = false %}
+                  {% endunless %}
+                {% endif %}
+
+                <div class="product-card__stock-badge">
+                  <span
+                    class="product-card__stock-dot"
+                    style="background-color: {% if in_stock %}{{ section.settings.in_stock_color }}{% else %}{{ section.settings.out_of_stock_color }}{% endif %};"
+                  ></span>
+                  <span
+                    class="product-card__stock-label"
+                    style="
+                      color: {{ section.settings.stock_label_color }};
+                      font-size: {{ section.settings.stock_font_size }}px;
+                    "
+                  >
+                    {% if in_stock %}
+                      {{ section.settings.in_stock_text }}
+                    {% else %}
+                      {{ section.settings.out_of_stock_text }}
+                    {% endif %}
+                  </span>
+                </div>
+              {% endif %}
+
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .you-may-also-like {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .you-may-also-like__container {
+    max-width: {{ section.settings.container_max_width }}px;
+    margin: 0 auto;
+    padding-left: {{ section.settings.container_padding }}px;
+    padding-right: {{ section.settings.container_padding }}px;
+  }
+
+  .you-may-also-like__heading {
+    margin-top: 0;
+    line-height: 1.2;
+  }
+
+  .you-may-also-like__grid {
+    display: grid;
+    grid-template-columns: repeat(var(--products-per-row, 5), 1fr);
+    gap: {{ section.settings.card_gap }}px;
+  }
+
+  .product-card {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: box-shadow 0.2s ease;
+  }
+
+  .product-card:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
+  }
+
+  .product-card__image-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    text-decoration: none;
+    padding: {{ section.settings.image_padding }}px;
+    box-sizing: border-box;
+  }
+
+  .product-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+    display: block;
+  }
+
+  .product-card__image-wrapper:hover .product-card__image {
+    transform: scale(1.04);
+  }
+
+  .product-card__image--placeholder {
+    width: 60%;
+    height: 60%;
+    opacity: 0.3;
+  }
+
+  .product-card__info {
+    padding: {{ section.settings.card_info_padding }}px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .product-card__vendor {
+    margin: 0;
+    text-transform: capitalize;
+    line-height: 1.4;
+    letter-spacing: 0.01em;
+  }
+
+  .product-card__title {
+    text-decoration: none;
+    display: block;
+    line-height: 1.35;
+    margin: 2px 0;
+  }
+
+  .product-card__title:hover {
+    text-decoration: underline;
+  }
+
+  .product-card__price {
+    margin: 2px 0 4px;
+    line-height: 1.4;
+  }
+
+  .product-card__stock-badge {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 2px;
+  }
+
+  .product-card__stock-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: inline-block;
+  }
+
+  .product-card__stock-label {
+    line-height: 1.4;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 1024px) {
+    .you-may-also-like__grid {
+      grid-template-columns: repeat(
+        {{ section.settings.products_per_row_tablet }},
+        1fr
+      );
+    }
+  }
+
+  @media (max-width: 640px) {
+    .you-may-also-like__grid {
+      grid-template-columns: repeat(
+        {{ section.settings.products_per_row_mobile }},
+        1fr
+      );
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "You May Also Like",
+  "tag": "section",
+  "class": "section-you-may-also-like",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Layout"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Section Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "label": "Padding Top (px)",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "label": "Padding Bottom (px)",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "container_max_width",
+      "label": "Container Max Width (px)",
+      "min": 800,
+      "max": 1600,
+      "step": 40,
+      "default": 1200
+    },
+    {
+      "type": "range",
+      "id": "container_padding",
+      "label": "Container Side Padding (px)",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading Text",
+      "default": "You may also like"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size",
+      "label": "Heading Font Size (px)",
+      "min": 14,
+      "max": 48,
+      "step": 1,
+      "default": 22
+    },
+    {
+      "type": "select",
+      "id": "heading_font_weight",
+      "label": "Heading Font Weight",
+      "options": [
+        { "value": "400", "label": "Normal" },
+        { "value": "600", "label": "Semi-Bold" },
+        { "value": "700", "label": "Bold" },
+        { "value": "800", "label": "Extra-Bold" }
+      ],
+      "default": "700"
+    },
+    {
+      "type": "range",
+      "id": "heading_margin_bottom",
+      "label": "Heading Bottom Margin (px)",
+      "min": 8,
+      "max": 60,
+      "step": 2,
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Grid Settings"
+    },
+    {
+      "type": "range",
+      "id": "products_per_row",
+      "label": "Products Per Row (Desktop)",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "range",
+      "id": "products_per_row_tablet",
+      "label": "Products Per Row (Tablet)",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "products_per_row_mobile",
+      "label": "Products Per Row (Mobile)",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "card_gap",
+      "label": "Gap Between Cards (px)",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Card Appearance"
+    },
+    {
+      "type": "color",
+      "id": "card_background_color",
+      "label": "Card Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "card_border_width",
+      "label": "Card Border Width (px)",
+      "min": 0,
+      "max": 4,
+      "step": 1,
+      "default": 1
+    },
+    {
+      "type": "color",
+      "id": "card_border_color",
+      "label": "Card Border Color",
+      "default": "#e5e5e5"
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "label": "Card Border Radius (px)",
+      "min": 0,
+      "max": 24,
+      "step": 1,
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "card_info_padding",
+      "label": "Card Info Padding (px)",
+      "min": 8,
+      "max": 32,
+      "step": 2,
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Product Image"
+    },
+    {
+      "type": "color",
+      "id": "image_bg_color",
+      "label": "Image Area Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "image_padding",
+      "label": "Image Padding (px)",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Vendor / Badge"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "Show Vendor",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "vendor_color",
+      "label": "Vendor Text Color",
+      "default": "#888888"
+    },
+    {
+      "type": "range",
+      "id": "vendor_font_size",
+      "label": "Vendor Font Size (px)",
+      "min": 10,
+      "max": 18,
+      "step": 1,
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Product Title"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "range",
+      "id": "title_font_size",
+      "label": "Title Font Size (px)",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "default": 14
+    },
+    {
+      "type": "select",
+      "id": "title_font_weight",
+      "label": "Title Font Weight",
+      "options": [
+        { "value": "400", "label": "Normal" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semi-Bold" },
+        { "value": "700", "label": "Bold" }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "header",
+      "content": "Price"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_price",
+      "label": "Show Price",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "price_color",
+      "label": "Price Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "range",
+      "id": "price_font_size",
+      "label": "Price Font Size (px)",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "default": 14
+    },
+    {
+      "type": "select",
+      "id": "price_font_weight",
+      "label": "Price Font Weight",
+      "options": [
+        { "value": "400", "label": "Normal" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semi-Bold" },
+        { "value": "700", "label": "Bold" }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "header",
+      "content": "Stock Badge"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_stock_badge",
+      "label": "Show Stock Badge",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "in_stock_text",
+      "label": "In Stock Label",
+      "default": "In stock"
+    },
+    {
+      "type": "text",
+      "id": "out_of_stock_text",
+      "label": "Out of Stock Label",
+      "default": "Out of stock"
+    },
+    {
+      "type": "color",
+      "id": "in_stock_color",
+      "label": "In Stock Dot Color",
+      "default": "#22c55e"
+    },
+    {
+      "type": "color",
+      "id": "out_of_stock_color",
+      "label": "Out of Stock Dot Color",
+      "default": "#ef4444"
+    },
+    {
+      "type": "color",
+      "id": "stock_label_color",
+      "label": "Stock Label Color",
+      "default": "#555555"
+    },
+    {
+      "type": "range",
+      "id": "stock_font_size",
+      "label": "Stock Label Font Size (px)",
+      "min": 10,
+      "max": 16,
+      "step": 1,
+      "default": 12
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product_card",
+      "name": "Product Card",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product (from store)"
+        },
+        {
+          "type": "header",
+          "content": "Manual Override (if no product selected)"
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_image",
+          "label": "Custom Product Image"
+        },
+        {
+          "type": "text",
+          "id": "custom_title",
+          "label": "Custom Product Title",
+          "default": "Bridor Pinched & Curved Butter Croissant"
+        },
+        {
+          "type": "text",
+          "id": "custom_vendor",
+          "label": "Custom Vendor / Category",
+          "default": "Bakery"
+        },
+        {
+          "type": "number",
+          "id": "custom_price",
+          "label": "Custom Price (in cents, e.g. 5200 = $52.00)",
+          "default": 5200
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "You May Also Like",
+      "blocks": [
+        { "type": "product_card" },
+        { "type": "product_card" },
+        { "type": "product_card" },
+        { "type": "product_card" },
+        { "type": "product_card" }
+      ]
+    }
+  ]
+}
+{% endschema %}
