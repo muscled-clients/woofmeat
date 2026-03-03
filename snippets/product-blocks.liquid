@@ -122,6 +122,18 @@
           {%- endif %}
         {%- when 'description' -%}
           {% render 'product-block-description', prod: prod, block: block %}
+        {% when 'metafields_table'%}
+
+  {%- capture metafields_content -%}
+    {% render 'product-metafields-table', prod: prod, block: block %}
+  {%- endcapture -%}
+
+  {% render 'product-block-accordion',
+    block: block,
+    heading: block.settings.heading,
+    content: metafields_content,
+    classes: 'product-blocks__accordion'
+  %}
         {%- when 'text-list-with-icons' -%}
           {% render 'section-block-text-list-with-icons', type: 'product', block: block %}
         {%- when 'product_labels' -%}

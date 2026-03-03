@@ -2759,6 +2759,7 @@
         }
       ]
     },
+     
     {
       "type": "description",
       "name": "t:sections.main_product_overview.blocks.description.name",
@@ -2865,6 +2866,187 @@
         }
       ]
     },
+    {
+  "type": "metafields_table",
+  "name": "Metafields Table",
+  "settings": [
+    {
+      "type": "select",
+      "id": "column_placement",
+      "label": "Column Placement",
+      "default": "right",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left column"
+        },
+        {
+          "value": "right",
+          "label": "Right column"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Product Specifications"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        {
+          "value": "fs-heading-4",
+          "label": "Small"
+        },
+        {
+          "value": "fs-heading-3",
+          "label": "Medium"
+        },
+        {
+          "value": "fs-heading-2",
+          "label": "Large"
+        },
+        {
+          "value": "fs-heading-1",
+          "label": "Extra large"
+        }
+      ],
+      "default": "fs-heading-4"
+    },
+    {
+      "type": "header",
+      "content": "Metafield Selection"
+    },
+    {
+      "type": "paragraph",
+      "content": "Select which metafields to display in the table. Leave empty to show all visible metafields."
+    },
+    {
+      "type": "text",
+      "id": "metafield_namespace",
+      "label": "Metafield Namespace",
+      "info": "e.g., 'product', 'custom', 'global'. Leave empty to show from all namespaces.",
+      "default": "custom"
+    },
+    {
+      "type": "textarea",
+      "id": "metafield_keys",
+      "label": "Specific Metafield Keys",
+      "info": "Enter one key per line. Leave empty to show all metafields from the selected namespace.",
+      "placeholder": "material\ncare_instructions\ncountry_of_origin\nwarranty"
+    },
+    {
+      "type": "checkbox",
+      "id": "exclude_empty",
+      "label": "Hide empty metafields",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Table Settings"
+    },
+    {
+      "type": "select",
+      "id": "table_style",
+      "label": "Table style",
+      "options": [
+        {
+          "value": "minimal",
+          "label": "Minimal"
+        },
+        {
+          "value": "bordered",
+          "label": "Bordered"
+        },
+        {
+          "value": "striped",
+          "label": "Striped rows"
+        },
+        {
+          "value": "cards",
+          "label": "Cards style"
+        }
+      ],
+      "default": "minimal"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_headers",
+      "label": "Show table headers",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "name_column_header",
+      "label": "Name column header",
+      "default": "Specification"
+    },
+    {
+      "type": "text",
+      "id": "value_column_header",
+      "label": "Value column header",
+      "default": "Details"
+    },
+    {
+      "type": "checkbox",
+      "id": "format_names",
+      "label": "Format metafield names",
+      "info": "Convert 'material' to 'Material' and 'care_instructions' to 'Care Instructions'",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Presentation"
+    },
+    {
+      "id": "add_box",
+      "type": "checkbox",
+      "label": "Add background box",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Display as collapsible row"
+    },
+    {
+      "id": "display_as_collapsible_row",
+      "type": "checkbox",
+      "label": "Display as collapsible row",
+      "default": false
+    },
+    {
+      "id": "expand_by_default",
+      "type": "checkbox",
+      "label": "Expand by default",
+      "default": false,
+      "info": "Only applies when displayed as collapsible row"
+    }
+  ]
+},
+   
     {
       "type": "image",
       "name": "t:sections.main_product_overview.blocks.image.name",
@@ -5561,7 +5743,7 @@
           "type": "range",
           "min": 20,
           "max": 100,
-          "step": 5,
+          "step": 1,
           "unit": "%",
           "default": 100
         },
@@ -18937,3 +19119,60 @@
   ]
 }
 {% endschema %}
+
+
+<style>
+ {{ section.id }} .fs-accent, .fs-accent-bold {
+    font-size: 13px;
+}
+{{ section.id }} icon-with-text-column__text rte.fs-body-75 {
+    font-size: 13px;
+}
+{{ section.id }} .icon-with-text-column__icon-wrapper.icon-modifiers__wrapper {
+  padding:10px;
+}
+.payments-and-trust .payments-and-trust__payment-content+.payments-and-trust__trust-content{
+      margin-top: 16px;
+  }
+  .product__primary {
+        display: grid;
+        grid-gap: 32px;
+    }
+    .fs-heading-5-base {
+    font-size: 16px;
+}
+ .fs-heading-2-base {
+    color: #303030;
+font-family: Figtree;
+font-size: 36px;
+font-style: normal;
+font-weight: 800;
+line-height: 41px; /* 113.889% */
+}
+@media (min-width: 720px) {
+    .icon-modifiers[data-icon-border=circle] .icon-modifiers__wrapper {
+        padding: 10px;
+    }
+    .product__block--product-header-inner>:last-child {
+    margin-bottom: 16px;
+}
+.product__block.product__block--medium:not(:last-child) {
+    margin-top: 24px;
+}
+.product__block--product-header.product__block--with-divider{
+    padding-bottom: 0px;
+    /* padding-bottom: var(--spacing-4); */
+    border-bottom: 1px solid var(--color-border) !important;
+}
+.product__block .product__price {
+color: #303030;
+font-family: Figtree;
+font-size: 28px;
+font-style: normal;
+font-weight: 700;
+line-height: 32px; /* 114.286% */
+}
+.product__policies {
+    margin-bottom: 24px;
+}
+</style>

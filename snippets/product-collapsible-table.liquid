@@ -1,0 +1,113 @@
+{% comment %}
+  Product Collapsible Table Block
+  Usage: {% render 'product-collapsible-table', block: block %}
+{% endcomment %}
+
+{%- liquid
+  assign table_title = block.settings.title
+  assign expand_by_default = block.settings.expand_by_default
+  assign table_headers = block.settings.headers | split: ','
+  assign table_rows = block.settings.rows | newline_to_br | split: '<br />'
+  assign table_style = block.settings.table_style
+  assign show_headers = block.settings.show_headers
+  assign column_placement = block.settings.column_placement
+-%}
+
+<div class="product__block product__block--collapsible-table product__block--{{ column_placement }}" {{ block.shopify_attributes }}>
+  <div class="product-collapsible-table" data-expanded="{{ expand_by_default }}">
+    <button class="product-collapsible-table__trigger" aria-expanded="{% if expand_by_default %}true{% else %}false{% endif %}">
+      <span class="product-collapsible-table__title">{{ table_title }}</span>
+      <span class="product-collapsible-table__icon">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6 1V11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M11 6L1 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </span>
+    </button>
+    
+    <div class="product-collapsible-table__content" {% unless expand_by_default %}hidden{% endunless %}>
+      <div class="product-collapsible-table__wrapper">
+        <div class="table-wrapper">
+          <table class="product-table product-table--{{ table_style }}">
+            {% if show_headers and table_headers.size > 0 and table_headers[0] != '' %}
+              <thead>
+                <tr>
+                  {% for header in table_headers %}
+                    <th>{{ header | strip }}</th>
+                  {% endfor %}
+                </tr>
+              </thead>
+            {% endif %}
+            
+            <tbody>
+              {% for row in table_rows %}
+                {% assign cells = row | split: '|' %}
+                {% if cells.size > 0 and cells[0] != '' %}
+                  <tr>
+                    {% for cell in cells %}
+                      <td>{{ cell | strip }}</td>
+                    {% endfor %}
+                  </tr>
+                {% endif %}
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.product__block--collapsible-table {
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: 0;
+}
+
+.product-collapsible-table__trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 15px 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-size: 16px;
+  font-weight: 500;
+  color: currentColor;
+  transition: opacity 0.2s ease;
+}
+
+.product-collapsible-table__trigger:hover {
+  opacity: 0.7;
+}
+
+.product-collapsible-table__title {
+  flex: 1;
+  font-family: inherit;
+  letter-spacing: normal;
+}
+
+.product-collapsible-table__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  transition: transform 0.3s ease;
+}
+
+.product-collapsible-table__trigger[aria-expanded="true"] .product-collapsible-table__icon {
+  transform: rotate(45deg);
+}
+
+.product-collapsible-table__content {
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  max-height: 0;
+}
+
+</style>
+ 

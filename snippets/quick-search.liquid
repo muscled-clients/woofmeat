@@ -7,20 +7,7 @@
 
 {%- liquid
   assign all_product_types = collections.all.all_types
-  assign show_product_type_chooser = false
-  if settings.enable_header_search_product_types_choice
-    assign show_product_type_chooser = true
-
-    if settings.header_search_product_type_options != blank
-      assign product_types = settings.header_search_product_type_options | split: ','
-    else
-      comment
-        Note: all_types will include an empty string
-        type as well that needs to be filtered out
-      endcomment
-      assign product_types = all_product_types
-    endif
-  endif
+  assign show_product_type_chooser = true
 
   assign has_search_value = false
   if search and search.terms
@@ -29,19 +16,12 @@
 -%}
 
 {% capture product_type_dropdown_content %}
-{% assign default_all_types_label = 'search.all_products' | t %}
 
-<option disabled>{{ 'search.search_within' | t }}</option>
-<option value selected>
-  {{ settings.header_search_product_type_all_label | default: default_all_types_label }}
-</option>
-{%- for product_type in product_types -%}
-  {% assign cleaned_type = product_type | strip %}
-  {% if all_product_types contains cleaned_type and cleaned_type != '' %}
-    <option value="{{ cleaned_type | escape }}" id="{{ product_type | handleize }}">
-      {{ cleaned_type | escape }}
-    </option>
-  {% endif %}
+<option value="" selected>All products</option>
+{%- for collection in collections -%}
+  {% unless collection.handle == 'frontpage' %}
+    <option value="{{ collection.handle | escape }}">{{ collection.title | escape }}</option>
+  {% endunless %}
 {%- endfor -%}
 
 {% endcapture %}
@@ -131,12 +111,11 @@
         <div class="quick-search__bar">
           <div class="quick-search__bar-inner">
             {%- if show_product_type_chooser -%}
-              {%- assign product_type_options = settings.header_search_product_type_options | split: ',' -%}
               <div class="quick-search__type-select-wrapper select-wrapper">
                 <select
                   class="quick-search__type-select"
                   data-quick-search-product-type
-                  name="filter.p.product_type"
+                  id="quickSearchCollectionFilter"
                 >
                   {{ product_type_dropdown_content }}
                 </select>
@@ -261,3 +240,23 @@
     </div>
   </div>
 </div>
+
+<script>
+  (function () {
+    // When form is submitted, if a collection is selected redirect to that collection
+    // Otherwise fall through to normal search
+    var form = document.querySelector('[data-quick-search-form]');
+    if (!form) return;
+
+    form.addEventListener('submit', function (e) {
+      var select = document.getElementById('quickSearchCollectionFilter');
+      if (!select || !select.value) return; // "All products" selected — normal search
+
+      e.preventDefault();
+      var query = form.querySelector('[data-quick-search-input]').value.trim();
+      if (!query) return;
+
+      window.location.href = '/collections/' + select.value + '?q=' + encodeURIComponent(query) + '&type=product';
+    });
+  })();
+</script>

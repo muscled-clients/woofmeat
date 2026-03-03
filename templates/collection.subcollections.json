@@ -1,9 +1,1 @@
-{
-  "sections": {
-    "main": {
-      "type": "sc-subcollections-grid",
-      "settings": {}
-    }
-  },
-  "order": ["main"]
-}
+{"sections":{"main":{"type":"sc-subcollections-grid","settings":{}},"subcollection_bottom_zNJM4j":{"type":"subcollection-bottom","name":"Trending Items","settings":{"title":"Trending Items","collection":"","products_to_show":5}}},"order":["main","subcollection_bottom_zNJM4j"]}

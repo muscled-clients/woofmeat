@@ -1,0 +1,500 @@
+{%- liquid
+  comment
+    Renders a table of product metafields from the custom namespace.
+  endcomment
+
+  # Get block settings
+
+  assign exclude_empty = block.settings.exclude_empty
+  assign table_style = block.settings.table_style | default: 'minimal'
+  assign show_headers = block.settings.show_headers
+  assign name_column_header = block.settings.name_column_header | default: 'Specification'
+  assign value_column_header = block.settings.value_column_header | default: 'Details'
+  assign format_names = block.settings.format_names
+  assign add_box = block.settings.add_box
+  assign text_alignment = block.settings.text_alignment | default: 'left'
+  # Remove display_as_collapsible_row - we'll let the outer wrapper handle it
+
+  # Direct access to custom namespace metafields
+  assign regulations = product.metafields.custom.regulations
+  assign country_of_origin = product.metafields.custom.country_of_origin
+  assign certifications = product.metafields.custom.certifications
+  assign shelf_life = product.metafields.custom.shelf_life_guarantee
+  assign dimensions = product.metafields.custom.dimensions
+  assign pallet_config = product.metafields.custom.pallet_configuration
+  assign cube = product.metafields.custom.cube
+  assign shipping_weight = product.metafields.custom.shipping_weight
+  assign how_packed = product.metafields.custom.how_packed
+  assign temperature = product.metafields.custom.temperature
+  assign tier1 = product.metafields.custom.tier_1
+  assign tier2 = product.metafields.custom.tier_2
+  assign tier3 = product.metafields.custom.tier_3
+
+  # Count how many metafields have values
+  assign metafield_count = 0
+  if regulations != blank or exclude_empty == false
+    assign metafield_count = metafield_count | plus: 1
+  endif
+  if country_of_origin != blank or exclude_empty == false
+    assign metafield_count = metafield_count | plus: 1
+  endif
+  if certifications != blank or exclude_empty == false
+    assign metafield_count = metafield_count | plus: 1
+  endif
+  if shelf_life != blank or exclude_empty == false
+    assign metafield_count = metafield_count | plus: 1
+  endif
+  if dimensions != blank or exclude_empty == false
+    assign metafield_count = metafield_count | plus: 1
+  endif
+  if pallet_config != blank or exclude_empty == false
+    assign metafield_count = metafield_count | plus: 1
+  endif
+  if cube != blank or exclude_empty == false
+    assign metafield_count = metafield_count | plus: 1
+  endif
+  if shipping_weight != blank or exclude_empty == false
+    assign metafield_count = metafield_count | plus: 1
+  endif
+  if how_packed != blank or exclude_empty == false
+    assign metafield_count = metafield_count | plus: 1
+  endif
+  if temperature != blank or exclude_empty == false
+    assign metafield_count = metafield_count | plus: 1
+  endif
+  if tier1 != blank or exclude_empty == false
+    assign metafield_count = metafield_count | plus: 1
+  endif
+  if tier2 != blank or exclude_empty == false
+    assign metafield_count = metafield_count | plus: 1
+  endif
+  if tier3 != blank or exclude_empty == false
+    assign metafield_count = metafield_count | plus: 1
+  endif
+
+  # Table style classes
+  assign table_classes = 'metafields-table'
+  if table_style == 'bordered'
+    assign table_classes = table_classes | append: ' metafields-table--bordered'
+  elsif table_style == 'striped'
+    assign table_classes = table_classes | append: ' metafields-table--striped'
+  elsif table_style == 'cards'
+    assign table_classes = table_classes | append: ' metafields-table--cards'
+  endif
+
+  if add_box
+    assign table_classes = table_classes | append: ' metafields-table--boxed'
+  endif
+
+  assign alignment_class = 'text-' | append: text_alignment
+-%}
+
+{% if metafield_count > 0 %}
+  {% comment %} REMOVED the inner accordion wrapper - now just the table content {% endcomment %}
+  <div class="metafields-table-wrapper {{ alignment_class }}" {{ block.shopify_attributes }}>
+    {% if heading != blank %}
+      <h3 class="metafields-table__heading {{ heading_size }}">{{ heading }}</h3>
+    {% endif %}
+    
+    <table class="{{ table_classes }}">
+      {% if show_headers %}
+        <thead>
+          <tr>
+            <th>{{ name_column_header }}</th>
+            <th>{{ value_column_header }}</th>
+          </tr>
+        </thead>
+      {% endif %}
+      <tbody>
+        {% if temperature != blank or exclude_empty == false %}
+          <tr class="metafields-table__row">
+            <td class="metafields-table__cell metafields-table__cell--name" data-label="{{ name_column_header }}">Temperature</td>
+            <td class="metafields-table__cell metafields-table__cell--value" data-label="{{ value_column_header }}">{{ temperature }}</td>
+          </tr>
+        {% endif %}
+
+        {% if how_packed != blank or exclude_empty == false %}
+          <tr class="metafields-table__row">
+            <td class="metafields-table__cell metafields-table__cell--name" data-label="{{ name_column_header }}">How Packed</td>
+            <td class="metafields-table__cell metafields-table__cell--value" data-label="{{ value_column_header }}">{{ how_packed }}</td>
+          </tr>
+        {% endif %}
+
+        {% if shipping_weight != blank or exclude_empty == false %}
+          <tr class="metafields-table__row">
+            <td class="metafields-table__cell metafields-table__cell--name" data-label="{{ name_column_header }}">Shipping Weight</td>
+            <td class="metafields-table__cell metafields-table__cell--value" data-label="{{ value_column_header }}">{{ shipping_weight }}</td>
+          </tr>
+        {% endif %}
+
+        {% if cube != blank or exclude_empty == false %}
+          <tr class="metafields-table__row">
+            <td class="metafields-table__cell metafields-table__cell--name" data-label="{{ name_column_header }}">Cube</td>
+            <td class="metafields-table__cell metafields-table__cell--value" data-label="{{ value_column_header }}">{{ cube }}</td>
+          </tr>
+        {% endif %}
+
+        {% if pallet_config != blank or exclude_empty == false %}
+          <tr class="metafields-table__row">
+            <td class="metafields-table__cell metafields-table__cell--name" data-label="{{ name_column_header }}">Pallet Configuration</td>
+            <td class="metafields-table__cell metafields-table__cell--value" data-label="{{ value_column_header }}">{{ pallet_config }}</td>
+          </tr>
+        {% endif %}
+
+        {% if dimensions != blank or exclude_empty == false %}
+          <tr class="metafields-table__row">
+            <td class="metafields-table__cell metafields-table__cell--name" data-label="{{ name_column_header }}">Dimensions</td>
+            <td class="metafields-table__cell metafields-table__cell--value" data-label="{{ value_column_header }}">{{ dimensions }}</td>
+          </tr>
+        {% endif %}
+
+        {% if shelf_life != blank or exclude_empty == false %}
+          <tr class="metafields-table__row">
+            <td class="metafields-table__cell metafields-table__cell--name" data-label="{{ name_column_header }}">Shelf Life / Guarantee</td>
+            <td class="metafields-table__cell metafields-table__cell--value" data-label="{{ value_column_header }}">{{ shelf_life }}</td>
+          </tr>
+        {% endif %}
+
+        {% if certifications != blank or exclude_empty == false %}
+          <tr class="metafields-table__row">
+            <td class="metafields-table__cell metafields-table__cell--name" data-label="{{ name_column_header }}">Certifications</td>
+            <td class="metafields-table__cell metafields-table__cell--value" data-label="{{ value_column_header }}">{{ certifications }}</td>
+          </tr>
+        {% endif %}
+
+        {% if country_of_origin != blank or exclude_empty == false %}
+          <tr class="metafields-table__row">
+            <td class="metafields-table__cell metafields-table__cell--name" data-label="{{ name_column_header }}">Country of Origin</td>
+            <td class="metafields-table__cell metafields-table__cell--value" data-label="{{ value_column_header }}">{{ country_of_origin }}</td>
+          </tr>
+        {% endif %}
+
+        {% if regulations != blank or exclude_empty == false %}
+          <tr class="metafields-table__row">
+            <td class="metafields-table__cell metafields-table__cell--name" data-label="{{ name_column_header }}">Regulations</td>
+            <td class="metafields-table__cell metafields-table__cell--value" data-label="{{ value_column_header }}">{{ regulations }}</td>
+          </tr>
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+{% else %}
+  {% if request.design_mode %}
+    <div style="border: 2px solid orange; padding: 20px; margin: 20px 0; background: #fff3e0;">
+      <p><strong>⚠️ No metafields match your criteria</strong></p>
+      <p>Current settings:</p>
+      <ul>
+        <li>Hide empty metafields: <strong>{{ exclude_empty }}</strong></li>
+      </ul>
+      <p>Debug - Direct access test:</p>
+      <ul>
+        <li><code>product.metafields.custom.regulations</code>: <strong>{{ product.metafields.custom.regulations | default: 'NOT FOUND' }}</strong></li>
+        <li><code>product.metafields.custom.country_of_origin</code>: <strong>{{ product.metafields.custom.country_of_origin | default: 'NOT FOUND' }}</strong></li>
+      </ul>
+    </div>
+  {% endif %}
+{% endif %}
+
+<style>
+  .metafields-table-wrapper {
+    margin: 1em 0;
+  }
+  
+  .metafields-table__heading {
+    margin-bottom: 1rem;
+  }
+  
+  .metafields-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--font-size-body, 16px);
+  }
+  
+  /* Minimal style (default) */
+  .metafields-table th,
+  .metafields-table td {
+    padding: 0.75rem 1rem;
+    text-align: {{ text_alignment }};
+    vertical-align: top;
+  }
+  
+  .metafields-table th {
+    font-weight: 700;
+    border-bottom: 1px solid rgba(var(--color-foreground), 0.1);
+  }
+  
+  /* Bordered style */
+  .metafields-table--bordered th,
+  .metafields-table--bordered td {
+    border: 1px solid rgba(var(--color-foreground), 0.1);
+  }
+  
+  .metafields-table--bordered th {
+    background-color: rgba(var(--color-foreground), 0.03);
+  }
+  
+  /* Striped style */
+  .metafields-table--striped tbody tr:nth-child(odd) {
+    background-color: rgba(var(--color-foreground), 0.03);
+  }
+  
+  /* Cards style (for mobile) */
+  .metafields-table--cards {
+    display: block;
+  }
+  
+  .metafields-table--cards tbody,
+  .metafields-table--cards tr,
+  .metafields-table--cards td {
+    display: block;
+  }
+  
+  .metafields-table--cards tr {
+    margin-bottom: 1rem;
+    border: 1px solid rgba(var(--color-foreground), 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .metafields-table--cards td {
+    display: flex;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid rgba(var(--color-foreground), 0.1);
+  }
+  
+  .metafields-table--cards td:last-child {
+    border-bottom: none;
+  }
+  
+  .metafields-table--cards td:before {
+    content: attr(data-label);
+    font-weight: 700;
+    width: 40%;
+    flex-shrink: 0;
+  }
+  
+  /* Boxed style */
+  .metafields-table--boxed {
+    border: 1px solid rgba(var(--color-foreground), 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  /* Responsive design */
+  @media screen and (max-width: 749px) {
+    .metafields-table:not(.metafields-table--cards) thead {
+      display: none;
+    }
+    
+    .metafields-table:not(.metafields-table--cards) tr {
+      display: block;
+      margin-bottom: 1rem;
+      border: 1px solid rgba(var(--color-foreground), 0.1);
+      border-radius: 8px;
+    }
+    
+    .metafields-table:not(.metafields-table--cards) td {
+      display: flex;
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid rgba(var(--color-foreground), 0.1);
+    }
+    
+    .metafields-table:not(.metafields-table--cards) td:last-child {
+      border-bottom: none;
+    }
+    
+    .metafields-table:not(.metafields-table--cards) td:before {
+      content: attr(data-label);
+      font-weight: 700;
+      width: 40%;
+      flex-shrink: 0;
+    }
+  }
+  
+  /* Text alignment */
+  .text-left {
+    text-align: left;
+  }
+  
+  .text-left th,
+  .text-left td {
+    text-align: left;
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  
+  .text-center th,
+  .text-center td {
+    text-align: center;
+  }
+  
+  .text-right {
+    text-align: right;
+  }
+  
+  .text-right th,
+  .text-right td {
+    text-align: right;
+  }
+
+</style>
+<style>
+  .metafields-table-wrapper {
+    margin: 1em 0;
+  }
+  
+  .metafields-table__heading {
+    margin-bottom: 1rem;
+  }
+  
+  .metafields-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--font-size-body, 16px);
+  }
+  
+  /* Minimal style (default) */
+  .metafields-table th,
+  .metafields-table td {
+    padding: 0.75rem 1rem;
+    text-align: {{ text_alignment }};
+    vertical-align: top;
+  }
+  
+  .metafields-table th {
+    font-weight: 700;
+    border-bottom: 1px solid rgba(var(--color-foreground), 0.1);
+  }
+  
+  /* 👇 NEW: Background color for first row */
+  .metafields-table tbody tr:first-child td {
+    background-color: #F2F2F2;
+  }
+  
+  /* Bordered style */
+  .metafields-table--bordered th,
+  .metafields-table--bordered td {
+    border: 1px solid rgba(var(--color-foreground), 0.1);
+  }
+  
+  .metafields-table--bordered th {
+    background-color: rgba(var(--color-foreground), 0.03);
+  }
+  
+  /* Striped style */
+  .metafields-table--striped tbody tr:nth-child(odd) {
+    background-color: rgba(var(--color-foreground), 0.03);
+  }
+  
+  /* Cards style (for mobile) */
+  .metafields-table--cards {
+    display: block;
+  }
+  
+  .metafields-table--cards tbody,
+  .metafields-table--cards tr,
+  .metafields-table--cards td {
+    display: block;
+  }
+  
+  .metafields-table--cards tr {
+    margin-bottom: 1rem;
+    border: 1px solid rgba(var(--color-foreground), 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .metafields-table--cards td {
+    display: flex;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid rgba(var(--color-foreground), 0.1);
+  }
+  
+  .metafields-table--cards td:last-child {
+    border-bottom: none;
+  }
+  
+  .metafields-table--cards td:before {
+    content: attr(data-label);
+    font-weight: 700;
+    width: 40%;
+    flex-shrink: 0;
+  }
+  
+  /* Boxed style */
+  .metafields-table--boxed {
+    border: 1px solid rgba(var(--color-foreground), 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .accordion__content{
+  padding:0; 
+  margin:0;
+  }
+  
+  /* Responsive design */
+  @media screen and (max-width: 749px) {
+    .metafields-table:not(.metafields-table--cards) thead {
+      display: none;
+    }
+    
+    .metafields-table:not(.metafields-table--cards) tr {
+      display: block;
+      margin-bottom: 1rem;
+      border: 1px solid rgba(var(--color-foreground), 0.1);
+      border-radius: 8px;
+    }
+    
+    .metafields-table:not(.metafields-table--cards) td {
+      display: flex;
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid rgba(var(--color-foreground), 0.1);
+    }
+    
+    .metafields-table:not(.metafields-table--cards) td:last-child {
+      border-bottom: none;
+    }
+    
+    .metafields-table:not(.metafields-table--cards) td:before {
+      content: attr(data-label);
+      font-weight: 700;
+      width: 40%;
+      flex-shrink: 0;
+    }
+    
+    /* 👇 Ensure first row background works on mobile too */
+    .metafields-table tbody tr:first-child td {
+      background-color: #F2F2F2;
+    }
+  }
+  
+  /* Text alignment */
+  .text-left {
+    text-align: left;
+  }
+  
+  .text-left th,
+  .text-left td {
+    text-align: left;
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  
+  .text-center th,
+  .text-center td {
+    text-align: center;
+  }
+  
+  .text-right {
+    text-align: right;
+  }
+  
+  .text-right th,
+  .text-right td {
+    text-align: right;
+  }
+</style>

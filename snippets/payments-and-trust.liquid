@@ -9,7 +9,7 @@
 
 {%- capture content -%}
   <div
-    class="payments-and-trust{% if block.settings.add_box %} payments-and-trust--boxed{% endif %}"
+    class="payments-and-trust{% if block.settings.add_box %} payments-and-trust--boxed{% endif %} custom-payments-trust-block"
     style="
       --content-alignment: {{ block.settings.content_alignment }};
       --image-size: {{ block.settings.image_size }}%;
@@ -19,7 +19,7 @@
       or block.settings.payment_heading != blank
       or block.settings.payment_text != blank
       or block.settings.show_payment_icons -%}
-      <div class="payments-and-trust__payment-content">
+      <div class="payments-and-trust__payment-content no-separator">
         {% liquid
           assign icons_below = false
 
@@ -30,17 +30,17 @@
 
         {% if block.settings.payment_heading_icon != 'none' and block.settings.payment_heading != blank -%}
           <div
-            class="payments-and-trust__payment-heading-wrapper"
+            class="payments-and-trust__payment-heading-wrapper no-separator-wrapper"
             data-icons-image-below="{{ icons_below }}"
           >
             {% render 'icon-editorial', icon: block.settings.payment_heading_icon %}
-            <div class="ff-heading fs-heading-6-base">{{ block.settings.payment_heading }}</div>
+            <div class="ff-heading fs-heading-6-base no-margin">{{ block.settings.payment_heading }}</div>
           </div>
         {%- endif %}
 
         {%- capture payment_text -%}
           {% if block.settings.payment_text != blank -%}
-            <div class="payments-and-trust__payment-text rte non-page-rte">{{ block.settings.payment_text }}</div>
+            <div class="payments-and-trust__payment-text rte non-page-rte no-margin">{{ block.settings.payment_text }}</div>
           {%- endif %}
         {%- endcapture -%}
 
@@ -64,7 +64,7 @@
       or block.settings.trust_heading != blank
       or block.settings.trust_text != blank
       or block.settings.trust_image != blank -%}
-      <div class="payments-and-trust__trust-content">
+      <div class="payments-and-trust__trust-content no-separator">
         {% liquid
           assign image_below = false
 
@@ -75,17 +75,17 @@
 
         {% if block.settings.trust_heading_icon != 'none' and block.settings.trust_heading != blank -%}
           <div
-            class="payments-and-trust__trust-heading-wrapper"
+            class="payments-and-trust__trust-heading-wrapper no-separator-wrapper"
             data-icons-image-below="{{ image_below }}"
           >
             {% render 'icon-editorial', icon: block.settings.trust_heading_icon %}
-            <div class="ff-heading fs-heading-6-base">{{ block.settings.trust_heading }}</div>
+            <div class="ff-heading fs-heading-6-base no-margin">{{ block.settings.trust_heading }}</div>
           </div>
         {%- endif %}
 
         {%- capture trust_text -%}
           {% if block.settings.trust_text != blank -%}
-            <div class="payments-and-trust__trust-text rte non-page-rte">{{ block.settings.trust_text }}</div>
+            <div class="payments-and-trust__trust-text rte non-page-rte no-margin">{{ block.settings.trust_text }}</div>
           {%- endif %}
         {%- endcapture -%}
 
@@ -95,7 +95,7 @@
           endif
 
           if block.settings.trust_image != blank
-            render 'section-block-image', image: block.settings.trust_image, wrapper_class: 'payments-and-trust__image', alignment: block.settings.content_alignment
+            render 'section-block-image', image: block.settings.trust_image, wrapper_class: 'payments-and-trust__image no-margin', alignment: block.settings.content_alignment
           endif
 
           if block.settings.trust_text_position == 'below'
@@ -124,3 +124,77 @@
     {{ content }}
   </div>
 {%- endif %}
+
+<style>
+  /* Reset everything */
+  .no-separator,
+  .no-separator *,
+  .custom-payments-trust-block,
+  .custom-payments-trust-block * {
+
+    border-top: none !important;
+  }
+  
+  
+  /* Remove all margins and paddings */
+  .no-margin,
+  .no-separator,
+  .no-separator-wrapper,
+  .payments-and-trust__payment-heading-wrapper,
+  .payments-and-trust__trust-heading-wrapper,
+  .payments-and-trust__payment-content,
+  .payments-and-trust__trust-content,
+  .payments-and-trust__payment-text,
+  .payments-and-trust__trust-text,
+  .payments-and-trust__image,
+  .custom-payments-trust-block,
+  .custom-payments-trust-block > div,
+  .custom-payments-trust-block .icon-editorial,
+  .custom-payments-trust-block .ff-heading {
+    margin-bottom: 0 !important;
+    padding: 0 !important;
+  }
+  
+  /* Set 16px gap between icon and text */
+  .no-separator-wrapper,
+  .payments-and-trust__payment-heading-wrapper,
+  .payments-and-trust__trust-heading-wrapper {
+    display: flex !important;
+    align-items: center !important;
+    gap: 16px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  /* Ensure icon has no extra spacing */
+  .no-separator-wrapper .icon-editorial,
+  .payments-and-trust__payment-heading-wrapper .icon-editorial,
+  .payments-and-trust__trust-heading-wrapper .icon-editorial {
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1 !important;
+  }
+  
+  /* Ensure heading has no extra spacing */
+  .no-separator-wrapper .ff-heading,
+  .payments-and-trust__payment-heading-wrapper .ff-heading,
+  .payments-and-trust__trust-heading-wrapper .ff-heading {
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1.2 !important;
+  }
+  
+  /* Remove any borders from parent elements */
+  .payments-and-trust,
+  .payments-and-trust--boxed,
+  .product__block,
+  .product__block--medium {
+    border: none !important;
+  }
+  
+  /* Remove any background colors that might look like lines */
+  .payments-and-trust__payment-heading-wrapper,
+  .payments-and-trust__trust-heading-wrapper {
+    background: transparent !important;
+  }
+</style>

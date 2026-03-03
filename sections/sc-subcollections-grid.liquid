@@ -8,15 +8,14 @@
       <div class="subc-grid">
         {% for sub in subs %}
           <a class="subc-card" href="{{ sub.url }}">
-            <div class="subc-card-inner">
-              <div class="subc-name">{{ sub.title }}</div>
-
+            <div class="subc-img-wrap">
               {% if sub.featured_image != blank %}
-                <div class="subc-thumb">
-                  <img src="{{ sub.featured_image | image_url: width: 240 }}" alt="{{ sub.title | escape }}" loading="lazy">
-                </div>
+                <img src="{{ sub.featured_image | image_url: width: 300 }}" alt="{{ sub.title | escape }}" loading="lazy" width="300" height="300">
+              {% else %}
+                {{ 'collection-1' | placeholder_svg_tag: 'subc-placeholder' }}
               {% endif %}
             </div>
+            <div class="subc-name">{{ sub.title }}</div>
           </a>
         {% endfor %}
       </div>
@@ -26,22 +25,52 @@
   </div>
 </section>
 
-
 <style>
-  .subc-wrap{
-    padding:28px 0}
-  .subc-inner{max-width:1200px;margin:0 auto;padding:0 18px}
-  .subc-title{font-size:22px;font-weight:700;margin:0 0 18px}
-  .subc-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
-  @media (max-width: 900px){.subc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-  @media (max-width: 520px){.subc-grid{grid-template-columns:1fr}}
-  .subc-card{text-decoration:none;color:inherit;border:1px solid #e7e7e7;border-radius:10px;background:#fff;transition:.15s}
-  .subc-card:hover{border-color:#b9c9ff;box-shadow:0 3px 14px rgba(0,0,0,.06)}
-  .subc-card-inner{display:flex;align-items:center;justify-content:space-between;padding:18px;min-height:78px}
-  .subc-name{font-size:14px;font-weight:600}
-  .subc-thumb{width:70px;height:70px;display:flex;align-items:center;justify-content:center}
-  .subc-thumb img{max-width:70px;max-height:70px;object-fit:contain}
-  .subc-empty{color:#666}
+  .subc-wrap { padding: 40px 0; background: #f5f5f5; }
+  .subc-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+  .subc-title { font-size: 24px; font-weight: 700; text-align: center; margin: 0 0 32px; }
+  .subc-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 20px;
+  }
+  .subc-card {
+    text-decoration: none;
+    color: inherit;
+    text-align: center;
+  }
+  .subc-card:hover .subc-img-wrap {
+    border-color: #ccc;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  }
+  .subc-img-wrap {
+    width: 100%;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 10px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .subc-img-wrap img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+  .subc-placeholder { width: 60%; opacity: 0.3; }
+  .subc-name { font-size: 13px; font-weight: 500; line-height: 1.3; }
+  .subc-empty { color: #666; text-align: center; }
+  @media (max-width: 1024px) { .subc-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  @media (max-width: 768px) {
+    .subc-wrap { padding: 28px 0; }
+    .subc-title { font-size: 20px; margin-bottom: 24px; }
+    .subc-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+  }
+  @media (max-width: 520px) { .subc-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; } }
 </style>
 
 {% schema %}
