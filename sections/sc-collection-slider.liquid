@@ -10,9 +10,23 @@
         <a class="sc-item" href="{{ c.url }}" {{ block.shopify_attributes }}>
           <div class="sc-img">
             {% if block.settings.custom_image != blank %}
-              <img src="{{ block.settings.custom_image | image_url: width: 500 }}" alt="{{ c.title | escape }}" loading="lazy">
+              <img
+                src="{{ block.settings.custom_image | image_url: width: 600 }}"
+                srcset="{{ block.settings.custom_image | image_url: width: 400 }} 400w,
+                        {{ block.settings.custom_image | image_url: width: 600 }} 600w,
+                        {{ block.settings.custom_image | image_url: width: 800 }} 800w"
+                sizes="(max-width: 600px) 160px, 260px"
+                alt="{{ c.title | escape }}"
+                loading="lazy">
             {% elsif c.featured_image != blank %}
-              <img src="{{ c.featured_image | image_url: width: 500 }}" alt="{{ c.title | escape }}" loading="lazy">
+              <img
+                src="{{ c.featured_image | image_url: width: 600 }}"
+                srcset="{{ c.featured_image | image_url: width: 400 }} 400w,
+                        {{ c.featured_image | image_url: width: 600 }} 600w,
+                        {{ c.featured_image | image_url: width: 800 }} 800w"
+                sizes="(max-width: 600px) 160px, 260px"
+                alt="{{ c.title | escape }}"
+                loading="lazy">
             {% endif %}
           </div>
           <div class="sc-title">{{ c.title }}</div>
@@ -32,15 +46,11 @@
 <style>
   .sc-collection-slider{padding:40px 0;text-align:center}
   .sc-heading{font-size:32px;font-weight:700;margin:0 0 26px}
-  .sc-slider{
-    position: relative;
-    display:flex;gap:46px;align-items:flex-start;overflow-x:hidden;padding:10px 22px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
-  .sc-item{flex:0 0 auto;width:220px;text-decoration:none;color:inherit;scroll-snap-align:center}
-  .sc-img{width:200px;height:200px;margin:0 auto 14px;border-radius:999px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#fff}
-  .sc-img img{width:100%;height:100%;object-fit:contain}
-  .sc-title{
-    
-    font-size:15px;font-weight:500}
+  .sc-slider{position:relative;display:flex;gap:10px;align-items:flex-start;justify-content:center;overflow-x:auto;padding:10px 24px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+  .sc-item{flex:1 1 0;min-width:120px;max-width:260px;text-decoration:none;color:inherit;scroll-snap-align:center}
+  .sc-img{width:100%;aspect-ratio:1/1;margin:0 auto 14px;border-radius:8px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#fff;border:1px solid #D2D2D2;padding:10px;}
+  .sc-img img{width:100%;height:100%;object-fit:contain;image-rendering:auto;}
+  .sc-title{font-size:14px;font-weight:400;text-align:center;margin-top:10px;color:#222}
   .sc-arrows{display:flex;gap:10px;justify-content:space-between;
     position: absolute;
     width: 100%;

@@ -1,0 +1,277 @@
+{% comment %}
+  Section: category-grid.liquid
+  Description: Displays a grid of category cards pulled from Shopify collections.
+  Each card shows the collection image, links to a custom URL, and displays
+  either a custom label or the collection name below the card box.
+{% endcomment %}
+
+<div class="category-grid-section" id="section-{{ section.id }}">
+  {% if section.settings.title != blank %}
+    <h2 class="category-grid__title">{{ section.settings.title }}</h2>
+  {% endif %}
+
+  <div class="category-grid__grid category-grid__grid--cols-{{ section.settings.columns }}">
+    {% for block in section.blocks %}
+      {% assign col = collections[block.settings.collection] %}
+      {% assign label = block.settings.custom_label | default: col.title %}
+      {% assign url = block.settings.custom_url | default: col.url %}
+
+      <a
+        class="category-grid__card"
+        href="{{ url }}"
+        {{ block.shopify_attributes }}
+      >
+        <div class="category-grid__image-wrap">
+          {% if col.image %}
+            <img
+              src="{{ col.image | img_url: '300x300', crop: 'center' }}"
+              alt="{{ label | escape }}"
+              class="category-grid__image"
+              loading="lazy"
+              width="300"
+              height="300"
+            >
+          {% else %}
+            <div class="category-grid__image-placeholder">
+              {{ 'image' | placeholder_svg_tag: 'category-grid__placeholder-svg' }}
+            </div>
+          {% endif %}
+        </div>
+        <span class="category-grid__label">{{ label }}</span>
+      </a>
+    {% endfor %}
+  </div>
+</div>
+
+{% stylesheet %}
+.category-grid-section {
+  padding: 40px 20px;
+  background: #f2f2f2;
+  font-family: inherit;
+}
+
+.category-grid__title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 500;
+  margin: 0 0 30px;
+  color: #222;
+}
+
+.category-grid__grid {
+  display: grid;
+  gap: 16px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Dynamic column count via modifier classes */
+.category-grid__grid--cols-3 { grid-template-columns: repeat(3, 1fr); }
+.category-grid__grid--cols-4 { grid-template-columns: repeat(4, 1fr); }
+.category-grid__grid--cols-5 { grid-template-columns: repeat(5, 1fr); }
+.category-grid__grid--cols-6 { grid-template-columns: repeat(6, 1fr); }
+
+.category-grid__card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+  gap: 10px;
+}
+
+.category-grid__image-wrap {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  border-radius: 6px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  box-sizing: border-box;
+  transition: box-shadow 0.25s ease;
+}
+
+.category-grid__card:hover .category-grid__image-wrap {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
+}
+
+.category-grid__image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.35s ease;
+  display: block;
+}
+
+.category-grid__card:hover .category-grid__image {
+  transform: scale(1.08);
+}
+
+.category-grid__image-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.category-grid__placeholder-svg {
+  width: 60%;
+  height: 60%;
+  opacity: 0.3;
+}
+
+.category-grid__label {
+  font-size: 12px;
+  color: #444;
+  text-align: center;
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+/* Large Tablet: 4 columns */
+@media (max-width: 1200px) {
+  .category-grid__grid--cols-5,
+  .category-grid__grid--cols-6 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Tablet: 3 columns */
+@media (max-width: 1024px) {
+  .category-grid__grid--cols-3,
+  .category-grid__grid--cols-4,
+  .category-grid__grid--cols-5,
+  .category-grid__grid--cols-6 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .category-grid__title {
+    font-size: 22px;
+    margin-bottom: 24px;
+  }
+}
+
+/* Small Tablet / Large Mobile: 2 columns */
+@media (max-width: 640px) {
+  .category-grid-section {
+    padding: 24px 12px;
+  }
+
+  .category-grid__grid--cols-3,
+  .category-grid__grid--cols-4,
+  .category-grid__grid--cols-5,
+  .category-grid__grid--cols-6 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .category-grid__title {
+    font-size: 18px;
+    margin-bottom: 18px;
+  }
+
+  .category-grid__image-wrap {
+    padding: 10px;
+  }
+
+  .category-grid__label {
+    font-size: 11px;
+  }
+}
+
+/* Small Mobile: 2 columns still, tighter spacing */
+@media (max-width: 400px) {
+  .category-grid-section {
+    padding: 16px 8px;
+  }
+
+  .category-grid__grid--cols-3,
+  .category-grid__grid--cols-4,
+  .category-grid__grid--cols-5,
+  .category-grid__grid--cols-6 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .category-grid__title {
+    font-size: 16px;
+    margin-bottom: 14px;
+  }
+
+  .category-grid__image-wrap {
+    padding: 8px;
+    border-radius: 4px;
+  }
+
+  .category-grid__label {
+    font-size: 10px;
+  }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Category Grid",
+  "tag": "section",
+  "class": "section-category-grid",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Bakery"
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "label": "Columns (desktop)",
+      "min": 3,
+      "max": 6,
+      "step": 1,
+      "default": 5
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category_card",
+      "name": "Category Card",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "url",
+          "id": "custom_url",
+          "label": "Custom Link URL",
+          "info": "Overrides the default collection URL"
+        },
+        {
+          "type": "text",
+          "id": "custom_label",
+          "label": "Custom Label",
+          "info": "Leave blank to use the collection name"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Category Grid",
+      "blocks": [
+        { "type": "category_card" },
+        { "type": "category_card" },
+        { "type": "category_card" },
+        { "type": "category_card" },
+        { "type": "category_card" }
+      ]
+    }
+  ]
+}
+{% endschema %}

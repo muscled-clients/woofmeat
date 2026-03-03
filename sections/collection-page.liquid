@@ -1,0 +1,1368 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --accent: {{ section.settings.accent_color }};
+    --accent-dark: #0f3d25;
+    --accent-light: #e8f2ec;
+    --text: #1a1a1a;
+    --text-muted: #6b7280;
+    --border: #e5e7eb;
+    --bg: #ffffff;
+    --bg-soft: #f9fafb;
+    --radius: 0px;
+    --shadow: 0 2px 12px rgba(0,0,0,0.07);
+    --shadow-hover: 0 8px 28px rgba(0,0,0,0.13);
+    --font-body: 'DM Sans', sans-serif;
+    --font-heading: 'Playfair Display', serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  .bcp-section { font-family: var(--font-body); color: var(--text); background: var(--bg); }
+
+  /* ── BREADCRUMB ── */
+  .bcp-breadcrumb {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 14px 32px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+  }
+  .bcp-breadcrumb a { color: var(--accent); text-decoration: none; }
+  .bcp-breadcrumb a:hover { text-decoration: underline; }
+  .bcp-breadcrumb svg { width: 12px; height: 12px; stroke: var(--text-muted); fill: none; stroke-width: 2; }
+
+  /* ── MAIN LAYOUT ── */
+  .bcp-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 20px 32px 60px;
+  }
+  .bcp-page-title {
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 24px;
+    letter-spacing: -0.5px;
+  }
+
+  .bcp-layout {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 32px;
+    align-items: start;
+  }
+  .bcp-layout.sidebar-hidden {
+    grid-template-columns: 1fr;
+  }
+
+  /* ── SIDEBAR ── */
+  .bcp-sidebar { position: sticky; top: 110px; }
+  .bcp-instock-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 12px;
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+  .toggle-switch {
+    position: relative;
+    width: 38px;
+    height: 22px;
+    flex-shrink: 0;
+  }
+  .toggle-switch input { opacity: 0; width: 0; height: 0; }
+  .toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    inset: 0;
+    background: #d1d5db;
+    border-radius: 22px;
+    transition: background 0.25s;
+  }
+  .toggle-slider::before {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    left: 3px;
+    bottom: 3px;
+    background: #fff;
+    border-radius: 50%;
+    transition: transform 0.25s;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+  }
+  .toggle-switch input:checked + .toggle-slider { background: var(--accent); }
+  .toggle-switch input:checked + .toggle-slider::before { transform: translateX(16px); }
+
+  .bcp-filter-group {
+    border-bottom: 1px solid var(--border);
+  }
+  .bcp-filter-group summary {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 13px 0;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    user-select: none;
+  }
+  .bcp-filter-group summary::-webkit-details-marker { display: none; }
+  .bcp-filter-group summary svg {
+    width: 14px;
+    height: 14px;
+    stroke: var(--text-muted);
+    fill: none;
+    stroke-width: 2;
+    transition: transform 0.25s;
+    flex-shrink: 0;
+  }
+  .bcp-filter-group[open] summary svg { transform: rotate(180deg); }
+  .bcp-filter-options {
+    padding-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .bcp-filter-options a {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 3px 0;
+    transition: color 0.2s;
+    display: block;
+  }
+  .bcp-filter-options a:hover,
+  .bcp-filter-options a.active { color: var(--accent); font-weight: 500; }
+
+  /* ── TOOLBAR ── */
+  .bcp-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .bcp-toolbar-left { display: flex; align-items: center; gap: 12px; }
+  .bcp-filter-toggle-btn {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    background: var(--bg);
+    font-family: var(--font-body);
+    font-size: 0.84rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    color: var(--text);
+  }
+  .bcp-filter-toggle-btn:hover { border-color: var(--accent); background: var(--accent-light); }
+  .bcp-filter-toggle-btn svg { width: 14px; height: 14px; stroke: var(--text); fill: none; stroke-width: 2; }
+  .bcp-result-count {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 400;
+  }
+  .bcp-toolbar-right { display: flex; align-items: center; gap: 10px; }
+  .bcp-view-btns { display: flex; gap: 4px; }
+  .bcp-view-btn {
+    background: none;
+    border: 1.5px solid var(--border);
+    border-radius: 6px;
+    padding: 6px 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .bcp-view-btn:hover, .bcp-view-btn.active { border-color: var(--accent); background: var(--accent-light); }
+  .bcp-view-btn svg { width: 15px; height: 15px; stroke: var(--text); fill: none; stroke-width: 2; }
+  .bcp-sort-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.84rem;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+  .bcp-sort-wrap select {
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 7px 10px;
+    font-family: var(--font-body);
+    font-size: 0.84rem;
+    background: var(--bg);
+    color: var(--text);
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .bcp-sort-wrap select:focus { border-color: var(--accent); }
+
+  /* ── PRODUCT GRID ── */
+  .bcp-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0px;
+  }
+  @media (max-width: 1100px) { .bcp-grid { grid-template-columns: repeat(4, 1fr); } }
+  @media (max-width: 860px) { .bcp-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 600px) { .bcp-grid { grid-template-columns: repeat(2, 1fr); } }
+
+  .bcp-card {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    position: relative;
+    transition: box-shadow 0.25s, transform 0.25s;
+    animation: fadeUp 0.5s ease both;
+  }
+  .bcp-card:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-3px);
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .bcp-card:nth-child(1) { animation-delay: 0.05s; }
+  .bcp-card:nth-child(2) { animation-delay: 0.10s; }
+  .bcp-card:nth-child(3) { animation-delay: 0.15s; }
+  .bcp-card:nth-child(4) { animation-delay: 0.20s; }
+  .bcp-card:nth-child(5) { animation-delay: 0.25s; }
+  .bcp-card:nth-child(6) { animation-delay: 0.30s; }
+  .bcp-card:nth-child(7) { animation-delay: 0.35s; }
+  .bcp-card:nth-child(8) { animation-delay: 0.40s; }
+  .bcp-card:nth-child(9) { animation-delay: 0.45s; }
+  .bcp-card:nth-child(10) { animation-delay: 0.50s; }
+
+  .bcp-card-img-wrap {
+    position: relative;
+    background: var(--bg-soft);
+    overflow: hidden;
+    height: 180px;
+  }
+  .bcp-card-img-wrap a {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  .bcp-card-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    display: block;
+    padding: 8px;
+    transition: transform 0.35s ease;
+  }
+  .bcp-card:hover .bcp-card-img-wrap img { transform: scale(1.05); }
+  .bcp-placeholder-img,
+  .bcp-card-img-wrap svg {
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.35;
+  }
+  .bcp-add-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 300;
+    line-height: 1;
+    box-shadow: 0 2px 8px rgba(26,92,56,0.35);
+    transition: background 0.2s, transform 0.2s;
+    z-index: 2;
+  }
+  .bcp-add-btn:hover { background: var(--accent-dark); transform: scale(1.12); }
+
+  .bcp-view-btn-card {
+    position: absolute;
+    top: 48px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(26,92,56,0.35);
+    transition: background 0.2s, transform 0.2s;
+    z-index: 2;
+    padding: 0;
+  }
+  .bcp-view-btn-card:hover { background: var(--accent-dark); transform: scale(1.12); }
+  .bcp-view-btn-card svg { width: 16px; height: 16px; stroke: #fff; fill: none; stroke-width: 2; pointer-events: none; }
+
+  /* ── QUICK VIEW MODAL ── */
+  .bcp-modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    z-index: 500;
+    align-items: center;
+    justify-content: center;
+  }
+  .bcp-modal-overlay.open { display: flex; }
+  .bcp-modal {
+    background: var(--bg);
+    border-radius: 12px;
+    max-width: 680px;
+    width: 92vw;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+    animation: modalIn 0.25s ease;
+    position: relative;
+  }
+  @keyframes modalIn {
+    from { opacity: 0; transform: scale(0.94) translateY(12px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
+  }
+  .bcp-modal-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    background: var(--bg-soft);
+    border: none;
+    border-radius: 50%;
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 2;
+    transition: background 0.2s;
+  }
+  .bcp-modal-close:hover { background: var(--border); }
+  .bcp-modal-close svg { width: 16px; height: 16px; stroke: var(--text); fill: none; stroke-width: 2; }
+  .bcp-modal-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+  @media (max-width: 540px) { .bcp-modal-inner { grid-template-columns: 1fr; } }
+  .bcp-modal-img {
+    background: var(--bg-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    border-radius: 12px 0 0 12px;
+    min-height: 240px;
+  }
+  .bcp-modal-img img {
+    width: 100%;
+    max-height: 280px;
+    object-fit: contain;
+  }
+  .bcp-modal-img svg {
+    width: 80px;
+    height: 80px;
+    opacity: 0.3;
+  }
+  .bcp-modal-info {
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .bcp-modal-cat {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 500;
+  }
+  .bcp-modal-title {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.3;
+  }
+  .bcp-modal-price {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .bcp-modal-stock {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+  }
+  .bcp-modal-stock-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #10b981;
+  }
+  .bcp-modal-stock-dot.out { background: #ef4444; }
+  .bcp-modal-desc {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    flex: 1;
+  }
+  .bcp-modal-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 6px;
+    flex-wrap: wrap;
+  }
+  .bcp-modal-add-btn {
+    flex: 1;
+    padding: 11px 16px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    min-width: 120px;
+  }
+  .bcp-modal-add-btn:hover { background: var(--accent-dark); }
+  .bcp-modal-view-btn {
+    padding: 11px 16px;
+    background: none;
+    color: var(--accent);
+    border: 1.5px solid var(--accent);
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+  }
+  .bcp-modal-view-btn:hover { background: var(--accent-light); }
+
+  .bcp-card-body { padding: 12px 14px 14px; }
+  .bcp-card-cat {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+    font-weight: 500;
+  }
+  .bcp-card-title {
+    font-size: 0.84rem;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.35;
+    margin-bottom: 8px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .bcp-card-title a { text-decoration: none; color: inherit; }
+  .bcp-card-title a:hover { color: var(--accent); }
+  .bcp-card-price {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .bcp-stock {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+  }
+  .bcp-stock-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #10b981;
+    flex-shrink: 0;
+  }
+  .bcp-stock-dot.out { background: #ef4444; }
+  .bcp-stock.out-of-stock { color: #ef4444; }
+
+  /* ── PAGINATION ── */
+  .bcp-pagination {
+    text-align: center;
+    margin-top: 36px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+  .bcp-pagination-info {
+    font-size: 0.84rem;
+    color: var(--text-muted);
+  }
+  .bcp-pagination-links {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .bcp-pagination-links a,
+  .bcp-pagination-links span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    font-size: 0.84rem;
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--text);
+    border: 1.5px solid var(--border);
+    transition: all 0.2s;
+  }
+  .bcp-pagination-links a:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
+  .bcp-pagination-links span.current {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+  }
+
+  /* ── MOBILE FILTER DRAWER OVERLAY ── */
+  .bcp-drawer-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 200;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .bcp-drawer-overlay.open {
+    display: block;
+    opacity: 1;
+  }
+
+  /* ── MOBILE FILTER DRAWER ── */
+  .bcp-drawer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: min(320px, 85vw);
+    height: 100%;
+    background: var(--bg);
+    z-index: 201;
+    transform: translateX(-100%);
+    transition: transform 0.32s cubic-bezier(0.4,0,0.2,1);
+    overflow-y: auto;
+    padding: 0 0 40px;
+    box-shadow: 4px 0 24px rgba(0,0,0,0.12);
+    display: none;
+  }
+  .bcp-drawer.open {
+    display: block;
+    transform: translateX(0);
+  }
+  .bcp-drawer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 20px;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    z-index: 1;
+  }
+  .bcp-drawer-header h3 {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+  .bcp-drawer-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    transition: background 0.2s;
+  }
+  .bcp-drawer-close:hover { background: var(--bg-soft); }
+  .bcp-drawer-close svg { width: 20px; height: 20px; stroke: var(--text); fill: none; stroke-width: 2; }
+  .bcp-drawer-body { padding: 12px 20px; }
+
+  /* ── RESPONSIVE: TABLET (≤1024px) ── */
+  @media (max-width: 1024px) {
+    .bcp-grid { grid-template-columns: repeat(4, 1fr); }
+    .bcp-layout { gap: 24px; }
+    .bcp-sidebar { position: static; }
+  }
+
+  /* ── RESPONSIVE: SMALL TABLET (≤860px) ── */
+  @media (max-width: 860px) {
+    .bcp-grid { grid-template-columns: repeat(3, 1fr); }
+    .bcp-container { padding: 14px 20px 48px; }
+    .bcp-breadcrumb { padding: 12px 20px 0; }
+
+    /* Sidebar hidden on tablet/mobile — use drawer instead */
+    .bcp-layout {
+      grid-template-columns: 1fr !important;
+    }
+    .bcp-sidebar {
+      display: none !important;
+    }
+
+    /* Show mobile filter button */
+    .bcp-filter-toggle-btn {
+      display: flex;
+    }
+
+    .bcp-toolbar {
+      flex-direction: row;
+      align-items: center;
+      gap: 8px;
+    }
+    .bcp-toolbar-right {
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+  }
+
+  /* ── RESPONSIVE: MOBILE (≤600px) ── */
+  @media (max-width: 600px) {
+    .bcp-container { padding: 12px 12px 40px; }
+    .bcp-breadcrumb { padding: 10px 12px 0; }
+    .bcp-page-title { font-size: 1.65rem; margin-bottom: 16px; }
+
+    .bcp-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    /* Toolbar: stack filters button + count on left, sort on right */
+    .bcp-toolbar {
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .bcp-toolbar-left { flex: 1; }
+    .bcp-toolbar-right { flex-shrink: 0; }
+
+    /* Hide view toggle on small screens */
+    .bcp-view-btns { display: none; }
+
+    /* Sort label hidden, just show select */
+    .bcp-sort-wrap span { display: none; }
+    .bcp-sort-wrap select {
+      font-size: 0.8rem;
+      padding: 7px 8px;
+    }
+
+    /* Compact filter button */
+    .bcp-filter-toggle-btn {
+      font-size: 0.8rem;
+      padding: 7px 10px;
+    }
+
+    /* Cards: tighter body padding on mobile */
+    .bcp-card-body { padding: 8px 10px 10px; }
+    .bcp-card-title { font-size: 0.78rem; }
+    .bcp-card-price { font-size: 0.85rem; }
+    .bcp-card-cat { font-size: 0.68rem; }
+    .bcp-stock { font-size: 0.72rem; }
+    .bcp-add-btn { width: 28px; height: 28px; font-size: 1rem; top: 7px; right: 7px; }
+
+    /* Pagination compact */
+    .bcp-pagination-links a,
+    .bcp-pagination-links span { width: 32px; height: 32px; font-size: 0.78rem; }
+  }
+
+  /* ── RESPONSIVE: TINY MOBILE (≤380px) ── */
+  @media (max-width: 380px) {
+    .bcp-page-title { font-size: 1.4rem; }
+    .bcp-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .bcp-card-body { padding: 6px 8px 8px; }
+  }
+</style>
+
+{%- liquid
+  assign current_collection = collections[section.settings.collection]
+  if current_collection == blank
+    assign current_collection = collection
+  endif
+  assign page_title = section.settings.page_title | default: 'Bakery'
+  assign products_per_page = section.settings.products_per_page | default: 15
+  assign show_filters = section.settings.show_filters
+  assign show_sort = section.settings.show_sort
+  assign current_sort = request.parameters.sort_by | default: 'created-descending'
+  assign instock_only = request.parameters['filter.p.inventory_quantity.gt']
+-%}
+
+<div class="bcp-section">
+
+  <!-- MOBILE FILTER DRAWER -->
+  {%- if show_filters -%}
+  <div class="bcp-drawer-overlay" id="bcp-drawer-overlay" aria-hidden="true"></div>
+  <div class="bcp-drawer" id="bcp-drawer" role="dialog" aria-modal="true" aria-label="Product filters">
+    <div class="bcp-drawer-header">
+      <h3>Filters</h3>
+      <button class="bcp-drawer-close" id="bcp-drawer-close" aria-label="Close filters">
+        <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="bcp-drawer-body">
+      <form method="get" id="bcp-drawer-filter-form">
+        {%- if current_sort != blank -%}
+          <input type="hidden" name="sort_by" value="{{ current_sort }}">
+        {%- endif -%}
+        <div class="bcp-instock-toggle">
+          <label class="toggle-switch" for="bcp-instock-drawer">
+            <input type="checkbox" id="bcp-instock-drawer" name="filter.p.inventory_quantity.gt" value="0"
+              {% if instock_only %}checked{% endif %}
+              onchange="this.form.submit()">
+            <span class="toggle-slider"></span>
+          </label>
+          <span>In stock only
+            {%- if current_collection != blank -%}({{ current_collection.products_count }}){%- endif -%}
+          </span>
+        </div>
+        {%- assign filter_categories_drawer = 'Cakes,Crust & Doughs,Pies,Cupcakes,Muffins, Scones & Croissants,Cheesecakes,Buns, Rolls & Biscuits,Bagels & Pretzels,Tortillas, Flatbreads & Wraps,Loaves & Sliced Bread,Donuts & Pastries,Brownies & Bars,Cookies,Cookie Doughs & Sweet Batters' | split: ',' -%}
+        {%- assign active_tag_drawer = request.parameters['filter.p.tag'] -%}
+        {%- for category in filter_categories_drawer -%}
+          <details class="bcp-filter-group" {% if active_tag_drawer == category %}open{% endif %}>
+            <summary>
+              {{ category | strip }}
+              <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+            </summary>
+            <div class="bcp-filter-options">
+              <a href="{{ collection.url | default: request.page_type }}?filter.p.tag={{ category | strip | url_encode }}&sort_by={{ current_sort }}"
+                 class="{% if active_tag_drawer == category %}active{% endif %}">
+                {{ category | strip }}
+              </a>
+            </div>
+          </details>
+        {%- endfor -%}
+      </form>
+    </div>
+  </div>
+  {%- endif -%}
+
+  <!-- CONTAINER -->
+  <div class="bcp-container">
+
+    <!-- BREADCRUMB -->
+    <nav class="bcp-breadcrumb" aria-label="Breadcrumb">
+      <a href="{{ routes.root_url }}">{{ section.settings.breadcrumb_parent | default: 'Home' }}</a>
+      <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+      <span>{{ page_title }}</span>
+    </nav>
+
+    <h1 class="bcp-page-title">{{ page_title }}</h1>
+
+    <!-- TOOLBAR -->
+    <div class="bcp-toolbar">
+      <div class="bcp-toolbar-left">
+        {%- if show_filters -%}
+        <button class="bcp-filter-toggle-btn" id="bcp-filter-toggle" aria-expanded="true" aria-controls="bcp-sidebar">
+          <svg viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="11" y1="18" x2="13" y2="18"/></svg>
+          <span id="bcp-filter-btn-text">Hide filters</span>
+        </button>
+        {%- endif -%}
+        {%- if current_collection != blank -%}
+          <span class="bcp-result-count">{{ current_collection.products_count }} Results</span>
+        {%- endif -%}
+      </div>
+      <div class="bcp-toolbar-right">
+        <div class="bcp-view-btns">
+          <button class="bcp-view-btn active" id="bcp-grid-view" aria-label="Grid view">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          </button>
+          <button class="bcp-view-btn" id="bcp-list-view" aria-label="List view">
+            <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          </button>
+        </div>
+        {%- if show_sort -%}
+        <div class="bcp-sort-wrap">
+          <span>Sort:</span>
+          <select id="bcp-sort-select" aria-label="Sort products">
+            <option value="created-descending" {% if current_sort == 'created-descending' %}selected{% endif %}>Date, new to old</option>
+            <option value="created-ascending" {% if current_sort == 'created-ascending' %}selected{% endif %}>Date, old to new</option>
+            <option value="price-ascending" {% if current_sort == 'price-ascending' %}selected{% endif %}>Price: Low to High</option>
+            <option value="price-descending" {% if current_sort == 'price-descending' %}selected{% endif %}>Price: High to Low</option>
+            <option value="title-ascending" {% if current_sort == 'title-ascending' %}selected{% endif %}>Alphabetically A–Z</option>
+            <option value="title-descending" {% if current_sort == 'title-descending' %}selected{% endif %}>Alphabetically Z–A</option>
+            <option value="best-selling" {% if current_sort == 'best-selling' %}selected{% endif %}>Best Selling</option>
+          </select>
+        </div>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <!-- LAYOUT -->
+    <div class="bcp-layout" id="bcp-layout">
+
+      {%- if show_filters -%}
+      <!-- SIDEBAR -->
+      <aside class="bcp-sidebar" id="bcp-sidebar" aria-label="Product filters">
+
+        <!-- In Stock Toggle -->
+        <form method="get" id="bcp-filter-form">
+          {%- if current_sort != blank -%}
+            <input type="hidden" name="sort_by" value="{{ current_sort }}">
+          {%- endif -%}
+
+          <div class="bcp-instock-toggle">
+            <label class="toggle-switch" for="bcp-instock">
+              <input type="checkbox" id="bcp-instock" name="filter.p.inventory_quantity.gt" value="0"
+                {% if instock_only %}checked{% endif %}
+                onchange="this.form.submit()">
+              <span class="toggle-slider"></span>
+            </label>
+            <span>In stock only
+              {%- if current_collection != blank -%}
+                ({{ current_collection.products_count }})
+              {%- endif -%}
+            </span>
+          </div>
+
+          <!-- Category Filters -->
+          {%- assign filter_categories = 'Cakes,Crust & Doughs,Pies,Cupcakes,Muffins, Scones & Croissants,Cheesecakes,Buns, Rolls & Biscuits,Bagels & Pretzels,Tortillas, Flatbreads & Wraps,Loaves & Sliced Bread,Donuts & Pastries,Brownies & Bars,Cookies,Cookie Doughs & Sweet Batters' | split: ',' -%}
+          {%- for category in filter_categories -%}
+            {%- assign cat_param = category | strip | handle -%}
+            {%- assign active_tag = request.parameters['filter.p.tag'] -%}
+            <details class="bcp-filter-group" {% if active_tag == cat_param %}open{% endif %}>
+              <summary>
+                {{ category | strip }}
+                <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+              </summary>
+              <div class="bcp-filter-options">
+                {%- assign current_url = collection.url | default: request.page_type -%}
+                <a href="{{ current_url }}?filter.p.tag={{ category | strip | url_encode }}&sort_by={{ current_sort }}"
+                   class="{% if active_tag == cat_param %}active{% endif %}">
+                  {{ category | strip }}
+                </a>
+              </div>
+            </details>
+          {%- endfor -%}
+        </form>
+      </aside>
+      {%- endif -%}
+
+      <!-- PRODUCT GRID -->
+      <main>
+        {%- if current_collection != blank -%}
+          {%- paginate current_collection.products by products_per_page -%}
+            <div class="bcp-grid" id="bcp-grid">
+              {%- for product in current_collection.products -%}
+                <div class="bcp-card">
+                  <div class="bcp-card-img-wrap">
+                    <a href="{{ product.url | within: current_collection }}">
+                      {%- if product.featured_image -%}
+                        <img
+                          src="{{ product.featured_image | img_url: '400x400', crop: 'center' }}"
+                          alt="{{ product.featured_image.alt | escape | default: product.title }}"
+                          loading="lazy"
+                          width="400"
+                          height="400">
+                      {%- else -%}
+                        {{ 'product-1' | placeholder_svg_tag: 'bcp-placeholder-img' }}
+                      {%- endif -%}
+                    </a>
+                    <button class="bcp-add-btn" aria-label="Add {{ product.title | escape }} to cart"
+                      data-variant-id="{{ product.first_available_variant.id }}"
+                      onclick="bcpAddToCart(this)">+</button>
+                    <button class="bcp-view-btn-card" aria-label="Quick view {{ product.title | escape }}"
+                      data-title="{{ product.title | escape }}"
+                      data-cat="{{ product.type | default: 'Bakery' | escape }}"
+                      data-price="{{ product.price | money | escape }}"
+                      data-img="{% if product.featured_image %}{{ product.featured_image | img_url: '600x600', crop: 'center' }}{% endif %}"
+                      data-url="{{ product.url | within: current_collection }}"
+                      data-variant-id="{{ product.first_available_variant.id }}"
+                      data-in-stock="{{ product.available }}"
+                      data-desc="{{ product.description | strip_html | truncate: 200 | escape }}"
+                      onclick="bcpQuickView(this)">
+                      <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </button>
+                  </div>
+                  <div class="bcp-card-body">
+                    <p class="bcp-card-cat">{{ product.type | default: 'Bakery' }}</p>
+                    <h3 class="bcp-card-title">
+                      <a href="{{ product.url | within: current_collection }}">{{ product.title }}</a>
+                    </h3>
+                    <p class="bcp-card-price">{{ product.price | money }}</p>
+                    <div class="bcp-stock {% unless product.available %}out-of-stock{% endunless %}">
+                      <span class="bcp-stock-dot {% unless product.available %}out{% endunless %}"></span>
+                      {% if product.available %}In stock{% else %}Out of stock{% endif %}
+                    </div>
+                  </div>
+                </div>
+              {%- else -%}
+                <p style="color:var(--text-muted);font-size:0.9rem;padding:20px 0;grid-column:1/-1;">
+                  No products found in this collection.
+                </p>
+              {%- endfor -%}
+            </div>
+
+            <!-- PAGINATION -->
+            <div class="bcp-pagination">
+              <p class="bcp-pagination-info">
+                You're viewing {{ paginate.items | at_most: paginate.current_offset | plus: current_collection.products.size }} of {{ paginate.items }} products
+              </p>
+              {%- if paginate.pages > 1 -%}
+                <div class="bcp-pagination-links">
+                  {%- if paginate.previous -%}
+                    <a href="{{ paginate.previous.url }}" aria-label="Previous page">&#8249;</a>
+                  {%- endif -%}
+                  {%- for part in paginate.parts -%}
+                    {%- if part.is_link -%}
+                      <a href="{{ part.url }}">{{ part.title }}</a>
+                    {%- else -%}
+                      <span class="current" aria-current="page">{{ part.title }}</span>
+                    {%- endif -%}
+                  {%- endfor -%}
+                  {%- if paginate.next -%}
+                    <a href="{{ paginate.next.url }}" aria-label="Next page">&#8250;</a>
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+            </div>
+
+          {%- endpaginate -%}
+        {%- else -%}
+          <!-- BLOCK PRODUCTS (added via theme customizer) -->
+          {%- assign block_products = section.blocks | where: 'type', 'product' -%}
+          {%- if block_products.size > 0 -%}
+            <div class="bcp-grid" id="bcp-grid">
+              {%- for block in block_products -%}
+                {%- assign bp = block.settings.product -%}
+                {%- if bp != blank -%}
+                  <div class="bcp-card" {{ block.shopify_attributes }}>
+                    <div class="bcp-card-img-wrap">
+                      <a href="{{ bp.url }}">
+                        {%- if bp.featured_image -%}
+                          <img
+                            src="{{ bp.featured_image | img_url: '400x400', crop: 'center' }}"
+                            alt="{{ bp.featured_image.alt | escape | default: bp.title }}"
+                            loading="lazy"
+                            width="400"
+                            height="400">
+                        {%- else -%}
+                          {{ 'product-1' | placeholder_svg_tag: 'bcp-placeholder-img' }}
+                        {%- endif -%}
+                      </a>
+                      <button class="bcp-add-btn" aria-label="Add {{ bp.title | escape }} to cart"
+                        data-variant-id="{{ bp.first_available_variant.id }}"
+                        onclick="bcpAddToCart(this)">+</button>
+                      <button class="bcp-view-btn-card" aria-label="Quick view {{ bp.title | escape }}"
+                        data-title="{{ bp.title | escape }}"
+                        data-cat="{{ bp.type | default: 'Bakery' | escape }}"
+                        data-price="{{ bp.price | money | escape }}"
+                        data-img="{% if bp.featured_image %}{{ bp.featured_image | img_url: '600x600', crop: 'center' }}{% endif %}"
+                        data-url="{{ bp.url }}"
+                        data-variant-id="{{ bp.first_available_variant.id }}"
+                        data-in-stock="{{ bp.available }}"
+                        data-desc="{{ bp.description | strip_html | truncate: 200 | escape }}"
+                        onclick="bcpQuickView(this)">
+                        <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                      </button>
+                    </div>
+                    <div class="bcp-card-body">
+                      <p class="bcp-card-cat">{{ bp.type | default: 'Bakery' }}</p>
+                      <h3 class="bcp-card-title"><a href="{{ bp.url }}">{{ bp.title }}</a></h3>
+                      <p class="bcp-card-price">{{ bp.price | money }}</p>
+                      <div class="bcp-stock {% unless bp.available %}out-of-stock{% endunless %}">
+                        <span class="bcp-stock-dot {% unless bp.available %}out{% endunless %}"></span>
+                        {% if bp.available %}In stock{% else %}Out of stock{% endif %}
+                      </div>
+                    </div>
+                  </div>
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+            <div class="bcp-pagination">
+              <p class="bcp-pagination-info">You're viewing {{ block_products.size }} product{{ block_products.size | plural: '', 's' }}</p>
+            </div>
+          {%- else -%}
+            <!-- PLACEHOLDER: no collection and no blocks yet -->
+            <div class="bcp-grid" id="bcp-grid">
+              <div class="bcp-card">
+                <div class="bcp-card-img-wrap">
+                  {{ 'product-1' | placeholder_svg_tag: 'bcp-placeholder-img' }}
+                  <button class="bcp-add-btn" aria-label="Add to cart" disabled>+</button>
+                </div>
+                <div class="bcp-card-body">
+                  <p class="bcp-card-cat">Bakery</p>
+                  <h3 class="bcp-card-title"><a href="#">Sample Product</a></h3>
+                  <p class="bcp-card-price">$0.00</p>
+                  <div class="bcp-stock">
+                    <span class="bcp-stock-dot"></span>
+                    In stock
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="bcp-pagination">
+              <p class="bcp-pagination-info" style="color:var(--text-muted);font-style:italic;">
+                Add products using the "Add product" button in the customizer →
+              </p>
+            </div>
+          {%- endif -%}
+        {%- endif -%}
+      </main>
+
+    </div><!-- /layout -->
+  </div><!-- /container -->
+</div>
+
+<script>
+(function() {
+  var isMobile = function() { return window.innerWidth <= 860; };
+
+  // ── FILTER TOGGLE (desktop sidebar / mobile drawer) ──
+  var toggleBtn = document.getElementById('bcp-filter-toggle');
+  var layout = document.getElementById('bcp-layout');
+  var btnText = document.getElementById('bcp-filter-btn-text');
+  var sidebar = document.getElementById('bcp-sidebar');
+  var drawer = document.getElementById('bcp-drawer');
+  var overlay = document.getElementById('bcp-drawer-overlay');
+  var drawerClose = document.getElementById('bcp-drawer-close');
+
+  function openDrawer() {
+    if (!drawer) return;
+    drawer.classList.add('open');
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    drawer.style.display = 'block';
+    drawerClose && drawerClose.focus();
+  }
+  function closeDrawer() {
+    if (!drawer) return;
+    drawer.classList.remove('open');
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+    setTimeout(function() {
+      if (!drawer.classList.contains('open')) drawer.style.display = 'none';
+    }, 320);
+  }
+
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', function() {
+      if (isMobile()) {
+        openDrawer();
+      } else {
+        var isVisible = sidebar && sidebar.style.display !== 'none';
+        if (isVisible) {
+          sidebar.style.display = 'none';
+          layout && layout.classList.add('sidebar-hidden');
+          btnText && (btnText.textContent = 'Show filters');
+          toggleBtn.setAttribute('aria-expanded', 'false');
+        } else {
+          sidebar && (sidebar.style.display = '');
+          layout && layout.classList.remove('sidebar-hidden');
+          btnText && (btnText.textContent = 'Hide filters');
+          toggleBtn.setAttribute('aria-expanded', 'true');
+        }
+      }
+    });
+  }
+
+  overlay && overlay.addEventListener('click', closeDrawer);
+  drawerClose && drawerClose.addEventListener('click', closeDrawer);
+
+  // Close drawer on ESC
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeDrawer();
+  });
+
+  // Re-evaluate on resize
+  window.addEventListener('resize', function() {
+    if (!isMobile() && drawer) closeDrawer();
+  });
+
+  // ── SORT REDIRECT ──
+  var sortSelect = document.getElementById('bcp-sort-select');
+  if (sortSelect) {
+    sortSelect.addEventListener('change', function() {
+      var url = new URL(window.location.href);
+      url.searchParams.set('sort_by', this.value);
+      window.location.href = url.toString();
+    });
+  }
+
+  // ── GRID / LIST VIEW TOGGLE ──
+  var gridView = document.getElementById('bcp-grid-view');
+  var listView = document.getElementById('bcp-list-view');
+  var grid = document.getElementById('bcp-grid');
+  if (gridView && listView && grid) {
+    gridView.addEventListener('click', function() {
+      grid.style.gridTemplateColumns = '';
+      gridView.classList.add('active');
+      listView.classList.remove('active');
+    });
+    listView.addEventListener('click', function() {
+      grid.style.gridTemplateColumns = '1fr';
+      listView.classList.add('active');
+      gridView.classList.remove('active');
+    });
+  }
+})();
+
+// ── QUICK VIEW HELPER ──
+function bcpQuickView(btn) {
+  var data = {
+    title:     btn.getAttribute('data-title') || '',
+    cat:       btn.getAttribute('data-cat') || 'Bakery',
+    price:     btn.getAttribute('data-price') || '',
+    img:       btn.getAttribute('data-img') || null,
+    url:       btn.getAttribute('data-url') || '#',
+    variantId: btn.getAttribute('data-variant-id') || '',
+    inStock:   btn.getAttribute('data-in-stock') !== 'false',
+    desc:      btn.getAttribute('data-desc') || 'No description available.'
+  };
+  if (typeof bcpOpenQuickView === 'function') bcpOpenQuickView(data);
+}
+
+// ── ADD TO CART (Shopify AJAX API) ──
+function bcpAddToCart(btn) {
+  var variantId = btn.getAttribute('data-variant-id');
+  if (!variantId) return;
+  btn.disabled = true;
+  btn.textContent = '...';
+  fetch('/cart/add.js', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ id: variantId, quantity: 1 })
+  })
+  .then(function(r) { return r.json(); })
+  .then(function() {
+    btn.textContent = '✓';
+    btn.style.background = '#059669';
+    setTimeout(function() {
+      btn.textContent = '+';
+      btn.style.background = '';
+      btn.disabled = false;
+    }, 1500);
+    fetch('/cart.js')
+      .then(function(r) { return r.json(); })
+      .then(function(cart) {
+        var cartLinks = document.querySelectorAll('a[href="/cart"]');
+        cartLinks.forEach(function(el) {
+          el.innerHTML = el.innerHTML.replace(/Cart \(.*?\)/, 'Cart (' + (cart.total_price / 100).toLocaleString('en-US', { style: 'currency', currency: 'USD' }) + ')');
+        });
+      });
+  })
+  .catch(function() {
+    btn.textContent = '+';
+    btn.disabled = false;
+  });
+}
+</script>
+
+<!-- QUICK VIEW MODAL -->
+<div class="bcp-modal-overlay" id="bcp-quickview-overlay" role="dialog" aria-modal="true" aria-label="Quick view">
+  <div class="bcp-modal" id="bcp-quickview-modal">
+    <button class="bcp-modal-close" id="bcp-quickview-close" aria-label="Close quick view">
+      <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="bcp-modal-inner">
+      <div class="bcp-modal-img" id="bcp-qv-img-wrap"></div>
+      <div class="bcp-modal-info">
+        <p class="bcp-modal-cat" id="bcp-qv-cat"></p>
+        <h2 class="bcp-modal-title" id="bcp-qv-title"></h2>
+        <p class="bcp-modal-price" id="bcp-qv-price"></p>
+        <div class="bcp-modal-stock" id="bcp-qv-stock">
+          <span class="bcp-modal-stock-dot" id="bcp-qv-stock-dot"></span>
+          <span id="bcp-qv-stock-text"></span>
+        </div>
+        <p class="bcp-modal-desc" id="bcp-qv-desc"></p>
+        <div class="bcp-modal-actions">
+          <button class="bcp-modal-add-btn" id="bcp-qv-add-btn">Add to Cart</button>
+          <a class="bcp-modal-view-btn" id="bcp-qv-view-link" href="#">View Product</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var overlay = document.getElementById('bcp-quickview-overlay');
+  var closeBtn = document.getElementById('bcp-quickview-close');
+
+  function openQuickView(data) {
+    var imgWrap = document.getElementById('bcp-qv-img-wrap');
+    if (data.img) {
+      imgWrap.innerHTML = '<img src="' + data.img + '" alt="' + data.title + '">';
+    } else {
+      imgWrap.innerHTML = data.placeholder || '<svg viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>';
+    }
+    document.getElementById('bcp-qv-cat').textContent   = data.cat   || 'Bakery';
+    document.getElementById('bcp-qv-title').textContent  = data.title || '';
+    document.getElementById('bcp-qv-price').textContent  = data.price || '';
+    document.getElementById('bcp-qv-desc').textContent   = data.desc  || 'No description available.';
+    var dot = document.getElementById('bcp-qv-stock-dot');
+    var txt = document.getElementById('bcp-qv-stock-text');
+    if (data.inStock) {
+      dot.className = 'bcp-modal-stock-dot';
+      txt.textContent = 'In stock';
+    } else {
+      dot.className = 'bcp-modal-stock-dot out';
+      txt.textContent = 'Out of stock';
+    }
+    var viewLink = document.getElementById('bcp-qv-view-link');
+    viewLink.href = data.url || '#';
+    var addBtn = document.getElementById('bcp-qv-add-btn');
+    addBtn.setAttribute('data-variant-id', data.variantId || '');
+    addBtn.onclick = function() {
+      if (data.variantId) {
+        bcpAddToCart(addBtn);
+      } else if (data.url && data.url !== '#') {
+        window.location.href = data.url;
+      }
+    };
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+  }
+
+  function closeQuickView() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  closeBtn && closeBtn.addEventListener('click', closeQuickView);
+  overlay && overlay.addEventListener('click', function(e) {
+    if (e.target === overlay) closeQuickView();
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeQuickView();
+  });
+
+  window.bcpOpenQuickView = openQuickView;
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Bakery Collection Page",
+  "tag": "section",
+  "class": "bcp-section-wrapper",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Page Content"
+    },
+    {
+      "type": "text",
+      "id": "page_title",
+      "label": "Page Title",
+      "default": "Bakery"
+    },
+    {
+      "type": "text",
+      "id": "breadcrumb_parent",
+      "label": "Breadcrumb Parent Label",
+      "default": "Home"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection to Display"
+    },
+    {
+      "type": "header",
+      "content": "Display Options"
+    },
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "label": "Products Per Page",
+      "min": 5,
+      "max": 50,
+      "step": 5,
+      "default": 15
+    },
+    {
+      "type": "checkbox",
+      "id": "show_filters",
+      "label": "Show Filter Sidebar",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_sort",
+      "label": "Show Sort Dropdown",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Styling"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent Color",
+      "default": "#1a5c38"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bakery Collection Page",
+      "category": "Collection"
+    }
+  ]
+}
+{% endschema %}
