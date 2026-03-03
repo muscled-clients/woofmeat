@@ -946,6 +946,123 @@
         "section_style_spacing_bottom": 0,
         "section_style_enable_animation": true
       }
+    },
+    "shop_by_brand_wJJELG": {
+      "type": "shop-by-brand",
+      "blocks": {
+        "brand_LTaipf": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "Brand Name",
+            "brand_link": ""
+          }
+        },
+        "brand_zPzFXh": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "Brand Name",
+            "brand_link": ""
+          }
+        },
+        "brand_FggQcx": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "Brand Name",
+            "brand_link": ""
+          }
+        },
+        "brand_8DCwWL": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "Brand Name",
+            "brand_link": ""
+          }
+        },
+        "brand_tzAwde": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "Brand Name",
+            "brand_link": ""
+          }
+        },
+        "brand_cFh9bq": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "Brand Name",
+            "brand_link": ""
+          }
+        },
+        "brand_VfyGjg": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "Brand 1",
+            "brand_link": ""
+          }
+        },
+        "brand_Y4phWP": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "Brand 2",
+            "brand_link": ""
+          }
+        },
+        "brand_gLN79G": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "Brand 3",
+            "brand_link": ""
+          }
+        },
+        "brand_yKjQmR": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "Brand 4",
+            "brand_link": ""
+          }
+        },
+        "brand_cHWbir": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "Brand 5",
+            "brand_link": ""
+          }
+        },
+        "brand_8P4jiN": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "Brand 6",
+            "brand_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "brand_LTaipf",
+        "brand_zPzFXh",
+        "brand_FggQcx",
+        "brand_8DCwWL",
+        "brand_tzAwde",
+        "brand_cFh9bq",
+        "brand_VfyGjg",
+        "brand_Y4phWP",
+        "brand_gLN79G",
+        "brand_yKjQmR",
+        "brand_cHWbir",
+        "brand_8P4jiN"
+      ],
+      "name": "Shop by Brand",
+      "settings": {
+        "section_title": "Shop by Brand",
+        "section_background_color": "#ffffff",
+        "columns_desktop": 6,
+        "columns_mobile": "2",
+        "brands_visible_before_showmore": 12,
+        "section_padding_top": 48,
+        "section_padding_bottom": 48,
+        "show_all_button_text": "SHOW ALL",
+        "hide_button_text": "SHOW LESS",
+        "button_background_color": "#ffffff",
+        "button_text_color": "#222222"
+      }
     }
   },
   "order": [
@@ -964,6 +1081,7 @@
     "featured_collection_media_2",
     "collection_list_2",
     "blog_posts",
-    "overlapping_media_with_content_2"
+    "overlapping_media_with_content_2",
+    "shop_by_brand_wJJELG"
   ]
 }
