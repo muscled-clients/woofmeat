@@ -15,21 +15,17 @@
   #shopify-section-{{ section.id }} {
     background-color: {{ section.settings.section_background_color }};
     padding: {{ section.settings.section_padding_top }}px 0 {{ section.settings.section_padding_bottom }}px;
-    width: 100%;
-    box-sizing: border-box;
   }
 
   .brand-section-{{ section.id }} {
-    width: 100%;
-    max-width: 100%;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 0 2%;
-    box-sizing: border-box;
+    padding: 0 20px;
   }
 
   .brand-section-title-{{ section.id }} {
     text-align: center;
-    font-size: clamp(15px, 1.8vw, 20px);
+    font-size: 20px;
     font-weight: 700;
     margin-bottom: 24px;
     color: #222222;
@@ -41,8 +37,6 @@
     grid-template-columns: repeat({{ columns_desktop }}, 1fr);
     border-left: 1px solid #e5e5e5;
     border-top: 1px solid #e5e5e5;
-    width: 100%;
-    box-sizing: border-box;
   }
 
   .brand-card-{{ section.id }} {
@@ -50,15 +44,14 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: clamp(10px, 1.5vw, 20px) clamp(8px, 1.2vw, 16px) clamp(8px, 1vw, 14px);
+    padding: 20px 16px 14px;
     border-right: 1px solid #e5e5e5;
     border-bottom: 1px solid #e5e5e5;
     background-color: #f9f9f9;
     text-decoration: none;
     transition: background-color 0.2s ease, box-shadow 0.2s ease;
-    min-height: clamp(80px, 9vw, 110px);
+    min-height: 110px;
     cursor: pointer;
-    box-sizing: border-box;
   }
 
   .brand-card-{{ section.id }}:hover {
@@ -69,7 +62,7 @@
 
   .brand-logo-wrap-{{ section.id }} {
     width: 100%;
-    height: clamp(40px, 5vw, 70px);
+    height: 70px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -78,7 +71,7 @@
 
   .brand-logo-{{ section.id }} {
     max-width: 100%;
-    max-height: clamp(40px, 5vw, 70px);
+    max-height: 70px;
     width: auto;
     height: auto;
     object-fit: contain;
@@ -86,7 +79,7 @@
   }
 
   .brand-name-{{ section.id }} {
-    font-size: clamp(10px, 0.85vw, 12px);
+    font-size: 12px;
     color: #666666;
     text-align: center;
     font-weight: 400;
@@ -112,7 +105,7 @@
     background-color: {{ section.settings.button_background_color }};
     color: {{ section.settings.button_text_color }};
     border: 1.5px solid {{ section.settings.button_text_color }};
-    font-size: clamp(11px, 1vw, 13px);
+    font-size: 13px;
     font-weight: 600;
     letter-spacing: 0.08em;
     cursor: pointer;
@@ -145,10 +138,6 @@
 
   /* Mobile */
   @media screen and (max-width: 768px) {
-    .brand-section-{{ section.id }} {
-      padding: 0 3%;
-    }
-
     .brand-grid-{{ section.id }} {
       grid-template-columns: repeat({{ columns_mobile }}, 1fr);
     }
@@ -172,12 +161,6 @@
 
     .brand-section-title-{{ section.id }} {
       font-size: 17px;
-    }
-  }
-
-  @media screen and (max-width: 480px) {
-    .brand-section-{{ section.id }} {
-      padding: 0 10px;
     }
   }
 </style>
@@ -273,6 +256,7 @@
         btn.classList.add('expanded');
       } else {
         btn.classList.remove('expanded');
+        // Scroll back up to section top smoothly
         var grid = document.getElementById('brand-grid-' + sectionId);
         if (grid) {
           grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
