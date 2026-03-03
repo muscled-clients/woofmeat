@@ -436,35 +436,132 @@
   
   /* Responsive design */
   @media screen and (max-width: 749px) {
+
+   <style>
+  .metafields-table-wrapper {
+    margin: 1em 0;
+  }
+  
+  .metafields-table__heading {
+    margin-bottom: 1rem;
+  }
+  
+  .metafields-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--font-size-body, 16px);
+  }
+  
+  /* Minimal style (default) */
+  .metafields-table th,
+  .metafields-table td {
+    padding: 0.75rem 1rem;
+    text-align: {{ text_alignment }};
+    vertical-align: top;
+  }
+  
+  .metafields-table th {
+    font-weight: 700;
+    border-bottom: 1px solid rgba(var(--color-foreground), 0.1);
+  }
+  
+  /* 👇 NEW: Background color for first row */
+  .metafields-table tbody tr:first-child td {
+    background-color: #F2F2F2;
+  }
+  
+  /* Bordered style */
+  .metafields-table--bordered th,
+  .metafields-table--bordered td {
+    border: 1px solid rgba(var(--color-foreground), 0.1);
+  }
+  
+  .metafields-table--bordered th {
+    background-color: rgba(var(--color-foreground), 0.03);
+  }
+  
+  /* Striped style */
+  .metafields-table--striped tbody tr:nth-child(odd) {
+    background-color: rgba(var(--color-foreground), 0.03);
+  }
+  
+  /* Cards style - ONLY when explicitly chosen */
+  .metafields-table--cards {
+    display: block;
+  }
+  
+  .metafields-table--cards tbody,
+  .metafields-table--cards tr,
+  .metafields-table--cards td {
+    display: block;
+  }
+  
+  .metafields-table--cards tr {
+    margin-bottom: 1rem;
+    border: 1px solid rgba(var(--color-foreground), 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .metafields-table--cards td {
+    display: flex;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid rgba(var(--color-foreground), 0.1);
+  }
+  
+  .metafields-table--cards td:last-child {
+    border-bottom: none;
+  }
+  
+  .metafields-table--cards td:before {
+    content: attr(data-label);
+    font-weight: 700;
+    width: 40%;
+    flex-shrink: 0;
+  }
+  
+  /* Boxed style */
+  .metafields-table--boxed {
+    border: 1px solid rgba(var(--color-foreground), 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .accordion__content {
+    padding: 0; 
+    margin: 0;
+  }
+  
+  /* Mobile styles - KEEP TABLE LAYOUT, don't convert to cards */
+  @media screen and (max-width: 749px) {
+    /* Remove the card conversion styles */
     .metafields-table:not(.metafields-table--cards) thead {
-      display: none;
+      display: table-header-group; /* Keep header visible */
     }
     
     .metafields-table:not(.metafields-table--cards) tr {
-      display: block;
-      margin-bottom: 1rem;
-      border: 1px solid rgba(var(--color-foreground), 0.1);
-      border-radius: 8px;
+      display: table-row; /* Keep as table row */
+      border: none;
+      margin: 0;
+      border-radius: 0;
     }
     
     .metafields-table:not(.metafields-table--cards) td {
-      display: flex;
-      padding: 0.75rem 1rem;
-      border-bottom: 1px solid rgba(var(--color-foreground), 0.1);
-    }
-    
-    .metafields-table:not(.metafields-table--cards) td:last-child {
-      border-bottom: none;
+      display: table-cell; /* Keep as table cell */
+      padding: 0.5rem 0.75rem; /* Slightly smaller padding on mobile */
+      border-bottom: 1px solid rgba(var(--color-foreground), 0.05);
     }
     
     .metafields-table:not(.metafields-table--cards) td:before {
-      content: attr(data-label);
-      font-weight: 700;
-      width: 40%;
-      flex-shrink: 0;
+      display: none; /* Hide the data-label pseudo-elements */
     }
     
-    /* 👇 Ensure first row background works on mobile too */
+    /* Adjust font size for mobile */
+    .metafields-table {
+      font-size: 14px;
+    }
+    
+    /* Keep first row background */
     .metafields-table tbody tr:first-child td {
       background-color: #F2F2F2;
     }
