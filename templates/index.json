@@ -361,6 +361,40 @@
         "section_style_enable_animation": true
       }
     },
+    "snacks_candy_collection_jAdxGy": {
+      "type": "snacks-candy-collection",
+      "name": "Snacks & Candy",
+      "settings": {
+        "show_section_title": true,
+        "section_title": "Bakery",
+        "title_color": "#111111",
+        "collection": "",
+        "products_to_show": 3,
+        "columns_desktop": 3,
+        "columns_mobile": 2,
+        "image_ratio": "square",
+        "badge_color": "#1a7a4a",
+        "badge_text_color": "#ffffff",
+        "show_vendor": true,
+        "vendor_color": "#888888",
+        "product_title_color": "#111111",
+        "product_title_size": "medium",
+        "price_color": "#111111",
+        "sale_price_color": "#cc0000",
+        "show_stock_label": true,
+        "instock_color": "#1a7a4a",
+        "outofstock_color": "#cc0000",
+        "enable_quick_view": true,
+        "button_label": "CHOOSE OPTIONS",
+        "button_action": "product_page",
+        "button_bg_color": "#ffffff",
+        "button_text_color": "#111111",
+        "button_border_color": "#111111",
+        "section_bg_color": "#f9f9f9",
+        "section_padding_top": 40,
+        "section_padding_bottom": 40
+      }
+    },
     "tabbed_collections_1": {
       "type": "tabbed-collections",
       "blocks": {
@@ -595,14 +629,14 @@
         "section_style_enable_animation": true
       }
     },
-    "featured_collection_BKNK4D": {
-      "type": "featured-collection",
-      "name": "Featured-Collection",
+    "snacks_candy_collection_aBW4Ji": {
+      "type": "snacks-candy-collection",
+      "name": "Snacks & Candy",
       "settings": {
         "show_section_title": true,
-        "section_title": "Bakery",
+        "section_title": "Snacks & Candy",
         "title_color": "#111111",
-        "collection": "frontpage",
+        "collection": "",
         "products_to_show": 3,
         "columns_desktop": 3,
         "columns_mobile": 2,
@@ -941,6 +975,40 @@
         "section_style_spacing_bottom": 0,
         "section_style_enable_animation": true
       }
+    },
+    "snacks_candy_collection_FtNRnt": {
+      "type": "snacks-candy-collection",
+      "name": "Featured-Collection",
+      "settings": {
+        "show_section_title": true,
+        "section_title": "Snacks & Candy",
+        "title_color": "#111111",
+        "collection": "",
+        "products_to_show": 3,
+        "columns_desktop": 3,
+        "columns_mobile": 2,
+        "image_ratio": "square",
+        "badge_color": "#1a7a4a",
+        "badge_text_color": "#ffffff",
+        "show_vendor": true,
+        "vendor_color": "#888888",
+        "product_title_color": "#111111",
+        "product_title_size": "medium",
+        "price_color": "#111111",
+        "sale_price_color": "#cc0000",
+        "show_stock_label": true,
+        "instock_color": "#1a7a4a",
+        "outofstock_color": "#cc0000",
+        "enable_quick_view": true,
+        "button_label": "CHOOSE OPTIONS",
+        "button_action": "product_page",
+        "button_bg_color": "#ffffff",
+        "button_text_color": "#111111",
+        "button_border_color": "#111111",
+        "section_bg_color": "#f9f9f9",
+        "section_padding_top": 40,
+        "section_padding_bottom": 40
+      }
     }
   },
   "order": [
@@ -949,15 +1017,17 @@
     "sc_collection_slider_bWtt3e",
     "promoution_grid_1",
     "promotion_grid_2",
+    "snacks_candy_collection_jAdxGy",
     "tabbed_collections_1",
     "overlapping_media_with_content_1",
     "featured_collection_media",
-    "featured_collection_BKNK4D",
+    "snacks_candy_collection_aBW4Ji",
     "grid_1",
     "tabbed_collections_8KUQrQ",
     "featured_collection_media_2",
     "collection_list_2",
     "blog_posts",
-    "overlapping_media_with_content_2"
+    "overlapping_media_with_content_2",
+    "snacks_candy_collection_FtNRnt"
   ]
 }
