@@ -1,0 +1,24 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-list-collections",
+      "settings": {
+        "display_type": "all",
+        "collections": [],
+        "num_columns": "5",
+        "num_columns_mobile": "2",
+        "num_rows": "5",
+        "show_product_counts": true,
+        "collection_item_style": "plain",
+        "image_source": "product",
+        "image_aspect_ratio": "square",
+        "image_circle_crop_enable": true,
+        "image_spacing": 10,
+        "title_font_type": "heading",
+        "text_alignment": "center",
+        "section_style_enable_animation": true
+      }
+    }
+  },
+  "order": ["main"]
+}
