@@ -1,9 +1,9 @@
-{% comment %} ============================================================
+{% comment %} 
   Section: Snacks & Candy — Collection Row
   File: sections/snacks-candy-collection.liquid
   Description: Fullaa dynamic collection product row with banner,
   discount badges, quick view, and full customizer control.
-============================================================ {% endcomment %}
+{% endcomment %}
 
 {%- liquid
   assign collection = collections[section.settings.collection]
@@ -13,7 +13,7 @@
 -%}
 
 <style>
-  /* ── Section ── */
+  /* Section  */
   #shopify-section-{{ section.id }} {
     background-color: {{ section.settings.section_bg_color }};
     padding-top: {{ section.settings.section_padding_top }}px;
