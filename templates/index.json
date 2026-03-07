@@ -1079,7 +1079,8 @@
         "brand_gLN79G": {
           "type": "brand",
           "settings": {
-            "brand_name": "Armand Hammer",
+            "brand_logo": "shopify://shop_images/e976121496569cacf5f6703709e2d35acc8b3ad9.png",
+            "brand_name": "Brand 3",
             "brand_link": ""
           }
         },
