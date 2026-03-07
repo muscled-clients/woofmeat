@@ -15,23 +15,15 @@
       "type": "announcement-bar",
       "name": "Announcement Bar",
       "settings": {
-        "background_color": "#1e3a2f",
-        "text_color": "#ffffff",
-        "announcement_text": "We stock fair-trade coffee from local brands 🫘",
-        "nav_label_1": "Shipping",
-        "nav_url_1": "",
-        "nav_label_2": "Returns",
-        "nav_url_2": "",
-        "nav_label_3": "Contact",
-        "nav_url_3": "",
-        "nav_label_4": "FAQ",
-        "nav_url_4": "",
-        "nav_label_5": "Theme",
-        "nav_url_5": "",
-        "facebook_url": "",
-        "pinterest_url": "",
-        "instagram_url": "",
-        "tiktok_url": ""
+        "autoplay_delay": 8,
+        "color_text": "#ffffff",
+        "color_background": "#1f4a37",
+        "show_divider": true,
+        "enable_locale_selector": true,
+        "enable_country_selector": true,
+        "show_country_flags": true,
+        "show_social_media": true,
+        "menu": ""
       }
     },
     "header": {
