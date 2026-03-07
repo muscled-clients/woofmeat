@@ -435,7 +435,7 @@
         "collection_1": {
           "type": "collection",
           "settings": {
-            "collection": "",
+            "collection": "frontpage",
             "tab_title": "New Arrivals",
             "show_view_all_tile": true,
             "tile_location": "end",
@@ -459,7 +459,7 @@
         "collection_2": {
           "type": "collection",
           "settings": {
-            "collection": "",
+            "collection": "frontpage",
             "tab_title": "Best Sellers",
             "show_view_all_tile": true,
             "tile_location": "end",
@@ -483,7 +483,7 @@
         "collection_3": {
           "type": "collection",
           "settings": {
-            "collection": "",
+            "collection": "bagels-pretzels",
             "tab_title": "Barista Picks",
             "show_view_all_tile": true,
             "tile_location": "end",
