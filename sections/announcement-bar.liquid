@@ -1,484 +1,410 @@
-{% comment %} Announcement Bar Section {% endcomment %}
+{%- liquid
+  assign menu = section.settings.menu
+  assign links = linklists[menu].links
+  assign scroller_id = 'announcement-bar-' | append: section.id
 
-{% if request.page_type == 'index' %}
+  assign enable_locale_selector = section.settings.enable_locale_selector
+  assign enable_country_selector = section.settings.enable_country_selector
+  assign show_social_media = section.settings.show_social_media
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400&display=swap" rel="stylesheet">
+  assign locale_selector = false
+  assign country_selector = false
 
-<style>
-  .announcement-bar {
-    background-color: {{ section.settings.background_color }};
-    width: 100%;
-    height: 38px;
-    display: flex;
-    align-items: center;
-    padding: 0 20px;
-    box-sizing: border-box;
-    font-family: 'Figtree', sans-serif;
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 18px;
-    letter-spacing: 0%;
-    color: {{ section.settings.text_color }};
-  }
+  if enable_locale_selector and shop.published_locales.size > 1
+    assign locale_selector = true
+  endif
 
-  .announcement-bar__left {
-    display: flex;
-    align-items: center;
-    gap: 24px;
-    flex: 1;
-  }
+  if enable_country_selector and localization.available_countries.size > 1
+    assign country_selector = true
+  endif
 
-  .announcement-bar__left a {
-    color: {{ section.settings.text_color }};
-    text-decoration: none;
-    font-family: 'Figtree', sans-serif;
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 18px;
-    white-space: nowrap;
-  }
+  assign show_country_flags = section.settings.show_country_flags
+  assign hide_country_flags = true
 
-  .announcement-bar__left a:hover {
-    opacity: 0.8;
-  }
+  if show_country_flags
+    assign hide_country_flags = false
+  endif
+-%}
 
-  .announcement-bar__center {
-    flex: 1;
-    text-align: center;
-    white-space: nowrap;
-    font-family: 'Figtree', sans-serif;
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 18px;
-  }
+{%- capture announcements -%}
+  {%- for block in section.blocks -%}
+    {%- liquid
+      assign modal_content = block.settings.modal_text
+      assign has_announcement_modal = false
+      if  block.settings.enable_modal and modal_content != blank
+        assign has_announcement_modal = true
+      endif
 
-  .announcement-bar__right {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex: 1;
-    justify-content: flex-end;
-  }
+      capture announcement_item_desktop
+        render 'announcement-item', announcement_text: block.settings.title, announcement_link: block.settings.link, has_announcement_modal: has_announcement_modal, modal_link_style: block.settings.modal_link_style, modal_link_text: block.settings.modal_link_text, loop: forloop.index0
+      endcapture
 
-  .announcement-bar__social {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
+      assign has_mobile_announcement = false
+      if block.settings.title_mobile != blank and block.settings.title_mobile != block.settings.title
+        assign has_mobile_announcement = true
 
-  .announcement-bar__social a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: {{ section.settings.text_color }};
-    text-decoration: none;
-    line-height: 1;
-  }
+        capture announcement_item_mobile
+          render 'announcement-item', announcement_text: block.settings.title_mobile, announcement_link: block.settings.link, enable_modal: block.settings.enable_modal, has_announcement_modal: has_announcement_modal, modal_link_style: block.settings.modal_link_style, modal_link_text: block.settings.modal_link_text, loop: forloop.index0
+        endcapture
+      endif
 
-  .announcement-bar__social a:hover {
-    opacity: 0.8;
-  }
+      if block.settings.page_for_modal_content
+        assign content_page = pages[block.settings.page_for_modal_content]
 
-  .announcement-bar__social svg {
-    width: 16px;
-    height: 16px;
-    fill: {{ section.settings.text_color }};
-  }
+        if content_page and content_page != blank
+          assign modal_content = content_page.content
+        endif
+      endif
+    -%}
 
-  .announcement-bar__divider {
-    width: 1px;
-    height: 14px;
-    background-color: rgba(255,255,255,0.3);
-  }
-
-  .announcement-bar__country-flag {
-    width: 18px;
-    height: 13px;
-    border-radius: 2px;
-    overflow: hidden;
-    display: inline-flex;
-    align-items: center;
-    flex-shrink: 0;
-  }
-
-  .announcement-bar__country-flag img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  /* Localization Wrapper */
-  .announcement-bar__localization {
-    position: relative;
-    display: flex;
-    align-items: center;
-  }
-
-  .localization-form {
-    display: flex;
-    align-items: center;
-  }
-
-  /* Trigger Button */
-  .localization-trigger {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: {{ section.settings.text_color }};
-    font-family: 'Figtree', sans-serif;
-    font-size: 12px;
-    font-weight: 400;
-    padding: 0;
-    white-space: nowrap;
-  }
-
-  .localization-trigger:hover {
-    opacity: 0.8;
-  }
-
-  .localization-trigger__chevron {
-    transition: transform 0.2s ease;
-    flex-shrink: 0;
-  }
-
-  .localization-trigger[aria-expanded="true"] .localization-trigger__chevron {
-    transform: rotate(180deg);
-  }
-
-  /* Dropdown */
-  .country-dropdown {
-    position: absolute;
-    top: calc(100% + 10px);
-    right: 0;
-    background: #ffffff;
-    border: 1px solid #e0e0e0;
-    border-radius: 6px;
-    list-style: none;
-    margin: 0;
-    padding: 4px 0;
-    min-width: 220px;
-    max-height: 300px;
-    overflow-y: auto;
-    z-index: 999;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
-  }
-
-  .country-dropdown__item {
-    margin: 0;
-    padding: 0;
-  }
-
-  .country-dropdown__option {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    width: 100%;
-    padding: 8px 12px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-family: 'Figtree', sans-serif;
-    font-size: 13px;
-    font-weight: 400;
-    text-align: left;
-    color: #333333;
-    box-sizing: border-box;
-  }
-
-  .country-dropdown__option:hover {
-    background-color: #f5f5f5;
-  }
-
-  .country-dropdown__option.is-active {
-    font-weight: 600;
-    color: #000000;
-  }
-</style>
-
-<div class="announcement-bar" role="banner" aria-label="Announcement bar">
-
-  {%- comment %} LEFT: Nav Links {% endcomment %}
-  <nav class="announcement-bar__left" aria-label="Utility navigation">
-    {%- for i in (1..5) -%}
-      {%- assign label_key = 'nav_label_' | append: i -%}
-      {%- assign url_key   = 'nav_url_'   | append: i -%}
-      {%- assign label = section.settings[label_key] -%}
-      {%- assign url   = section.settings[url_key]   -%}
-      {%- if label != blank -%}
-        <a href="{{ url | default: '#' }}">{{ label }}</a>
-      {%- endif -%}
-    {%- endfor -%}
-  </nav>
-
-  {%- comment %} CENTER: Announcement Text {% endcomment %}
-  <div class="announcement-bar__center">
-    {{ section.settings.announcement_text }}
-  </div>
-
-  {%- comment %} RIGHT: Social Icons + Localization {% endcomment %}
-  <div class="announcement-bar__right">
-
-    <div class="announcement-bar__social">
-      {%- if section.settings.facebook_url != blank -%}
-        <a href="{{ section.settings.facebook_url }}" target="_blank" rel="noopener" aria-label="Facebook">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-        </a>
+    <div
+      class="announcement-bar__item ff-body fs-body-60"
+      {% unless forloop.first %}
+        inert
+      {% endunless %}
+      {{ block.shopify_attributes }}
+      data-index="{{ forloop.index0 }}"
+    >
+      {%- if has_mobile_announcement -%}
+        <div class="announcement-bar__item-inner announcement-bar__item-inner-mobile-only">
+          {{ announcement_item_mobile }}
+        </div>
       {%- endif -%}
 
-      {%- if section.settings.pinterest_url != blank -%}
-        <a href="{{ section.settings.pinterest_url }}" target="_blank" rel="noopener" aria-label="Pinterest">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.236 2.636 7.855 6.356 9.312-.088-.791-.167-2.005.035-2.868.181-.78 1.172-4.97 1.172-4.97s-.299-.598-.299-1.482c0-1.388.806-2.428 1.808-2.428.853 0 1.267.641 1.267 1.408 0 .858-.546 2.14-.828 3.33-.236.995.499 1.806 1.476 1.806 1.772 0 3.137-1.868 3.137-4.566 0-2.387-1.715-4.057-4.163-4.057-2.838 0-4.503 2.128-4.503 4.33 0 .857.33 1.776.741 2.278a.3.3 0 0 1 .069.284c-.075.314-.243.995-.276 1.134-.044.183-.146.222-.337.134-1.249-.581-2.03-2.407-2.03-3.874 0-3.154 2.292-6.052 6.608-6.052 3.469 0 6.165 2.473 6.165 5.776 0 3.447-2.173 6.22-5.19 6.22-1.013 0-1.967-.527-2.292-1.148l-.623 2.378c-.226.869-.835 1.958-1.244 2.621.937.29 1.931.446 2.962.446 5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
-        </a>
-      {%- endif -%}
+      <div class="announcement-bar__item-inner{% if has_mobile_announcement %} announcement-bar__item-inner-desktop-only{% endif %}">
+        {{ announcement_item_desktop }}
 
-      {%- if section.settings.instagram_url != blank -%}
-        <a href="{{ section.settings.instagram_url }}" target="_blank" rel="noopener" aria-label="Instagram">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" fill="{{ section.settings.background_color }}"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="{{ section.settings.background_color }}" stroke-width="2" stroke-linecap="round"/></svg>
-        </a>
-      {%- endif -%}
-
-      {%- if section.settings.tiktok_url != blank -%}
-        <a href="{{ section.settings.tiktok_url }}" target="_blank" rel="noopener" aria-label="TikTok">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/></svg>
-        </a>
-      {%- endif -%}
-    </div>
-
-    <div class="announcement-bar__divider"></div>
-
-    {%- comment %} Shopify Built-in Localization {% endcomment %}
-    <div class="announcement-bar__localization">
-      {%- if localization.available_countries.size > 1 -%}
-        {%- form 'localization', class: 'localization-form' -%}
-
-          <input type="hidden" name="country_code" id="selected_country" value="{{ localization.country.iso_code }}">
-          <input type="hidden" name="return_to" value="{{ request.path }}">
-
-          <button type="button" class="localization-trigger" aria-expanded="false" aria-controls="country-dropdown">
-            <span class="announcement-bar__country-flag">
-              <img
-                src="https://cdn.shopify.com/static/images/flags/{{ localization.country.iso_code | downcase }}.svg"
-                alt="{{ localization.country.name }}"
-                width="18"
-                height="13"
-                loading="lazy"
-              >
-            </span>
-            <span class="localization-trigger__text">
-              {{ localization.country.name }} ({{ localization.country.currency.iso_code }} {{ localization.country.currency.symbol }})
-            </span>
-            <svg class="localization-trigger__chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
-
-          <ul class="country-dropdown" id="country-dropdown" hidden>
-            {%- for country in localization.available_countries -%}
-              <li class="country-dropdown__item">
-                <button
-                  type="button"
-                  class="country-dropdown__option {% if country.iso_code == localization.country.iso_code %}is-active{% endif %}"
-                  data-country="{{ country.iso_code }}"
-                >
-                  <img
-                    src="https://cdn.shopify.com/static/images/flags/{{ country.iso_code | downcase }}.svg"
-                    alt="{{ country.name }}"
-                    width="18"
-                    height="13"
-                    loading="lazy"
-                  >
-                  {{ country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})
-                </button>
-              </li>
-            {%- endfor -%}
-          </ul>
-
-        {%- endform -%}
-
-      {%- else -%}
-        <span class="announcement-bar__country-flag">
-          <img
-            src="https://cdn.shopify.com/static/images/flags/{{ localization.country.iso_code | downcase }}.svg"
-            alt="{{ localization.country.name }}"
-            width="18"
-            height="13"
+        {% if has_announcement_modal %}
+          <div
+            class="announcement-bar-modal"
+            id="announcement-modal-content-{{ forloop.index0 }}"
           >
-        </span>
-        <span>{{ localization.country.name }} ({{ localization.country.currency.iso_code }} {{ localization.country.currency.symbol }})</span>
+            <div class="announcement-bar-modal__content">
+              {% if block.settings.modal_heading != blank -%}
+                <{{ block.settings.heading_tag }} class="announcement-bar-modal__heading">{{ block.settings.modal_heading }}</{{ block.settings.heading_tag }}>
+              {%- endif %}
+
+              <div class="announcement-bar-modal__text">
+                {{ modal_content }}
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  {%- endfor -%}
+{%- endcapture -%}
+
+{%- if section.blocks.size > 0 or locale_selector or country_selector or show_social_media -%}
+  <div
+    class="
+      announcement-bar
+      {% if menu == blank and locale_selector or country_selector or show_social_media %}
+        announcement-bar--announcements-desktop-align-left
+      {% elsif menu != blank and locale_selector == false and country_selector == false and show_social_media == false %}
+        announcement-bar--announcements-desktop-align-right
+      {% endif %}
+      {% if section.settings.show_divider %}
+        announcement-bar--has-border
+      {% endif %}
+    "
+    data-section-id="{{ section.id }}"
+    data-scroller-id="{{ scroller_id }}"
+    data-section-type="announcement-bar"
+    data-item-count="{{ section.blocks.size }}"
+    style="
+      --color-background: {{ section.settings.color_background }};
+      --color-gradient-overlay: {{ section.settings.color_background | color_modify: 'alpha', 1 }};
+      --color-gradient-overlay-transparent: {{ section.settings.color_background | color_modify: 'alpha', 0 }};
+      --color-text: {{ section.settings.color_text }};
+      --color-border: {{ section.settings.color_text | color_modify: 'alpha', 0.3 }}
+    "
+  >
+    <div class="announcement-bar__inner">
+      {%- if menu != blank -%}
+        <div class="announcement-bar__links" data-navigation>
+          {% render 'navigation', announcement_bar_links: true, menu: links, interaction_type: 'click' %}
+        </div>
+      {%- endif -%}
+
+      {%- if section.blocks.size > 0 -%}
+        <div class="announcement-bar__announcements-wrapper">
+          {% comment %} Using custom scroll-slider buttons only visible when user is tabbing {% endcomment %}
+          {% if section.blocks.size > 1 -%}
+            <div
+              class="announcement-bar__nav-button-wrapper announcement-bar__nav-button-wrapper--prev"
+            >
+              <button
+                type="button"
+                class="announcement-bar__nav-button announcement-bar__nav-button--prev hidden"
+                title="{{ 'general.accessibility.previous' | t }}"
+                data-scroll-slider-prev-button
+                name="prev"
+                style="
+                  --icon-width: 16px;
+                  --icon-height: 16px;
+                "
+              >
+                {% render 'icon', icon: 'chevron' %}
+              </button>
+            </div>
+          {%- endif %}
+          {% render 'scroll-slider',
+            navigation_container: '.announcement-bar',
+            id: scroller_id,
+            slider_items: announcements,
+            slider_wrapper_classes: 'announcement-bar__announcements',
+            columns: 1,
+            gap: 20,
+            peek: 0,
+            loop: true,
+            full_width_below_720: true,
+            autoplay: true,
+            autoplay_pause_on_hover: true,
+            autoplay_delay: section.settings.autoplay_delay,
+            slideshow: true
+          %}
+          {% if section.blocks.size > 1 -%}
+            <div
+              class="announcement-bar__nav-button-wrapper announcement-bar__nav-button-wrapper--next"
+            >
+              <button
+                type="button"
+                class="announcement-bar__nav-button announcement-bar__nav-button--next hidden"
+                title="{{ 'general.accessibility.next' | t }}"
+                data-scroll-slider-next-button
+                name="next"
+                style="
+                  --icon-width: 16px;
+                  --icon-height: 16px;
+                "
+              >
+                {% render 'icon', icon: 'chevron' %}
+              </button>
+            </div>
+          {%- endif %}
+        </div>
+      {%- endif -%}
+
+      {%- if locale_selector or country_selector or show_social_media -%}
+        <div class="announcement-bar__menus">
+          {%- if show_social_media -%}
+            {% render 'social-icons' %}
+          {%- endif -%}
+
+          {%- if locale_selector or country_selector -%}
+            <div class="announcement-bar__cross-border">
+              {% render 'cross-border',
+                show_locale: locale_selector,
+                show_country: country_selector,
+                hide_country_flags: hide_country_flags,
+                id: 'announcement-bar'
+              %}
+            </div>
+          {%- endif -%}
+        </div>
       {%- endif -%}
     </div>
-
   </div>
-</div>
-
-<script>
-  (function () {
-    const trigger = document.querySelector('.localization-trigger');
-    const dropdown = document.getElementById('country-dropdown');
-
-    if (!trigger || !dropdown) return;
-
-    // Open / close dropdown
-    trigger.addEventListener('click', function () {
-      const isOpen = !dropdown.hidden;
-      dropdown.hidden = isOpen;
-      trigger.setAttribute('aria-expanded', String(!isOpen));
-    });
-
-    // Select a country and submit form
-    document.querySelectorAll('.country-dropdown__option').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        document.getElementById('selected_country').value = btn.dataset.country;
-        btn.closest('form').submit();
-      });
-    });
-
-    // Close when clicking outside
-    document.addEventListener('click', function (e) {
-      if (!e.target.closest('.announcement-bar__localization')) {
-        dropdown.hidden = true;
-        trigger.setAttribute('aria-expanded', 'false');
-      }
-    });
-
-    // Close on Escape key
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') {
-        dropdown.hidden = true;
-        trigger.setAttribute('aria-expanded', 'false');
-        trigger.focus();
-      }
-    });
-  })();
-</script>
-
-{% endif %}
+{%- endif -%}
 
 {% schema %}
 {
-  "name": "Announcement Bar",
-  "tag": "section",
-  "class": "announcement-bar-section",
+  "name": "t:sections.announcement_bar.name",
+  "class": "announcement-bar-wrapper",
+  "max_blocks": 3,
   "settings": [
     {
-      "type": "header",
-      "content": "Colors"
+      "type": "range",
+      "id": "autoplay_delay",
+      "label": "t:sections.announcement_bar.settings.timing.label",
+      "min": 3,
+      "max": 15,
+      "step": 1,
+      "default": 8,
+      "unit": "s"
     },
     {
+      "id": "color_text",
       "type": "color",
-      "id": "background_color",
-      "label": "Background color",
-      "default": "#1e3a2f"
+      "label": "t:sections.announcement_bar.settings.color_text.label",
+      "default": "#FFFFFF"
     },
     {
+      "id": "color_background",
       "type": "color",
-      "id": "text_color",
-      "label": "Text & icon color",
-      "default": "#ffffff"
+      "label": "t:sections.announcement_bar.settings.color_background.label",
+      "default": "#000000"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_divider",
+      "label": "t:sections.announcement_bar.settings.show_divider.label",
+      "default": true
     },
     {
       "type": "header",
-      "content": "Announcement Text"
+      "content": "t:shared.settings.disclosure.header__language.content"
     },
     {
-      "type": "text",
-      "id": "announcement_text",
-      "label": "Announcement text",
-      "default": "We stock fair-trade coffee from local brands 🫘"
-    },
-    {
-      "type": "header",
-      "content": "Navigation Links"
-    },
-    {
-      "type": "text",
-      "id": "nav_label_1",
-      "label": "Link 1 label",
-      "default": "Shipping"
-    },
-    {
-      "type": "url",
-      "id": "nav_url_1",
-      "label": "Link 1 URL"
-    },
-    {
-      "type": "text",
-      "id": "nav_label_2",
-      "label": "Link 2 label",
-      "default": "Returns"
-    },
-    {
-      "type": "url",
-      "id": "nav_url_2",
-      "label": "Link 2 URL"
-    },
-    {
-      "type": "text",
-      "id": "nav_label_3",
-      "label": "Link 3 label",
-      "default": "Contact"
-    },
-    {
-      "type": "url",
-      "id": "nav_url_3",
-      "label": "Link 3 URL"
-    },
-    {
-      "type": "text",
-      "id": "nav_label_4",
-      "label": "Link 4 label",
-      "default": "FAQ"
-    },
-    {
-      "type": "url",
-      "id": "nav_url_4",
-      "label": "Link 4 URL"
-    },
-    {
-      "type": "text",
-      "id": "nav_label_5",
-      "label": "Link 5 label",
-      "default": "Theme"
-    },
-    {
-      "type": "url",
-      "id": "nav_url_5",
-      "label": "Link 5 URL"
+      "type": "checkbox",
+      "id": "enable_locale_selector",
+      "label": "t:shared.settings.disclosure.enable_locale_selector.label",
+      "info": "t:shared.settings.disclosure.enable_locale_selector.info",
+      "default": true
     },
     {
       "type": "header",
-      "content": "Social Media URLs"
+      "content": "t:shared.settings.disclosure.header__country.content"
     },
     {
-      "type": "url",
-      "id": "facebook_url",
-      "label": "Facebook URL"
+      "type": "checkbox",
+      "id": "enable_country_selector",
+      "label": "t:shared.settings.disclosure.enable_country_selector.label",
+      "info": "t:shared.settings.disclosure.enable_country_selector.info",
+      "default": true
     },
     {
-      "type": "url",
-      "id": "pinterest_url",
-      "label": "Pinterest URL"
+      "type": "checkbox",
+      "id": "show_country_flags",
+      "label": "t:shared.settings.disclosure.show_country_flags.label",
+      "default": true
     },
     {
-      "type": "url",
-      "id": "instagram_url",
-      "label": "Instagram URL"
+      "type": "header",
+      "content": "t:shared.settings.header__social_media.content",
+      "info": "t:shared.settings.header__social_media.info"
     },
     {
-      "type": "url",
-      "id": "tiktok_url",
-      "label": "TikTok URL"
+      "type": "checkbox",
+      "id": "show_social_media",
+      "label": "t:shared.settings.show_social_icons.label",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "t:sections.announcement_bar.settings.header__links.content"
+    },
+    {
+      "id": "menu",
+      "type": "link_list",
+      "label": "t:sections.announcement_bar.settings.links.label"
     }
   ],
-  "presets": [
+  "blocks": [
     {
-      "name": "Announcement Bar"
+      "type": "announcement",
+      "name": "t:sections.announcement_bar.blocks.announcement.name",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "title",
+          "default": "<p>Free standard shipping and returns on all orders</p>",
+          "label": "t:sections.announcement_bar.blocks.announcement.settings.title.label"
+        },
+        {
+          "type": "richtext",
+          "id": "title_mobile",
+          "label": "t:sections.announcement_bar.blocks.announcement.settings.title_mobile.label"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "t:sections.announcement_bar.blocks.announcement.settings.link.label",
+          "info": "t:sections.announcement_bar.blocks.announcement.settings.link.info"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.announcement_bar.blocks.announcement.settings.header__additional_info.content",
+          "info": "t:sections.announcement_bar.blocks.announcement.settings.header__additional_info.info"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_modal",
+          "label": "t:shared.settings.general.enable.label",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "modal_link_text",
+          "label": "t:sections.announcement_bar.settings.link_text.label",
+          "default": "<p>Click for details</p>"
+        },
+        {
+          "type": "select",
+          "id": "modal_link_style",
+          "label": "t:sections.announcement_bar.settings.link_style.label",
+          "options": [
+            {
+              "value": "text",
+              "label": "t:shared.section_blocks.text.settings.text.label"
+            },
+            {
+              "value": "button",
+              "label": "t:shared.section_blocks.button.name"
+            }
+          ],
+          "default": "text"
+        },
+        {
+          "type": "text",
+          "id": "modal_heading",
+          "label": "t:sections.announcement_bar.settings.popup_heading.label"
+        },
+        {
+          "id": "heading_tag",
+          "type": "select",
+          "label": "t:shared.settings.heading_tag.label",
+          "options": [
+            {
+              "value": "h1",
+              "label": "H1"
+            },
+            {
+              "value": "h2",
+              "label": "H2"
+            },
+            {
+              "value": "h3",
+              "label": "H3"
+            },
+            {
+              "value": "h4",
+              "label": "H4"
+            },
+            {
+              "value": "h5",
+              "label": "H5"
+            },
+            {
+              "value": "h6",
+              "label": "H6"
+            }
+          ],
+          "info": "t:shared.settings.heading_tag.info",
+          "default": "h3"
+        },
+        {
+          "type": "richtext",
+          "id": "modal_text",
+          "label": "t:sections.announcement_bar.settings.popup_text.label",
+          "default": "<p>Add your information popup content here</p>"
+        },
+        {
+          "type": "page",
+          "id": "page_for_modal_content",
+          "label": "t:shared.settings.general.page_for_content.label",
+          "info": "t:shared.settings.general.page_for_content.info"
+        }
+      ]
     }
-  ]
+  ],
+  "default": {
+    "blocks": [
+      {
+        "type": "announcement"
+      }
+    ]
+  }
 }
 {% endschema %}
