@@ -14,6 +14,21 @@
     "announcement_bar_L7wb7q": {
       "type": "announcement-bar",
       "blocks": {
+        "announcement_DaeKez": {
+          "type": "announcement",
+          "settings": {
+            "title": "<p>Free standard shipping and returns on all orders</p>",
+            "title_mobile": "",
+            "link": "",
+            "enable_modal": false,
+            "modal_link_text": "Click for details",
+            "modal_link_style": "text",
+            "modal_heading": "",
+            "heading_tag": "h3",
+            "modal_text": "<p>Add your information popup content here</p>",
+            "page_for_modal_content": ""
+          }
+        },
         "announcement_9UKghB": {
           "type": "announcement",
           "settings": {
@@ -31,6 +46,7 @@
         }
       },
       "block_order": [
+        "announcement_DaeKez",
         "announcement_9UKghB"
       ],
       "name": "Announcement Bar",
