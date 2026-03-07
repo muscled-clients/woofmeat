@@ -13,6 +13,26 @@
   "sections": {
     "announcement_bar_L7wb7q": {
       "type": "announcement-bar",
+      "blocks": {
+        "announcement_9UKghB": {
+          "type": "announcement",
+          "settings": {
+            "title": "<p>Free standard shipping and returns on all orders</p>",
+            "title_mobile": "",
+            "link": "",
+            "enable_modal": false,
+            "modal_link_text": "<p>Click for details</p>",
+            "modal_link_style": "text",
+            "modal_heading": "",
+            "heading_tag": "h3",
+            "modal_text": "<p>Add your information popup content here</p>",
+            "page_for_modal_content": ""
+          }
+        }
+      },
+      "block_order": [
+        "announcement_9UKghB"
+      ],
       "name": "Announcement Bar",
       "settings": {
         "autoplay_delay": 8,
