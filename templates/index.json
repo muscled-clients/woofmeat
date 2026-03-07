@@ -1070,7 +1070,8 @@
         "brand_Y4phWP": {
           "type": "brand",
           "settings": {
-            "brand_name": "Brand 2",
+            "brand_logo": "shopify://shop_images/7634d47cfc0bf9bdeff1ff55021fffec5a6fa3af.png",
+            "brand_name": "U S Chemical",
             "brand_link": ""
           }
         },
