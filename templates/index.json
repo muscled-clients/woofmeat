@@ -897,116 +897,102 @@
         "arrows": true
       }
     },
-    "blog_posts": {
-      "type": "blog-posts",
+    "you_may_also_like_8GrEnE": {
+      "type": "you-may-also-like",
       "blocks": {
-        "article_j7cNkj": {
-          "type": "article",
+        "product_card_ynrLBJ": {
+          "type": "product_card",
           "settings": {
-            "article": "news/choosing-snack-bulk-packs"
+            "product": "",
+            "custom_title": "Bridor Pinched & Curved Butter Croissant",
+            "custom_vendor": "Bakery",
+            "custom_price": 5200
+          }
+        },
+        "product_card_krQUy9": {
+          "type": "product_card",
+          "settings": {
+            "product": "",
+            "custom_title": "Bridor Pinched & Curved Butter Croissant",
+            "custom_vendor": "Bakery",
+            "custom_price": 5200
+          }
+        },
+        "product_card_7cnrcn": {
+          "type": "product_card",
+          "settings": {
+            "product": "",
+            "custom_title": "Bridor Pinched & Curved Butter Croissant",
+            "custom_vendor": "Bakery",
+            "custom_price": 5200
+          }
+        },
+        "product_card_cqCiBK": {
+          "type": "product_card",
+          "settings": {
+            "product": "",
+            "custom_title": "Bridor Pinched & Curved Butter Croissant",
+            "custom_vendor": "Bakery",
+            "custom_price": 5200
+          }
+        },
+        "product_card_jcwaRW": {
+          "type": "product_card",
+          "settings": {
+            "product": "",
+            "custom_title": "Bridor Pinched & Curved Butter Croissant",
+            "custom_vendor": "Bakery",
+            "custom_price": 5200
           }
         }
       },
       "block_order": [
-        "article_j7cNkj"
+        "product_card_ynrLBJ",
+        "product_card_krQUy9",
+        "product_card_7cnrcn",
+        "product_card_cqCiBK",
+        "product_card_jcwaRW"
       ],
+      "name": "You May Also Like",
       "settings": {
-        "center_content": true,
-        "preheading": "",
-        "heading": "Blog posts",
-        "section_header_heading_tag": "h2",
-        "subheading": "",
-        "section_header_subheading_tag": "h2",
-        "maximum_content_width": 650,
-        "button_link": "",
-        "button_label": "View all posts",
-        "button_style": "tertiary",
-        "button_position": "header",
-        "display_type": "all",
-        "blog": "",
-        "max_articles": 4,
-        "num_columns": "4",
-        "show_tags": true,
-        "show_author": true,
-        "show_date": true,
-        "show_excerpt": true,
-        "show_featured_image": true,
-        "aspect_ratio": "landscape",
-        "enable_text_box": false,
-        "text_box_style": "soft_small",
-        "text_box_color_scheme": "default",
-        "text_box_override_with_custom_colors": false,
-        "text_box_override_color_text": "#393939",
-        "text_box_override_color_background": "#ffffff",
-        "color_scheme": "default",
-        "override_with_custom_colors": false,
-        "override_color_text": "#393939",
-        "override_color_background": "#ffffff",
-        "section_style_spacing_top": 36,
-        "section_style_spacing_bottom": 36,
-        "section_style_enable_animation": true
-      }
-    },
-    "overlapping_media_with_content_2": {
-      "type": "overlapping-media-with-content",
-      "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "title": "Brew Like a Pro",
-            "heading_tag": "h3",
-            "heading_font_size": 5
-          }
-        },
-        "text": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Embark on a journey to coffee mastery with our expert-curated guide, perfecting grind sizes and techniques for exceptional coffee.</p>",
-            "text_font_size": 3
-          }
-        },
-        "button": {
-          "type": "button",
-          "settings": {
-            "button_link": "",
-            "button_label": "Shop Now",
-            "button_style": "solid"
-          }
-        }
-      },
-      "block_order": [
-        "heading",
-        "text",
-        "button"
-      ],
-      "name": "t:sections.overlapping_media_with_content.presets.name",
-      "settings": {
-        "media_width": 40,
-        "media_position_desktop": "left",
-        "media_position_mobile": "above",
-        "media_1_type": "image",
-        "image_1": "shopify://shop_images/b22f6783cb81636e851e0f749097e81a9fda41c7.png",
-        "media_1_aspect_ratio": "square",
-        "mobile_media_1_aspect_ratio": "square",
-        "media_1_focal_point": "center",
-        "mobile_media_1_focal_point": "center",
-        "media_caption": "",
-        "enable_media_2": false,
-        "media_2_type": "image",
-        "media_2_aspect_ratio": "square",
-        "mobile_media_2_aspect_ratio": "square",
-        "media_2_focal_point": "center",
-        "mobile_media_2_focal_point": "center",
-        "content_width": "custom",
-        "custom_width": 525,
-        "content_alignment": "center",
-        "color_scheme": "color_scheme_1",
-        "override_with_custom_colors": true,
-        "override_color_text": "#ffffff",
-        "override_color_background": "#f57e21",
-        "section_style_spacing_top": 0,
-        "section_style_spacing_bottom": 0,
-        "section_style_enable_animation": true
+        "background_color": "#ffffff",
+        "section_padding_top": 40,
+        "section_padding_bottom": 40,
+        "container_max_width": 1200,
+        "container_padding": 20,
+        "heading": "You may also like",
+        "heading_color": "#1a1a1a",
+        "heading_font_size": 22,
+        "heading_font_weight": "700",
+        "heading_margin_bottom": 20,
+        "products_per_row": 5,
+        "products_per_row_tablet": 3,
+        "products_per_row_mobile": 2,
+        "card_gap": 0,
+        "card_background_color": "#ffffff",
+        "card_border_width": 1,
+        "card_border_color": "#e5e5e5",
+        "card_border_radius": 0,
+        "card_info_padding": 14,
+        "image_bg_color": "#ffffff",
+        "image_padding": 16,
+        "show_vendor": true,
+        "vendor_color": "#888888",
+        "vendor_font_size": 12,
+        "title_color": "#1a1a1a",
+        "title_font_size": 14,
+        "title_font_weight": "400",
+        "show_price": true,
+        "price_color": "#1a1a1a",
+        "price_font_size": 14,
+        "price_font_weight": "400",
+        "show_stock_badge": true,
+        "in_stock_text": "In stock",
+        "out_of_stock_text": "Out of stock",
+        "in_stock_color": "#22c55e",
+        "out_of_stock_color": "#ef4444",
+        "stock_label_color": "#555555",
+        "stock_font_size": 12
       }
     },
     "shop_by_brand_wJJELG": {
@@ -1137,6 +1123,118 @@
         "button_background_color": "#ffffff",
         "button_text_color": "#222222"
       }
+    },
+    "blog_posts": {
+      "type": "blog-posts",
+      "blocks": {
+        "article_j7cNkj": {
+          "type": "article",
+          "settings": {
+            "article": "news/choosing-snack-bulk-packs"
+          }
+        }
+      },
+      "block_order": [
+        "article_j7cNkj"
+      ],
+      "settings": {
+        "center_content": true,
+        "preheading": "",
+        "heading": "Blog posts",
+        "section_header_heading_tag": "h2",
+        "subheading": "",
+        "section_header_subheading_tag": "h2",
+        "maximum_content_width": 650,
+        "button_link": "",
+        "button_label": "View all posts",
+        "button_style": "tertiary",
+        "button_position": "header",
+        "display_type": "all",
+        "blog": "",
+        "max_articles": 4,
+        "num_columns": "4",
+        "show_tags": true,
+        "show_author": true,
+        "show_date": true,
+        "show_excerpt": true,
+        "show_featured_image": true,
+        "aspect_ratio": "landscape",
+        "enable_text_box": false,
+        "text_box_style": "soft_small",
+        "text_box_color_scheme": "default",
+        "text_box_override_with_custom_colors": false,
+        "text_box_override_color_text": "#393939",
+        "text_box_override_color_background": "#ffffff",
+        "color_scheme": "default",
+        "override_with_custom_colors": false,
+        "override_color_text": "#393939",
+        "override_color_background": "#ffffff",
+        "section_style_spacing_top": 36,
+        "section_style_spacing_bottom": 36,
+        "section_style_enable_animation": true
+      }
+    },
+    "overlapping_media_with_content_2": {
+      "type": "overlapping-media-with-content",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "title": "Brew Like a Pro",
+            "heading_tag": "h3",
+            "heading_font_size": 5
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Embark on a journey to coffee mastery with our expert-curated guide, perfecting grind sizes and techniques for exceptional coffee.</p>",
+            "text_font_size": 3
+          }
+        },
+        "button": {
+          "type": "button",
+          "settings": {
+            "button_link": "",
+            "button_label": "Shop Now",
+            "button_style": "solid"
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "text",
+        "button"
+      ],
+      "name": "t:sections.overlapping_media_with_content.presets.name",
+      "settings": {
+        "media_width": 40,
+        "media_position_desktop": "left",
+        "media_position_mobile": "above",
+        "media_1_type": "image",
+        "image_1": "shopify://shop_images/b22f6783cb81636e851e0f749097e81a9fda41c7.png",
+        "media_1_aspect_ratio": "square",
+        "mobile_media_1_aspect_ratio": "square",
+        "media_1_focal_point": "center",
+        "mobile_media_1_focal_point": "center",
+        "media_caption": "",
+        "enable_media_2": false,
+        "media_2_type": "image",
+        "media_2_aspect_ratio": "square",
+        "mobile_media_2_aspect_ratio": "square",
+        "media_2_focal_point": "center",
+        "mobile_media_2_focal_point": "center",
+        "content_width": "custom",
+        "custom_width": 525,
+        "content_alignment": "center",
+        "color_scheme": "color_scheme_1",
+        "override_with_custom_colors": true,
+        "override_color_text": "#ffffff",
+        "override_color_background": "#f57e21",
+        "section_style_spacing_top": 0,
+        "section_style_spacing_bottom": 0,
+        "section_style_enable_animation": true
+      }
     }
   },
   "order": [
@@ -1154,8 +1252,9 @@
     "snacks_candy_collection_FtNRnt",
     "featured_collection_media_2",
     "collection_list_2",
+    "shop_by_brand_wJJELG",
+    "you_may_also_like_8GrEnE",
     "blog_posts",
-    "overlapping_media_with_content_2",
-    "shop_by_brand_wJJELG"
+    "overlapping_media_with_content_2"
   ]
 }
