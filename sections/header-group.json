@@ -11,6 +11,29 @@
   "type": "header",
   "name": "t:groups.header_group.name",
   "sections": {
+    "announcement_bar_L7wb7q": {
+      "type": "announcement-bar",
+      "name": "Announcement Bar",
+      "settings": {
+        "background_color": "#1e3a2f",
+        "text_color": "#ffffff",
+        "announcement_text": "We stock fair-trade coffee from local brands 🫘",
+        "nav_label_1": "Shipping",
+        "nav_url_1": "",
+        "nav_label_2": "Returns",
+        "nav_url_2": "",
+        "nav_label_3": "Contact",
+        "nav_url_3": "",
+        "nav_label_4": "FAQ",
+        "nav_url_4": "",
+        "nav_label_5": "Theme",
+        "nav_url_5": "",
+        "facebook_url": "",
+        "pinterest_url": "",
+        "instagram_url": "",
+        "tiktok_url": ""
+      }
+    },
     "header": {
       "type": "header",
       "blocks": {
@@ -90,26 +113,6 @@
     "mobile-menu": {
       "type": "mobile-menu",
       "blocks": {
-        "promoted_collections": {
-          "type": "promoted_collections",
-          "settings": {
-            "submenu_name": "",
-            "block_position": "top",
-            "title": "Promoted collections",
-            "heading_tag": "h3",
-            "collections": [],
-            "layout": "2_col",
-            "image_source": "collection",
-            "image_aspect_ratio": "square",
-            "collection_title_style": "overlay",
-            "text_position": "flex-start_flex-end",
-            "image_overlay_tint_opacity": 50,
-            "image_overlay_tint_style": "solid",
-            "image_overlay_override_with_custom_colors": false,
-            "image_overlay_override_color_text": "#ffffff",
-            "image_overlay_override_color_tint": "#000000"
-          }
-        },
         "promoted_products": {
           "type": "promoted_products",
           "settings": {
@@ -138,7 +141,6 @@
         }
       },
       "block_order": [
-        "promoted_collections",
         "promoted_products",
         "promoted_text"
       ],
@@ -153,29 +155,6 @@
         "social_media_icons_columns": 5,
         "enable_locale_selector": true,
         "enable_country_selector": true
-      }
-    },
-    "announcement_bar_L7wb7q": {
-      "type": "announcement-bar",
-      "name": "Announcement Bar",
-      "settings": {
-        "background_color": "#1e3a2f",
-        "text_color": "#ffffff",
-        "announcement_text": "We stock fair-trade coffee from local brands 🫘",
-        "nav_label_1": "Shipping",
-        "nav_url_1": "",
-        "nav_label_2": "Returns",
-        "nav_url_2": "",
-        "nav_label_3": "Contact",
-        "nav_url_3": "",
-        "nav_label_4": "FAQ",
-        "nav_url_4": "",
-        "nav_label_5": "Theme",
-        "nav_url_5": "",
-        "facebook_url": "",
-        "pinterest_url": "",
-        "instagram_url": "",
-        "tiktok_url": ""
       }
     }
   },
