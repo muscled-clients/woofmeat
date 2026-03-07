@@ -899,6 +899,17 @@
     },
     "blog_posts": {
       "type": "blog-posts",
+      "blocks": {
+        "article_j7cNkj": {
+          "type": "article",
+          "settings": {
+            "article": "news/choosing-snack-bulk-packs"
+          }
+        }
+      },
+      "block_order": [
+        "article_j7cNkj"
+      ],
       "settings": {
         "center_content": true,
         "preheading": "",
