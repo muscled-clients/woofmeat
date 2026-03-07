@@ -161,6 +161,63 @@
         "arrows": true
       }
     },
+    "subcollection_top_3wjnr9": {
+      "type": "subcollection-top",
+      "blocks": {
+        "category_card_fyXXze": {
+          "type": "category_card",
+          "settings": {
+            "collection": "frontpage",
+            "custom_url": "",
+            "custom_label": ""
+          }
+        },
+        "category_card_Ldyg6C": {
+          "type": "category_card",
+          "settings": {
+            "collection": "beverages",
+            "custom_url": "",
+            "custom_label": ""
+          }
+        },
+        "category_card_fAEHyH": {
+          "type": "category_card",
+          "settings": {
+            "collection": "disinfecting-cleaning",
+            "custom_url": "",
+            "custom_label": ""
+          }
+        },
+        "category_card_ECiGEL": {
+          "type": "category_card",
+          "settings": {
+            "collection": "disposables",
+            "custom_url": "",
+            "custom_label": ""
+          }
+        },
+        "category_card_zHtr7Y": {
+          "type": "category_card",
+          "settings": {
+            "collection": "snacks-candy-1",
+            "custom_url": "",
+            "custom_label": ""
+          }
+        }
+      },
+      "block_order": [
+        "category_card_fyXXze",
+        "category_card_Ldyg6C",
+        "category_card_fAEHyH",
+        "category_card_ECiGEL",
+        "category_card_zHtr7Y"
+      ],
+      "name": "Category Grid",
+      "settings": {
+        "title": "Shop by category",
+        "columns": 5
+      }
+    },
     "sc_collection_slider_bWtt3e": {
       "type": "sc-collection-slider",
       "blocks": {
@@ -202,6 +259,7 @@
         "collection_NWpT9H",
         "collection_hLBjP3"
       ],
+      "disabled": true,
       "custom_css": [],
       "name": "SC-Collections Slider",
       "settings": {
@@ -1164,68 +1222,12 @@
         "stock_label_color": "#555555",
         "stock_font_size": 12
       }
-    },
-    "subcollection_top_3wjnr9": {
-      "type": "subcollection-top",
-      "blocks": {
-        "category_card_fyXXze": {
-          "type": "category_card",
-          "settings": {
-            "collection": "frontpage",
-            "custom_url": "",
-            "custom_label": ""
-          }
-        },
-        "category_card_Ldyg6C": {
-          "type": "category_card",
-          "settings": {
-            "collection": "beverages",
-            "custom_url": "",
-            "custom_label": ""
-          }
-        },
-        "category_card_fAEHyH": {
-          "type": "category_card",
-          "settings": {
-            "collection": "disinfecting-cleaning",
-            "custom_url": "",
-            "custom_label": ""
-          }
-        },
-        "category_card_ECiGEL": {
-          "type": "category_card",
-          "settings": {
-            "collection": "disposables",
-            "custom_url": "",
-            "custom_label": ""
-          }
-        },
-        "category_card_zHtr7Y": {
-          "type": "category_card",
-          "settings": {
-            "collection": "snacks-candy-1",
-            "custom_url": "",
-            "custom_label": ""
-          }
-        }
-      },
-      "block_order": [
-        "category_card_fyXXze",
-        "category_card_Ldyg6C",
-        "category_card_fAEHyH",
-        "category_card_ECiGEL",
-        "category_card_zHtr7Y"
-      ],
-      "name": "Category Grid",
-      "settings": {
-        "title": "Shop by category",
-        "columns": 5
-      }
     }
   },
   "order": [
     "slideshow_1",
     "collection_list_99KRUT",
+    "subcollection_top_3wjnr9",
     "sc_collection_slider_bWtt3e",
     "promoution_grid_1",
     "promotion_grid_2",
@@ -1241,7 +1243,6 @@
     "blog_posts",
     "overlapping_media_with_content_2",
     "shop_by_brand_wJJELG",
-    "you_may_also_like_q9jMMa",
-    "subcollection_top_3wjnr9"
+    "you_may_also_like_q9jMMa"
   ]
 }
