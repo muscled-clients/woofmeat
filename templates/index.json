@@ -1062,7 +1062,8 @@
         "brand_VfyGjg": {
           "type": "brand",
           "settings": {
-            "brand_name": "Brand 1",
+            "brand_logo": "shopify://shop_images/027e69a1556bbb18a91aad4783f9573fa773b5ca.png",
+            "brand_name": "Goodnes",
             "brand_link": ""
           }
         },
