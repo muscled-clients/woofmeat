@@ -213,7 +213,7 @@
         "category_card_zHtr7Y"
       ],
       "custom_css": [
-        "h2{font-family: \"Figtree\", sans-serif; font-weight: 800; font-size: 28px; line-height: 100%; letter-spacing: 0; text-align: center;}"
+        "h2 {font-family: \"Figtree\", sans-serif; font-weight: 800; font-size: 28px; line-height: 100%; letter-spacing: 0; text-align: center;}"
       ],
       "name": "Category Grid",
       "settings": {
@@ -276,13 +276,13 @@
         "item_1": {
           "type": "promotion_grid_item",
           "settings": {
-            "image": "shopify://shop_images/7e28b5c976e04f437df0f080f2401bac9e1a012f.png",
+            "image": "shopify://shop_images/cb41116295e44f9c6de80a231d4852112947903a.jpg",
             "link": "",
             "sale_heading": "",
             "sale_type": "up to",
             "sale_amount": "30",
             "sale_unit": "percent_off",
-            "promotion_text": "on Filters",
+            "promotion_text": "on Mixers",
             "color_scheme": "default",
             "override_with_custom_colors": true,
             "override_color_text": "#c71d0c",
@@ -292,6 +292,7 @@
         "item_2": {
           "type": "promotion_grid_item",
           "settings": {
+            "image": "shopify://shop_images/ed448cfe2c6e7e982821d41f3d8aec8ae3678949.png",
             "link": "",
             "sale_heading": "",
             "sale_type": "Take",
@@ -307,6 +308,7 @@
         "item_3": {
           "type": "promotion_grid_item",
           "settings": {
+            "image": "shopify://shop_images/4fef58b2fade180ce29b9884d13d3debc7c01fae.jpg",
             "link": "",
             "sale_heading": "",
             "sale_type": "up to",
