@@ -1039,14 +1039,16 @@
         "brand_8DCwWL": {
           "type": "brand",
           "settings": {
-            "brand_name": "Brand Name",
+            "brand_logo": "shopify://shop_images/60ce964a75e79ca392be7c7ce7f3331149039e92.png",
+            "brand_name": "Hawaiian Host",
             "brand_link": ""
           }
         },
         "brand_tzAwde": {
           "type": "brand",
           "settings": {
-            "brand_name": "Brand Name",
+            "brand_logo": "shopify://shop_images/aa953a4fe27638f684ee89b4ad2e819b4d6a6bda.png",
+            "brand_name": "Tellus Products",
             "brand_link": ""
           }
         },
