@@ -298,7 +298,7 @@
             "sale_type": "Take",
             "sale_amount": "20",
             "sale_unit": "dollars_off",
-            "promotion_text": "Sets of 4 mugs",
+            "promotion_text": "on Dish  Detergent",
             "color_scheme": "sale",
             "override_with_custom_colors": true,
             "override_color_text": "#c71d0c",
@@ -364,6 +364,7 @@
         "item_1": {
           "type": "promotion_grid_item",
           "settings": {
+            "image": "shopify://shop_images/cf5e31ae8d8ff61f0da9867ab2d36e5e5a55a0c8.jpg",
             "link": "",
             "sale_heading": "Reusable cups",
             "sale_type": "up to",
