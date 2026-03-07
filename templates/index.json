@@ -1087,6 +1087,7 @@
         "brand_yKjQmR": {
           "type": "brand",
           "settings": {
+            "brand_logo": "shopify://shop_images/e514e6fdca65ed8d65734dd06cf1285a534939dc.png",
             "brand_name": "Pgpro",
             "brand_link": ""
           }
@@ -1094,6 +1095,7 @@
         "brand_cHWbir": {
           "type": "brand",
           "settings": {
+            "brand_logo": "shopify://shop_images/a72f4c41ac319223f7bb467c533142f9f07c0efb.png",
             "brand_name": "Brand 5",
             "brand_link": ""
           }
@@ -1101,6 +1103,7 @@
         "brand_8P4jiN": {
           "type": "brand",
           "settings": {
+            "brand_logo": "shopify://shop_images/916460f2cf9c03da5e9cd91bcde1fe7bd772f098.png",
             "brand_name": "Brand 6",
             "brand_link": ""
           }
