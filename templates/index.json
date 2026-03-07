@@ -1055,6 +1055,7 @@
         "brand_cFh9bq": {
           "type": "brand",
           "settings": {
+            "brand_logo": "shopify://shop_images/f9f8985076cbf6564abb10cffa36259bfad89b24.png",
             "brand_name": "Hola Churros",
             "brand_link": ""
           }
