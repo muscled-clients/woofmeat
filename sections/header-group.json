@@ -59,7 +59,7 @@
         "enable_country_selector": true,
         "show_country_flags": true,
         "show_social_media": true,
-        "menu": "custom-menu"
+        "menu": "announcment-menu"
       }
     },
     "header": {
