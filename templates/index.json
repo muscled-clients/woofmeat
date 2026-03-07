@@ -1015,7 +1015,8 @@
         "brand_LTaipf": {
           "type": "brand",
           "settings": {
-            "brand_name": "Brand Name",
+            "brand_logo": "shopify://shop_images/7e9b212dccda9ea8c41eb062f921d86cd0a748c8.png",
+            "brand_name": "Tostitos",
             "brand_link": ""
           }
         },
