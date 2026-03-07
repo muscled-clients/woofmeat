@@ -833,6 +833,7 @@
         "featured_image": {
           "type": "featured_image",
           "settings": {
+            "background_image": "shopify://shop_images/dc1d15296114f1f87835295c744b822e95718eda.png",
             "background_image_media_fit": "cover",
             "background_image_focal_point": "image_presentation",
             "background_image_mobile_focal_point": "image_presentation",
@@ -873,7 +874,7 @@
         "button_link": "",
         "button_label": "",
         "button_style": "primary",
-        "collection": "",
+        "collection": "frontpage",
         "maximum_products": 6,
         "num_columns": "3",
         "enable_slider_desktop": false,
