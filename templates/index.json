@@ -1026,40 +1026,6 @@
         "button_text_color": "#222222"
       }
     },
-    "featured_collection_hrCBNJ": {
-      "type": "featured-collection",
-      "name": "Featured-Collection",
-      "settings": {
-        "show_section_title": true,
-        "section_title": "You may also like",
-        "title_color": "#111111",
-        "collection": "frontpage",
-        "products_to_show": 5,
-        "columns_desktop": 5,
-        "columns_mobile": 2,
-        "image_ratio": "portrait",
-        "badge_color": "#1a7a4a",
-        "badge_text_color": "#ffffff",
-        "show_vendor": true,
-        "vendor_color": "#888888",
-        "product_title_color": "#111111",
-        "product_title_size": "medium",
-        "price_color": "#111111",
-        "sale_price_color": "#cc0000",
-        "show_stock_label": true,
-        "instock_color": "#1a7a4a",
-        "outofstock_color": "#cc0000",
-        "enable_quick_view": true,
-        "button_label": "CHOOSE OPTIONS",
-        "button_action": "product_page",
-        "button_bg_color": "#ffffff",
-        "button_text_color": "#111111",
-        "button_border_color": "#111111",
-        "section_bg_color": "#f9f9f9",
-        "section_padding_top": 0,
-        "section_padding_bottom": 0
-      }
-    },
     "you_may_also_like_8GrEnE": {
       "type": "you-may-also-like",
       "blocks": {
@@ -1270,6 +1236,15 @@
         "section_style_spacing_bottom": 0,
         "section_style_enable_animation": true
       }
+    },
+    "subcollection_bottom_gnCGPM": {
+      "type": "subcollection-bottom",
+      "name": "you may also like ",
+      "settings": {
+        "title": "you may also like",
+        "collection": "frontpage",
+        "products_to_show": 5
+      }
     }
   },
   "order": [
@@ -1288,7 +1263,7 @@
     "featured_collection_media_2",
     "collection_list_2",
     "shop_by_brand_wJJELG",
-    "featured_collection_hrCBNJ",
+    "subcollection_bottom_gnCGPM",
     "you_may_also_like_8GrEnE",
     "blog_posts",
     "overlapping_media_with_content_2"
