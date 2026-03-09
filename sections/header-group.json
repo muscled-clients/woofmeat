@@ -89,10 +89,11 @@
         },
         "meganav_simple_VbVxRE": {
           "type": "meganav_simple",
+          "disabled": true,
           "settings": {
             "title": "Beverages",
             "header_area_heading": "",
-            "header_link_link": "",
+            "header_link_link": "shopify://collections/beverages",
             "header_link_label": "",
             "nav_column_count": 5,
             "show_column_borders": false
@@ -104,13 +105,21 @@
             "title": "Bakery",
             "nav_column_count": 5
           }
+        },
+        "meganav_collection_images_JRWirL": {
+          "type": "meganav_collection_images",
+          "settings": {
+            "title": "Beverages",
+            "nav_column_count": 5
+          }
         }
       },
       "block_order": [
         "meganav_simple_jpGrNF",
         "meganav_simple_JATzDe",
         "meganav_simple_VbVxRE",
-        "meganav_bakery"
+        "meganav_bakery",
+        "meganav_collection_images_JRWirL"
       ],
       "settings": {
         "layout": "below_logo_left_search_full_width",
