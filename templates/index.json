@@ -897,104 +897,6 @@
         "arrows": true
       }
     },
-    "you_may_also_like_8GrEnE": {
-      "type": "you-may-also-like",
-      "blocks": {
-        "product_card_ynrLBJ": {
-          "type": "product_card",
-          "settings": {
-            "product": "",
-            "custom_title": "Bridor Pinched & Curved Butter Croissant",
-            "custom_vendor": "Bakery",
-            "custom_price": 5200
-          }
-        },
-        "product_card_krQUy9": {
-          "type": "product_card",
-          "settings": {
-            "product": "",
-            "custom_title": "Bridor Pinched & Curved Butter Croissant",
-            "custom_vendor": "Bakery",
-            "custom_price": 5200
-          }
-        },
-        "product_card_7cnrcn": {
-          "type": "product_card",
-          "settings": {
-            "product": "",
-            "custom_title": "Bridor Pinched & Curved Butter Croissant",
-            "custom_vendor": "Bakery",
-            "custom_price": 5200
-          }
-        },
-        "product_card_cqCiBK": {
-          "type": "product_card",
-          "settings": {
-            "product": "",
-            "custom_title": "Bridor Pinched & Curved Butter Croissant",
-            "custom_vendor": "Bakery",
-            "custom_price": 5200
-          }
-        },
-        "product_card_jcwaRW": {
-          "type": "product_card",
-          "settings": {
-            "product": "",
-            "custom_title": "Bridor Pinched & Curved Butter Croissant",
-            "custom_vendor": "Bakery",
-            "custom_price": 5200
-          }
-        }
-      },
-      "block_order": [
-        "product_card_ynrLBJ",
-        "product_card_krQUy9",
-        "product_card_7cnrcn",
-        "product_card_cqCiBK",
-        "product_card_jcwaRW"
-      ],
-      "name": "You May Also Like",
-      "settings": {
-        "background_color": "#ffffff",
-        "section_padding_top": 40,
-        "section_padding_bottom": 40,
-        "container_max_width": 1200,
-        "container_padding": 20,
-        "heading": "You may also like",
-        "heading_color": "#1a1a1a",
-        "heading_font_size": 22,
-        "heading_font_weight": "700",
-        "heading_margin_bottom": 20,
-        "products_per_row": 5,
-        "products_per_row_tablet": 3,
-        "products_per_row_mobile": 2,
-        "card_gap": 0,
-        "card_background_color": "#ffffff",
-        "card_border_width": 1,
-        "card_border_color": "#e5e5e5",
-        "card_border_radius": 0,
-        "card_info_padding": 14,
-        "image_bg_color": "#ffffff",
-        "image_padding": 16,
-        "show_vendor": true,
-        "vendor_color": "#888888",
-        "vendor_font_size": 12,
-        "title_color": "#1a1a1a",
-        "title_font_size": 14,
-        "title_font_weight": "400",
-        "show_price": true,
-        "price_color": "#1a1a1a",
-        "price_font_size": 14,
-        "price_font_weight": "400",
-        "show_stock_badge": true,
-        "in_stock_text": "In stock",
-        "out_of_stock_text": "Out of stock",
-        "in_stock_color": "#22c55e",
-        "out_of_stock_color": "#ef4444",
-        "stock_label_color": "#555555",
-        "stock_font_size": 12
-      }
-    },
     "shop_by_brand_wJJELG": {
       "type": "shop-by-brand",
       "blocks": {
@@ -1122,6 +1024,139 @@
         "hide_button_text": "SHOW LESS",
         "button_background_color": "#ffffff",
         "button_text_color": "#222222"
+      }
+    },
+    "featured_collection_hrCBNJ": {
+      "type": "featured-collection",
+      "name": "Featured-Collection",
+      "settings": {
+        "show_section_title": true,
+        "section_title": "You may also like",
+        "title_color": "#111111",
+        "collection": "frontpage",
+        "products_to_show": 5,
+        "columns_desktop": 5,
+        "columns_mobile": 2,
+        "image_ratio": "portrait",
+        "badge_color": "#1a7a4a",
+        "badge_text_color": "#ffffff",
+        "show_vendor": true,
+        "vendor_color": "#888888",
+        "product_title_color": "#111111",
+        "product_title_size": "medium",
+        "price_color": "#111111",
+        "sale_price_color": "#cc0000",
+        "show_stock_label": true,
+        "instock_color": "#1a7a4a",
+        "outofstock_color": "#cc0000",
+        "enable_quick_view": true,
+        "button_label": "CHOOSE OPTIONS",
+        "button_action": "product_page",
+        "button_bg_color": "#ffffff",
+        "button_text_color": "#111111",
+        "button_border_color": "#111111",
+        "section_bg_color": "#f9f9f9",
+        "section_padding_top": 0,
+        "section_padding_bottom": 0
+      }
+    },
+    "you_may_also_like_8GrEnE": {
+      "type": "you-may-also-like",
+      "blocks": {
+        "product_card_ynrLBJ": {
+          "type": "product_card",
+          "settings": {
+            "product": "",
+            "custom_title": "Bridor Pinched & Curved Butter Croissant",
+            "custom_vendor": "Bakery",
+            "custom_price": 5200
+          }
+        },
+        "product_card_krQUy9": {
+          "type": "product_card",
+          "settings": {
+            "product": "",
+            "custom_title": "Bridor Pinched & Curved Butter Croissant",
+            "custom_vendor": "Bakery",
+            "custom_price": 5200
+          }
+        },
+        "product_card_7cnrcn": {
+          "type": "product_card",
+          "settings": {
+            "product": "",
+            "custom_title": "Bridor Pinched & Curved Butter Croissant",
+            "custom_vendor": "Bakery",
+            "custom_price": 5200
+          }
+        },
+        "product_card_cqCiBK": {
+          "type": "product_card",
+          "settings": {
+            "product": "",
+            "custom_title": "Bridor Pinched & Curved Butter Croissant",
+            "custom_vendor": "Bakery",
+            "custom_price": 5200
+          }
+        },
+        "product_card_jcwaRW": {
+          "type": "product_card",
+          "settings": {
+            "product": "",
+            "custom_title": "Bridor Pinched & Curved Butter Croissant",
+            "custom_vendor": "Bakery",
+            "custom_price": 5200
+          }
+        }
+      },
+      "block_order": [
+        "product_card_ynrLBJ",
+        "product_card_krQUy9",
+        "product_card_7cnrcn",
+        "product_card_cqCiBK",
+        "product_card_jcwaRW"
+      ],
+      "disabled": true,
+      "name": "You May Also Like",
+      "settings": {
+        "background_color": "#ffffff",
+        "section_padding_top": 40,
+        "section_padding_bottom": 40,
+        "container_max_width": 1200,
+        "container_padding": 20,
+        "heading": "You may also like",
+        "heading_color": "#1a1a1a",
+        "heading_font_size": 22,
+        "heading_font_weight": "700",
+        "heading_margin_bottom": 20,
+        "products_per_row": 5,
+        "products_per_row_tablet": 3,
+        "products_per_row_mobile": 2,
+        "card_gap": 0,
+        "card_background_color": "#ffffff",
+        "card_border_width": 1,
+        "card_border_color": "#e5e5e5",
+        "card_border_radius": 0,
+        "card_info_padding": 14,
+        "image_bg_color": "#ffffff",
+        "image_padding": 16,
+        "show_vendor": true,
+        "vendor_color": "#888888",
+        "vendor_font_size": 12,
+        "title_color": "#1a1a1a",
+        "title_font_size": 14,
+        "title_font_weight": "400",
+        "show_price": true,
+        "price_color": "#1a1a1a",
+        "price_font_size": 14,
+        "price_font_weight": "400",
+        "show_stock_badge": true,
+        "in_stock_text": "In stock",
+        "out_of_stock_text": "Out of stock",
+        "in_stock_color": "#22c55e",
+        "out_of_stock_color": "#ef4444",
+        "stock_label_color": "#555555",
+        "stock_font_size": 12
       }
     },
     "blog_posts": {
@@ -1253,6 +1288,7 @@
     "featured_collection_media_2",
     "collection_list_2",
     "shop_by_brand_wJJELG",
+    "featured_collection_hrCBNJ",
     "you_may_also_like_8GrEnE",
     "blog_posts",
     "overlapping_media_with_content_2"

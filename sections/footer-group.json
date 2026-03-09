@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "type": "footer",
   "name": "t:groups.footer_group.name",
@@ -36,7 +45,11 @@
           }
         }
       },
-      "block_order": ["column-1", "column-3", "column-4"],
+      "block_order": [
+        "column-1",
+        "column-3",
+        "column-4"
+      ],
       "settings": {
         "icon_border": "circle",
         "icon_border_style": "outlined",
@@ -80,13 +93,17 @@
         "signup-1": {
           "type": "newsletter_signup",
           "settings": {
+            "enable_collect_customer_name": false,
             "signup_link_text": "Sign up",
             "button_style": "solid",
             "footer_text": "<p>By completing this form, you are signing up to receive our emails and can unsubscribe at any time.</p>"
           }
         }
       },
-      "block_order": ["content-1", "signup-1"],
+      "block_order": [
+        "content-1",
+        "signup-1"
+      ],
       "settings": {
         "spacing_mode": "between",
         "color_forms": "default",
@@ -172,16 +189,26 @@
           }
         }
       },
-      "block_order": ["links_1", "links_2", "links_3", "links_4", "contact"],
+      "block_order": [
+        "links_1",
+        "links_2",
+        "links_3",
+        "links_4",
+        "contact"
+      ],
       "settings": {
         "desktop_column_gap": 72,
         "enable_locale_selector": true,
         "enable_country_selector": true,
         "show_payment_icons": true,
         "additional_copyright_text": "",
-        "subfooter_menu": "footer-menu"
+        "subfooter_menu": ""
       }
     }
   },
-  "order": ["icon_text_columns", "newsletter_compact", "footer"]
+  "order": [
+    "icon_text_columns",
+    "newsletter_compact",
+    "footer"
+  ]
 }
