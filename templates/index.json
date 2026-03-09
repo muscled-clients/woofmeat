@@ -52,7 +52,6 @@
         },
         "slide_2": {
           "type": "slide",
-          "disabled": true,
           "settings": {
             "background_image": "shopify://shop_images/ChatGPT_Image_Jan_28_2026_12_05_03_AM.png",
             "background_image_focal_point": "image_presentation",
@@ -90,7 +89,6 @@
         },
         "slide_3": {
           "type": "slide",
-          "disabled": true,
           "settings": {
             "background_image": "shopify://shop_images/ChatGPT_Image_Jan_27_2026_11_53_27_PM.png",
             "background_image_focal_point": "image_presentation",
