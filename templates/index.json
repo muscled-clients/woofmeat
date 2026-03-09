@@ -1026,6 +1026,15 @@
         "button_text_color": "#222222"
       }
     },
+    "subcollection_bottom_gnCGPM": {
+      "type": "subcollection-bottom",
+      "name": "you may also like ",
+      "settings": {
+        "title": "you may also like",
+        "collection": "frontpage",
+        "products_to_show": 5
+      }
+    },
     "you_may_also_like_8GrEnE": {
       "type": "you-may-also-like",
       "blocks": {
@@ -1235,15 +1244,6 @@
         "section_style_spacing_top": 0,
         "section_style_spacing_bottom": 0,
         "section_style_enable_animation": true
-      }
-    },
-    "subcollection_bottom_gnCGPM": {
-      "type": "subcollection-bottom",
-      "name": "you may also like ",
-      "settings": {
-        "title": "you may also like",
-        "collection": "frontpage",
-        "products_to_show": 5
       }
     }
   },
