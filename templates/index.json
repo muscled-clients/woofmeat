@@ -274,7 +274,7 @@
         "item_1": {
           "type": "promotion_grid_item",
           "settings": {
-            "image": "shopify://shop_images/cb41116295e44f9c6de80a231d4852112947903a.jpg",
+            "image": "shopify://shop_images/image_3025.jpg",
             "link": "",
             "sale_heading": "",
             "sale_type": "up to",
@@ -290,7 +290,7 @@
         "item_2": {
           "type": "promotion_grid_item",
           "settings": {
-            "image": "shopify://shop_images/ed448cfe2c6e7e982821d41f3d8aec8ae3678949.png",
+            "image": "shopify://shop_images/image_3025_1.jpg",
             "link": "",
             "sale_heading": "",
             "sale_type": "Take",
@@ -306,7 +306,7 @@
         "item_3": {
           "type": "promotion_grid_item",
           "settings": {
-            "image": "shopify://shop_images/4fef58b2fade180ce29b9884d13d3debc7c01fae.jpg",
+            "image": "shopify://shop_images/image_3025_3.jpg",
             "link": "",
             "sale_heading": "",
             "sale_type": "up to",
@@ -362,7 +362,7 @@
         "item_1": {
           "type": "promotion_grid_item",
           "settings": {
-            "image": "shopify://shop_images/cf5e31ae8d8ff61f0da9867ab2d36e5e5a55a0c8.jpg",
+            "image": "shopify://shop_images/image_3026.jpg",
             "link": "",
             "sale_heading": "Donuts & Pastries",
             "sale_type": "up to",
