@@ -177,7 +177,7 @@
         "num_rows_mobile": "3",
         "enable_slider_mobile": false,
         "show_product_counts": false,
-        "collection_item_style": "plain",
+        "collection_item_style": "outlined",
         "image_source": "collection",
         "image_aspect_ratio": "square",
         "image_circle_crop_enable": false,
