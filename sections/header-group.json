@@ -103,6 +103,7 @@
         },
         "meganav_simple": {
           "type": "meganav_simple",
+          "disabled": true,
           "settings": {
             "title": "Bakery",
             "header_area_heading": "",
@@ -151,11 +152,10 @@
         },
         "meganav_collection_images": {
           "type": "meganav_collection_images",
-          "disabled": true,
           "settings": {
             "title": "Bakery",
             "header_area_heading": "",
-            "header_link_link": "shopify://collections/bakery",
+            "header_link_link": "/collections/bakery?view=subcollections",
             "header_link_label": "",
             "nav_column_count": 5,
             "show_column_borders": true,
