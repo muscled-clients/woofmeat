@@ -65,6 +65,17 @@
     "header": {
       "type": "header",
       "blocks": {
+        "meganav_simple_KRQygw": {
+          "type": "meganav_simple",
+          "settings": {
+            "title": "Cleaning",
+            "header_area_heading": "Mega menu",
+            "header_link_link": "/collections/cleaning?view=subcollections",
+            "header_link_label": "",
+            "nav_column_count": 3,
+            "show_column_borders": true
+          }
+        },
         "meganav_simple_XixBUt": {
           "type": "meganav_simple",
           "settings": {
@@ -154,6 +165,7 @@
         }
       },
       "block_order": [
+        "meganav_simple_KRQygw",
         "meganav_simple_XixBUt",
         "meganav_collection_images_fBRQQN",
         "meganav_simple",
