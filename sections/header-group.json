@@ -65,6 +65,17 @@
     "header": {
       "type": "header",
       "blocks": {
+        "meganav_simple_XixBUt": {
+          "type": "meganav_simple",
+          "settings": {
+            "title": "Beverages",
+            "header_area_heading": "Mega menu",
+            "header_link_link": "/collections/beverages?view=subcollections",
+            "header_link_label": "",
+            "nav_column_count": 3,
+            "show_column_borders": true
+          }
+        },
         "meganav_collection_images_fBRQQN": {
           "type": "meganav_collection_images",
           "disabled": true,
@@ -143,6 +154,7 @@
         }
       },
       "block_order": [
+        "meganav_simple_XixBUt",
         "meganav_collection_images_fBRQQN",
         "meganav_simple",
         "meganav_image_with_text",
