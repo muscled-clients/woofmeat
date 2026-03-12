@@ -1634,6 +1634,15 @@
       },
       "name": "Product overview",
       "settings": {
+        "desktop_gallery_layout": {
+          "info": "Thumbnails are always displayed on mobile devices.",
+          "label": "Desktop gallery layout",
+          "options": {
+            "grid": "Grid",
+            "stacked": "Stacked",
+            "thumbnails": "Thumbnails"
+          }
+        },
         "enable_gift_card_recipient": {
           "info": "Allows buyers to send gift cards on a scheduled date, along with a personal message. [Learn more](https://help.shopify.com/manual/online-store/themes/customizing-themes/add-gift-card-recipient-fields).",
           "label": "Show recipient information form for gift cards"
@@ -1700,24 +1709,15 @@
         "show_thumbs_in_product_lightbox": {
           "label": "Show thumbnails in zoom gallery"
         },
-        "desktop_gallery_layout": {
-          "label": "Desktop gallery layout",
-          "info": "Thumbnails are always displayed on mobile devices.",
-          "options": {
-            "thumbnails": "Thumbnails",
-            "grid": "Grid",
-            "stacked": "Stacked"
-          }
-        },
         "thumbnail_position": {
-          "label": "Thumbnails position",
           "info": "Only applies on desktop when layout is set to \"Thumbnails\".",
+          "label": "Thumbnails position",
           "option_bottom": "Below media",
           "option_left": "Left of media"
         },
         "thumbnail_size": {
-          "label": "Thumbnail size",
           "info": "Only applies on desktop when layout is set to \"Thumbnails\".",
+          "label": "Thumbnail size",
           "option_large": "Large",
           "option_medium": "Medium",
           "option_small": "Small"
@@ -5244,7 +5244,7 @@
         "label": "Show discount"
       },
       "show_filters": {
-        "info": "Allow customers to filter by product options, product type, price, availability, and more. [Customize filters](/admin/menus).",
+        "info": "Allow customers to filter by product options, product type, price, availability, and more. [Learn more](https://help.fluorescent.co/cornerstone/collection-pages/filters-and-sorting).",
         "label": "Enable filtering"
       },
       "show_item_count": {

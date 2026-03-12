@@ -106,16 +106,16 @@
                 </div>
               {%- endif %}
 
-              {% if cart.cart_level_discount_applications.size > 0 -%}
-                <ul class="quick-cart__item-discounts">
+              <ul class="quick-cart__item-discounts">
+                {%- if cart.cart_level_discount_applications.size > 0 -%}
                   {% for discount_application in cart.cart_level_discount_applications -%}
                     <li class="quick-cart__item-discount fs-body-60">
                       {%- render 'icon', icon: 'discount-badge' -%}
                       {{ discount_application.title }} (-{{ discount_application.total_allocated_amount | money }})
                     </li>
                   {%- endfor %}
-                </ul>
-              {%- endif %}
+                {%- endif -%}
+              </ul>
 
               <div class="quick-cart__footer-subtotal">
                 <h3 class="ff-body fs-body-200">{{ 'cart.general.subtotal' | t }}</h3>
@@ -125,22 +125,6 @@
                   {%- if section.settings.show_product_currency %} {{ cart.currency.iso_code }}{%- endif %}
                 </span>
               </div>
-
-              {% if customer and customer.tags contains 'approved' %}
-                {%- assign cart_total_grams = 0 -%}
-                {%- for item in cart.items -%}
-                  {%- assign item_total_grams = item.grams | times: item.quantity -%}
-                  {%- assign cart_total_grams = cart_total_grams | plus: item_total_grams -%}
-                {%- endfor -%}
-                {%- assign cart_total_lbs = cart_total_grams | times: 0.00220462 -%}
-
-                <div class="quick-cart__footer-weight" style="display:flex;justify-content:space-between;align-items:center;margin-top:12px;padding:12px 0;border-top:1px solid rgba(0,0,0,0.08);" data-cart-weight-display>
-                  <span class="ff-body fs-body-200" style="font-weight:600;">Total Weight</span>
-                  <span class="ff-body fs-body-200" style="font-weight:700;" data-cart-weight-value>
-                    {{ cart_total_lbs | round: 1 }} lbs
-                  </span>
-                </div>
-              {% endif %}
 
               <p class="quick-cart__footer-tax-note ff-body fs-body-75 t-subdued">
                 {% liquid
@@ -205,52 +189,6 @@
     </div>
   </div>
 {%- endif %}
-
-{% if customer and customer.tags contains 'approved' %}
-<script>
-  (function() {
-    function updateCartWeight() {
-      var el = document.querySelector('[data-cart-weight-value]');
-      if (!el) return;
-
-      fetch('/cart.js', { credentials: 'same-origin', cache: 'no-store' })
-        .then(function(res) { return res.json(); })
-        .then(function(cart) {
-          var totalGrams = 0;
-          (cart.items || []).forEach(function(item) {
-            totalGrams += (item.grams || 0) * (item.quantity || 0);
-          });
-          var totalLbs = (totalGrams * 0.00220462).toFixed(1);
-          el.textContent = totalLbs + ' lbs';
-        })
-        .catch(function() {});
-    }
-
-    /* Listen for quantity +/- clicks and remove buttons */
-    document.addEventListener('click', function(e) {
-      if (e.target.closest('[data-add-quantity], [data-subtract-quantity], [data-remove-item]')) {
-        setTimeout(updateCartWeight, 600);
-        setTimeout(updateCartWeight, 1200);
-      }
-    });
-
-    /* Listen for quantity input changes */
-    document.addEventListener('change', function(e) {
-      if (e.target && e.target.matches('[name="quantity"]')) {
-        setTimeout(updateCartWeight, 600);
-      }
-    });
-
-    /* Watch for cart drawer DOM changes (theme re-renders) */
-    var cartDrawer = document.querySelector('.quick-cart');
-    if (cartDrawer) {
-      new MutationObserver(function() {
-        setTimeout(updateCartWeight, 300);
-      }).observe(cartDrawer, { childList: true, subtree: true });
-    }
-  })();
-</script>
-{% endif %}
 
 {% schema %}
 {
