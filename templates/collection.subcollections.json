@@ -48,7 +48,30 @@
         "text_alignment": "center",
         "section_style_enable_animation": true
       }
+    },
+    "recently_viewed_products_8yr3QU": {
+      "type": "recently-viewed-products",
+      "name": "t:sections.recently_viewed.presets.name",
+      "settings": {
+        "center_content": false,
+        "preheading": "",
+        "heading": "Trending Items",
+        "section_header_heading_tag": "h2",
+        "subheading": "",
+        "section_header_subheading_tag": "h2",
+        "maximum_content_width": 650,
+        "maximum_products": 8,
+        "num_columns": "5",
+        "num_columns_mobile": "2",
+        "section_style_spacing_top": 36,
+        "section_style_spacing_bottom": 36,
+        "section_style_enable_animation": true
+      }
     }
   },
-  "order": ["banner", "subcollections"]
+  "order": [
+    "banner",
+    "subcollections",
+    "recently_viewed_products_8yr3QU"
+  ]
 }
