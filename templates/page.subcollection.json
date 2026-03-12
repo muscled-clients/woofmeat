@@ -1,1 +1,129 @@
-{"sections":{"main":{"type":"main-page","disabled":true,"settings":{"content_width":"custom","custom_content_width":700,"section_style_enable_animation":true}},"subcollection_top_h6kXJh":{"type":"subcollection-top","blocks":{"category_card_nWtYUT":{"type":"category_card","settings":{"collection":"chips","custom_url":"","custom_label":""}},"category_card_DWafFY":{"type":"category_card","settings":{"collection":"gummy-chewy-candy","custom_url":"","custom_label":""}},"category_card_Hgf6GW":{"type":"category_card","settings":{"collection":"crackers","custom_url":"","custom_label":""}},"category_card_PaLim9":{"type":"category_card","settings":{"collection":"beverages","custom_url":"","custom_label":""}},"category_card_e3cJcR":{"type":"category_card","settings":{"collection":"frontpage","custom_url":"","custom_label":""}},"category_card_CBAXdA":{"type":"category_card","settings":{"collection":"frontpage","custom_url":"","custom_label":""}},"category_card_w7EWmJ":{"type":"category_card","settings":{"collection":"frontpage","custom_url":"","custom_label":""}},"category_card_qpAFrr":{"type":"category_card","settings":{"collection":"frontpage","custom_url":"","custom_label":""}},"category_card_7AgByc":{"type":"category_card","settings":{"collection":"frontpage","custom_url":"","custom_label":""}}},"block_order":["category_card_nWtYUT","category_card_DWafFY","category_card_Hgf6GW","category_card_PaLim9","category_card_e3cJcR","category_card_CBAXdA","category_card_w7EWmJ","category_card_qpAFrr","category_card_7AgByc"],"name":"Category Grid","settings":{"title":"Bakery","columns":5}},"subcollection_bottom_84PQbC":{"type":"subcollection-bottom","name":"Trending Items","settings":{"title":"{{ section.settings.collection.title }}Trending items","collection":"frontpage","products_to_show":5}}},"order":["main","subcollection_top_h6kXJh","subcollection_bottom_84PQbC"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "content_width": "custom",
+        "custom_content_width": 700,
+        "section_style_enable_animation": true
+      }
+    },
+    "subcollection_top_h6kXJh": {
+      "type": "subcollection-top",
+      "blocks": {
+        "category_card_nWtYUT": {
+          "type": "category_card",
+          "settings": {
+            "collection": "chips",
+            "custom_url": "",
+            "custom_label": ""
+          }
+        },
+        "category_card_DWafFY": {
+          "type": "category_card",
+          "settings": {
+            "collection": "gummy-chewy-candy",
+            "custom_url": "",
+            "custom_label": ""
+          }
+        },
+        "category_card_Hgf6GW": {
+          "type": "category_card",
+          "settings": {
+            "collection": "crackers",
+            "custom_url": "",
+            "custom_label": ""
+          }
+        },
+        "category_card_PaLim9": {
+          "type": "category_card",
+          "settings": {
+            "collection": "beverages",
+            "custom_url": "",
+            "custom_label": ""
+          }
+        },
+        "category_card_e3cJcR": {
+          "type": "category_card",
+          "settings": {
+            "collection": "bakery",
+            "custom_url": "",
+            "custom_label": ""
+          }
+        },
+        "category_card_CBAXdA": {
+          "type": "category_card",
+          "settings": {
+            "collection": "bakery",
+            "custom_url": "",
+            "custom_label": ""
+          }
+        },
+        "category_card_w7EWmJ": {
+          "type": "category_card",
+          "settings": {
+            "collection": "bakery",
+            "custom_url": "",
+            "custom_label": ""
+          }
+        },
+        "category_card_qpAFrr": {
+          "type": "category_card",
+          "settings": {
+            "collection": "bakery",
+            "custom_url": "",
+            "custom_label": ""
+          }
+        },
+        "category_card_7AgByc": {
+          "type": "category_card",
+          "settings": {
+            "collection": "bakery",
+            "custom_url": "",
+            "custom_label": ""
+          }
+        }
+      },
+      "block_order": [
+        "category_card_nWtYUT",
+        "category_card_DWafFY",
+        "category_card_Hgf6GW",
+        "category_card_PaLim9",
+        "category_card_e3cJcR",
+        "category_card_CBAXdA",
+        "category_card_w7EWmJ",
+        "category_card_qpAFrr",
+        "category_card_7AgByc"
+      ],
+      "name": "Category Grid",
+      "settings": {
+        "title": "Bakery",
+        "columns": 5
+      }
+    },
+    "subcollection_bottom_84PQbC": {
+      "type": "subcollection-bottom",
+      "name": "Trending Items",
+      "settings": {
+        "title": "{{ section.settings.collection.title }}Trending items",
+        "collection": "bakery",
+        "products_to_show": 5
+      }
+    }
+  },
+  "order": [
+    "main",
+    "subcollection_top_h6kXJh",
+    "subcollection_bottom_84PQbC"
+  ]
+}

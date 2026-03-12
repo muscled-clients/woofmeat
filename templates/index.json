@@ -165,7 +165,7 @@
         "category_card_fyXXze": {
           "type": "category_card",
           "settings": {
-            "collection": "frontpage",
+            "collection": "bakery",
             "custom_url": "",
             "custom_label": ""
           }
@@ -249,7 +249,7 @@
         "collection_hLBjP3": {
           "type": "collection",
           "settings": {
-            "collection": "frontpage"
+            "collection": "bakery"
           }
         }
       },
@@ -433,7 +433,7 @@
         "collection_1": {
           "type": "collection",
           "settings": {
-            "collection": "frontpage",
+            "collection": "bakery",
             "tab_title": "New Arrivals",
             "show_view_all_tile": true,
             "tile_location": "end",
@@ -457,7 +457,7 @@
         "collection_2": {
           "type": "collection",
           "settings": {
-            "collection": "frontpage",
+            "collection": "bakery",
             "tab_title": "Best Sellers",
             "show_view_all_tile": true,
             "tile_location": "end",
@@ -649,7 +649,7 @@
         "button_link": "",
         "button_label": "",
         "button_style": "primary",
-        "collection": "frontpage",
+        "collection": "bakery",
         "maximum_products": 6,
         "num_columns": "3",
         "enable_slider_desktop": false,
@@ -671,7 +671,7 @@
         "show_section_title": true,
         "section_title": "Bakery",
         "title_color": "#111111",
-        "collection": "frontpage",
+        "collection": "bakery",
         "products_to_show": 3,
         "columns_desktop": 3,
         "columns_mobile": 2,
@@ -1029,7 +1029,7 @@
       "name": "you may also like ",
       "settings": {
         "title": "you may also like",
-        "collection": "frontpage",
+        "collection": "bakery",
         "products_to_show": 5
       }
     },
