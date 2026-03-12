@@ -151,7 +151,6 @@
         },
         "meganav_collection_images": {
           "type": "meganav_collection_images",
-          "disabled": true,
           "settings": {
             "title": "Bakery",
             "header_area_heading": "",
