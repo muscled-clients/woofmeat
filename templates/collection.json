@@ -84,7 +84,7 @@
         "collapse_filter_sidebar": false,
         "collapse_filter_groups_desktop": true,
         "truncate_filter_list": true,
-        "truncate_filter_list_amount": 6,
+        "truncate_filter_list_amount": 7,
         "show_swatch_filters": true,
         "show_chip_filters": true,
         "chip_layout": "2col",
