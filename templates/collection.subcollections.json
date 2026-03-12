@@ -63,8 +63,8 @@
         "maximum_products": 8,
         "num_columns": "5",
         "num_columns_mobile": "2",
-        "section_style_spacing_top": 36,
-        "section_style_spacing_bottom": 36,
+        "section_style_spacing_top": 32,
+        "section_style_spacing_bottom": 32,
         "section_style_enable_animation": true
       }
     }
