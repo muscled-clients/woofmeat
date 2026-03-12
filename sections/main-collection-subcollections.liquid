@@ -31,9 +31,6 @@
       >
         {% if subcollections != blank %}
           {% for subcollection in subcollections -%}
-            {% if subcollection.handle == collection.handle %}
-              {% continue %}
-            {% endif %}
             {%
               render 'collection-item',
               coll: subcollection,
