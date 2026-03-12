@@ -103,7 +103,6 @@
         },
         "meganav_simple": {
           "type": "meganav_simple",
-          "disabled": true,
           "settings": {
             "title": "Bakery",
             "header_area_heading": "",
