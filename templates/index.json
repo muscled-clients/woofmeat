@@ -403,7 +403,7 @@
           "type": "collection",
           "settings": {
             "collection": "candy",
-            "tab_title": "Barista Picks",
+            "tab_title": "Most Popular",
             "show_view_all_tile": true,
             "tile_location": "end",
             "accent": "",
