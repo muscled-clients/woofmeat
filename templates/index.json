@@ -606,7 +606,7 @@
         "button_2_button_style": "tertiary",
         "button_position": "header",
         "collection": "bakery",
-        "maximum_products": 15,
+        "maximum_products": 7,
         "num_columns": "4",
         "num_columns_mobile": "2",
         "enable_slider_desktop": true,
