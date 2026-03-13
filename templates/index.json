@@ -586,7 +586,9 @@
     },
     "featured_collection_8X8Kd3": {
       "type": "featured-collection",
-      "custom_css": [],
+      "custom_css": [
+        ".scroll-all-sizes .scroll-slider__slider {gap: 32px;}"
+      ],
       "name": "t:sections.featured_collection.presets.name",
       "settings": {
         "center_content": false,
