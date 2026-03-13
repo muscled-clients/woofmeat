@@ -1,4 +1,16 @@
 {% liquid
+  assign is_approved = false
+  if customer
+    for tag in customer.tags
+      if tag == 'wholesale-approved'
+        assign is_approved = true
+      endif
+    endfor
+  endif
+-%}
+
+{% if is_approved %}
+{% liquid
   comment
     Renders a list of product price displays (ie. regular, sale, unit). Used for product
     listings (ie. collection page, search results).
@@ -73,4 +85,10 @@
   </span>
 {% else %}
   {{ content }}
+{% endif %}
+
+{% else %}
+  <span class="wholesale-price-hidden ff-product-price" style="font-size:0.85em;color:#666;">
+    <a href="/pages/contact" style="color:#444;text-decoration:underline;">Contact for pricing</a>
+  </span>
 {% endif %}

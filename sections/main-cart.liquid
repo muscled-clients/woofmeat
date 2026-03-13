@@ -173,6 +173,69 @@
   </div>
 </div>
 
+
+{%- comment -%} Wholesale minimum order weight check {%- endcomment -%}
+{% assign is_wholesale = false %}
+{% if customer %}
+  {% for tag in customer.tags %}
+    {% if tag == 'wholesale-approved' %}
+      {% assign is_wholesale = true %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
+
+{% if is_wholesale %}
+<div id="wholesale-min-weight" style="display:none;margin:16px 0;padding:14px 18px;border-radius:6px;font-size:0.95em;font-weight:500;"></div>
+
+<script>
+(function() {
+  var MIN_LBS = 5000;
+
+  function getCartWeight() {
+    // Shopify cart object injected into page
+    var items = {{ cart.items | json }};
+    var totalGrams = 0;
+    for (var i = 0; i < items.length; i++) {
+      // variant weight is in grams in Shopify's cart object
+      totalGrams += (items[i].variant.weight || 0) * items[i].quantity;
+    }
+    // Convert grams to lbs (1 lb = 453.592 g)
+    return totalGrams / 453.592;
+  }
+
+  function updateCheckout() {
+    var totalLbs = getCartWeight();
+    var banner = document.getElementById('wholesale-min-weight');
+    var checkoutBtn = document.querySelector('[name="checkout"]');
+
+    if (!banner || !checkoutBtn) return;
+
+    banner.style.display = 'block';
+
+    if (totalLbs < MIN_LBS) {
+      banner.style.background = '#fff3cd';
+      banner.style.border = '1px solid #ffc107';
+      banner.style.color = '#856404';
+      banner.innerHTML = '&#9888; Minimum wholesale order is 5,000 lbs. You currently have <strong>' + totalLbs.toFixed(1) + ' lbs</strong> in your cart.';
+      checkoutBtn.disabled = true;
+      checkoutBtn.style.opacity = '0.5';
+      checkoutBtn.style.cursor = 'not-allowed';
+    } else {
+      banner.style.background = '#d1e7dd';
+      banner.style.border = '1px solid #0f5132';
+      banner.style.color = '#0f5132';
+      banner.innerHTML = '&#10003; Minimum order met &mdash; <strong>' + totalLbs.toFixed(1) + ' lbs</strong> in cart.';
+      checkoutBtn.disabled = false;
+      checkoutBtn.style.opacity = '';
+      checkoutBtn.style.cursor = '';
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', updateCheckout);
+})();
+</script>
+{% endif %}
+
 {% schema %}
 {
   "tag": "section",

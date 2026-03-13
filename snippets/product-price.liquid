@@ -1,5 +1,21 @@
 {% liquid
   comment
+    Wholesale gate: only show prices to logged-in customers tagged 'wholesale-approved'.
+    Guests and unapproved customers see a "Contact for pricing" message instead.
+  endcomment
+  assign is_approved = false
+  if customer
+    for tag in customer.tags
+      if tag == 'wholesale-approved'
+        assign is_approved = true
+      endif
+    endfor
+  endif
+-%}
+
+{% if is_approved %}
+{% liquid
+  comment
     Renders a product price display.
 
     Required parameters:
@@ -44,3 +60,9 @@
 {%- else -%}
   <span>{{ 9999 | money }}</span>
 {%- endif %}
+
+{% else %}
+  <span class="wholesale-price-hidden" style="font-size:0.9em;color:#666;">
+    <a href="/pages/contact" style="color:#444;text-decoration:underline;">Contact for pricing</a>
+  </span>
+{% endif %}
