@@ -88,7 +88,7 @@
     "enable_quick_view": true,
     "enable_quick_add": true,
     "quick_add_style": "icon",
-    "product_listing_product_list_style": "bordered_grid",
+    "product_listing_product_list_style": "default",
     "product_listing_color_colored_tile": "#ffffff",
     "product_listing_content_alignment": "left",
     "product_listing_product_title_text_limit": "1_line",
