@@ -34,15 +34,15 @@
 
     if has_tier3 and prod.metafields.custom.tier_3
       assign customer_price = prod.metafields.custom.tier_3.value
-      assign tier_label = 'Tier3'
+      assign tier_label = 'Tier 3'
       assign has_tier = true
     elsif has_tier2 and prod.metafields.custom.tier_2
       assign customer_price = prod.metafields.custom.tier_2.value
-      assign tier_label = 'Tier2'
+      assign tier_label = 'Tier 2'
       assign has_tier = true
     elsif has_tier1 and prod.metafields.custom.tier_1
       assign customer_price = prod.metafields.custom.tier_1.value
-      assign tier_label = 'Tier1'
+      assign tier_label = 'Tier 1'
       assign has_tier = true
     endif
   endif
