@@ -156,6 +156,18 @@
                 -%}
               </p>
 
+              {% if is_wholesale %}
+              <button
+                type="submit"
+                name="checkout"
+                id="drawer-checkout-btn"
+                class="quick-cart__submit btn btn--full btn--primary"
+                aria-label="{{ 'cart.general.checkout' | t }}"
+                {% unless cart_total_lbs >= 5000 %}disabled style="opacity:0.5;cursor:not-allowed;"{% endunless %}
+              >
+                {{ 'cart.general.checkout' | t }}
+              </button>
+              {% else %}
               <button
                 type="submit"
                 name="checkout"
@@ -164,6 +176,7 @@
               >
                 {{ 'cart.general.checkout' | t }}
               </button>
+              {% endif %}
             </div>
           {%- else -%}
             <div class="quick-cart__empty-state">
@@ -206,49 +219,96 @@
   </div>
 {%- endif %}
 
-{% if customer and customer.tags contains 'approved' %}
+{% assign is_wholesale = false %}
+{% if customer %}
+  {% for tag in customer.tags %}
+    {% if tag == 'wholesale-approved' %}
+      {% assign is_wholesale = true %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
+
+{% if is_wholesale %}
+  {%- assign cart_total_grams = 0 -%}
+  {%- for item in cart.items -%}
+    {%- assign item_grams = item.grams | times: item.quantity -%}
+    {%- assign cart_total_grams = cart_total_grams | plus: item_grams -%}
+  {%- endfor -%}
+  {%- assign cart_total_lbs = cart_total_grams | times: 0.00220462 | round: 1 -%}
+
+  <div id="wholesale-drawer-banner" style="margin:12px 16px 0;padding:12px 14px;border-radius:6px;font-size:0.88em;font-weight:500;
+    {% if cart_total_lbs >= 5000 %}background:#d1e7dd;border:1px solid #0f5132;color:#0f5132;
+    {% else %}background:#fff3cd;border:1px solid #ffc107;color:#856404;{% endif %}">
+    {% if cart_total_lbs >= 5000 %}
+      &#10003; Minimum order met &mdash; <strong>{{ cart_total_lbs }} lbs</strong> in cart.
+    {% else %}
+      &#9888; Min order is 5,000 lbs. You have <strong id="drawer-lbs">{{ cart_total_lbs }} lbs</strong>.
+    {% endif %}
+  </div>
+{% endif %}
+
+
+{% if is_wholesale %}
 <script>
-  (function() {
-    function updateCartWeight() {
-      var el = document.querySelector('[data-cart-weight-value]');
-      if (!el) return;
+(function() {
+  var MIN_LBS = 5000;
 
-      fetch('/cart.js', { credentials: 'same-origin', cache: 'no-store' })
-        .then(function(res) { return res.json(); })
-        .then(function(cart) {
-          var totalGrams = 0;
-          (cart.items || []).forEach(function(item) {
-            totalGrams += (item.grams || 0) * (item.quantity || 0);
-          });
-          var totalLbs = (totalGrams * 0.00220462).toFixed(1);
-          el.textContent = totalLbs + ' lbs';
-        })
-        .catch(function() {});
+  function updateDrawer() {
+    fetch('/cart.js', { credentials: 'same-origin', cache: 'no-store' })
+      .then(function(r) { return r.json(); })
+      .then(function(cart) {
+        var totalGrams = 0;
+        (cart.items || []).forEach(function(i) { totalGrams += (i.grams || 0) * (i.quantity || 0); });
+        var lbs = totalGrams * 0.00220462;
+        var lbsRounded = lbs.toFixed(1);
+
+        var banner = document.getElementById('wholesale-drawer-banner');
+        var btn = document.getElementById('drawer-checkout-btn');
+        var lbsEl = document.getElementById('drawer-lbs');
+
+        if (lbsEl) lbsEl.textContent = lbsRounded + ' lbs';
+
+        if (banner) {
+          if (lbs >= MIN_LBS) {
+            banner.style.background = '#d1e7dd';
+            banner.style.border = '1px solid #0f5132';
+            banner.style.color = '#0f5132';
+            banner.innerHTML = '&#10003; Minimum order met &mdash; <strong>' + lbsRounded + ' lbs</strong> in cart.';
+          } else {
+            banner.style.background = '#fff3cd';
+            banner.style.border = '1px solid #ffc107';
+            banner.style.color = '#856404';
+            banner.innerHTML = '&#9888; Min order is 5,000 lbs. You have <strong>' + lbsRounded + ' lbs</strong>.';
+          }
+        }
+
+        if (btn) {
+          btn.disabled = lbs < MIN_LBS;
+          btn.style.opacity = lbs < MIN_LBS ? '0.5' : '';
+          btn.style.cursor = lbs < MIN_LBS ? 'not-allowed' : '';
+        }
+      });
+  }
+
+  document.addEventListener('click', function(e) {
+    if (e.target.closest('[data-add-quantity],[data-subtract-quantity],[data-remove-item]')) {
+      setTimeout(updateDrawer, 700);
+      setTimeout(updateDrawer, 1400);
     }
+  });
 
-    /* Listen for quantity +/- clicks and remove buttons */
-    document.addEventListener('click', function(e) {
-      if (e.target.closest('[data-add-quantity], [data-subtract-quantity], [data-remove-item]')) {
-        setTimeout(updateCartWeight, 600);
-        setTimeout(updateCartWeight, 1200);
-      }
-    });
-
-    /* Listen for quantity input changes */
-    document.addEventListener('change', function(e) {
-      if (e.target && e.target.matches('[name="quantity"]')) {
-        setTimeout(updateCartWeight, 600);
-      }
-    });
-
-    /* Watch for cart drawer DOM changes (theme re-renders) */
-    var cartDrawer = document.querySelector('.quick-cart');
-    if (cartDrawer) {
-      new MutationObserver(function() {
-        setTimeout(updateCartWeight, 300);
-      }).observe(cartDrawer, { childList: true, subtree: true });
+  document.addEventListener('change', function(e) {
+    if (e.target && e.target.matches('[name="quantity"]')) {
+      setTimeout(updateDrawer, 700);
     }
-  })();
+  });
+
+  var drawer = document.querySelector('.quick-cart');
+  if (drawer) {
+    new MutationObserver(function() { setTimeout(updateDrawer, 400); })
+      .observe(drawer, { childList: true, subtree: true });
+  }
+})();
 </script>
 {% endif %}
 
