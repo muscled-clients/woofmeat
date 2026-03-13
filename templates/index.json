@@ -767,7 +767,7 @@
         "override_color_background": "#ffffff",
         "background_image": "shopify://shop_images/image_3038_3.jpg",
         "background_image_focal_point": "center",
-        "image_overlay_tint_opacity": 50,
+        "image_overlay_tint_opacity": 0,
         "image_overlay_tint_style": "solid",
         "image_overlay_override_with_custom_colors": false,
         "image_overlay_override_color_text": "#ffffff",
