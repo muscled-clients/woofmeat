@@ -39,7 +39,7 @@
         "num_columns": "5",
         "num_columns_mobile": "2",
         "show_product_counts": false,
-        "collection_item_style": "outlined",
+        "collection_item_style": "plain",
         "image_source": "collection",
         "image_aspect_ratio": "square",
         "image_circle_crop_enable": false,
