@@ -586,9 +586,7 @@
     },
     "featured_collection_8X8Kd3": {
       "type": "featured-collection",
-      "custom_css": [
-        ".scroll-all-sizes .scroll-slider__slider {gap: 32px;}"
-      ],
+      "custom_css": [],
       "name": "t:sections.featured_collection.presets.name",
       "settings": {
         "center_content": false,
@@ -729,9 +727,7 @@
     },
     "featured_collection_nGGHbK": {
       "type": "featured-collection",
-      "custom_css": [
-        ".scroll-all-sizes .scroll-slider__slider {gap: 32px;}"
-      ],
+      "custom_css": [],
       "name": "t:sections.featured_collection.presets.name",
       "settings": {
         "center_content": false,
