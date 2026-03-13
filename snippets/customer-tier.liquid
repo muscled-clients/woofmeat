@@ -8,7 +8,7 @@
     - show_discount: { Boolean } Whether to show the discount display
     - discount_format: { String } The discount format
 {% endcomment %}
-
+{% if customer %}
 {%- liquid
   assign customer_price = null
   assign tier_label = ''
@@ -72,3 +72,8 @@
     </s>
   </div>
 {%- endif -%}
+{% else %}
+  <a href="/account/login" style="font-size:14px; font-weight:600; color:inherit;">
+    Log in to see price
+  </a>
+{% endif %}
