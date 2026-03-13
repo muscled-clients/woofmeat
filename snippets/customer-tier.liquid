@@ -40,8 +40,8 @@
       assign customer_price = prod.metafields.custom.tier_2.value
       assign tier_label = 'Tier 2'
       assign has_tier = true
-    elsif has_tier1 and prod.metafields.custom.tier_1
-      assign customer_price = prod.metafields.custom.tier_1.value
+    elsif has_tier1 and prod.metafields.custom.tier_1_price
+      assign customer_price = prod.metafields.custom.tier_1_price.value
       assign tier_label = 'Tier 1 '
       assign has_tier = true
     endif
