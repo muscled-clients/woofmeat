@@ -235,6 +235,31 @@
   </a>
 {%- endcapture -%}
 
+{% assign is_wholesale_header = false %}
+{% if customer %}
+  {% for tag in customer.tags %}
+    {% if tag == 'wholesale-approved' %}
+      {% assign is_wholesale_header = true %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
+{% if is_wholesale_header %}
+  {%- assign hdr_grams = 0 -%}
+  {%- for item in cart.items -%}
+    {%- assign hdr_grams = hdr_grams | plus: item.grams | times: item.quantity -%}
+  {%- endfor -%}
+  {%- assign hdr_lbs = hdr_grams | times: 0.00220462 | round: 0 -%}
+  <div id="wholesale-cart-weight" style="
+    display:inline-flex;align-items:center;justify-content:center;
+    background:#1a1a1a;color:#fff;border-radius:20px;
+    font-size:11px;font-weight:700;padding:3px 8px;
+    margin-left:6px;vertical-align:middle;letter-spacing:0.3px;
+    line-height:1.4;white-space:nowrap;
+  ">
+    <span id="wholesale-cart-weight-val">{{ hdr_lbs }}</span> lbs
+  </div>
+{% endif %}
+
 {%- capture cart_icon_with_label -%}
   {% if section.settings.show_cart_label -%}
     <a
@@ -711,6 +736,47 @@
 {%- endif %}
 
 {% render 'flash-alert' %}
+
+
+{% assign is_wholesale_hdr_js = false %}
+{% if customer %}
+  {% for tag in customer.tags %}
+    {% if tag == 'wholesale-approved' %}
+      {% assign is_wholesale_hdr_js = true %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
+{% if is_wholesale_hdr_js %}
+<script>
+(function() {
+  function refreshHeaderWeight() {
+    fetch('/cart.js', { credentials: 'same-origin', cache: 'no-store' })
+      .then(function(r) { return r.json(); })
+      .then(function(cart) {
+        var totalGrams = 0;
+        (cart.items || []).forEach(function(i) { totalGrams += (i.grams || 0) * (i.quantity || 0); });
+        var lbs = Math.round(totalGrams * 0.00220462);
+        var el = document.getElementById('wholesale-cart-weight-val');
+        if (el) el.textContent = lbs;
+        var badge = document.getElementById('wholesale-cart-weight');
+        if (badge) badge.style.display = lbs > 0 ? 'inline-flex' : 'none';
+      });
+  }
+  // Update on cart changes
+  document.addEventListener('click', function(e) {
+    if (e.target.closest('[data-add-quantity],[data-subtract-quantity],[data-remove-item],[data-cart-add]')) {
+      setTimeout(refreshHeaderWeight, 800);
+      setTimeout(refreshHeaderWeight, 1600);
+    }
+  });
+  document.addEventListener('change', function(e) {
+    if (e.target && e.target.matches('[name="quantity"]')) {
+      setTimeout(refreshHeaderWeight, 800);
+    }
+  });
+})();
+</script>
+{% endif %}
 
 {% schema %}
 {
