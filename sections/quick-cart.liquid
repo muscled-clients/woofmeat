@@ -10,6 +10,25 @@
     endcomment
   -%}
 
+  {%- comment -%} Wholesale: compute variables BEFORE they are used {%- endcomment -%}
+  {% assign is_wholesale = false %}
+  {% if customer %}
+    {% for tag in customer.tags %}
+      {% if tag == 'wholesale-approved' %}
+        {% assign is_wholesale = true %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+
+  {% if is_wholesale %}
+    {%- assign cart_total_grams = 0 -%}
+    {%- for item in cart.items -%}
+      {%- assign item_grams = item.grams | times: item.quantity -%}
+      {%- assign cart_total_grams = cart_total_grams | plus: item_grams -%}
+    {%- endfor -%}
+    {%- assign cart_total_lbs = cart_total_grams | times: 0.00220462 | round: 1 -%}
+  {% endif %}
+
   <div
     class="{{ section_class }}"
     data-section-id="{{ section.id }}"
@@ -141,25 +160,27 @@
               </p>
 
               {% if is_wholesale %}
-              <button
-                type="submit"
-                name="checkout"
-                id="drawer-checkout-btn"
-                class="quick-cart__submit btn btn--full btn--primary"
-                aria-label="{{ 'cart.general.checkout' | t }}"
-                {% unless cart_total_lbs >= 5000 %}disabled style="opacity:0.5;cursor:not-allowed;"{% endunless %}
-              >
-                {{ 'cart.general.checkout' | t }}
-              </button>
+                <div id="drawer-wholesale-weight-msg" style="display:none;margin:0 0 12px 0;padding:10px 14px;border-radius:6px;font-size:0.9em;font-weight:500;text-align:center;"></div>
+
+                <button
+                  type="submit"
+                  name="checkout"
+                  id="drawer-checkout-btn"
+                  class="quick-cart__submit btn btn--full btn--primary"
+                  aria-label="{{ 'cart.general.checkout' | t }}"
+                  {% unless cart_total_lbs >= 5000 %}disabled style="opacity:0.5;cursor:not-allowed;"{% endunless %}
+                >
+                  {{ 'cart.general.checkout' | t }}
+                </button>
               {% else %}
-              <button
-                type="submit"
-                name="checkout"
-                class="quick-cart__submit btn btn--full btn--primary"
-                aria-label="{{ 'cart.general.checkout' | t }}"
-              >
-                {{ 'cart.general.checkout' | t }}
-              </button>
+                <button
+                  type="submit"
+                  name="checkout"
+                  class="quick-cart__submit btn btn--full btn--primary"
+                  aria-label="{{ 'cart.general.checkout' | t }}"
+                >
+                  {{ 'cart.general.checkout' | t }}
+                </button>
               {% endif %}
             </div>
           {%- else -%}
@@ -201,27 +222,91 @@
       </div>
     </div>
   </div>
+
+  {% if is_wholesale %}
+  <script>
+  (function() {
+    var MIN_LBS = 5000;
+
+    function updateDrawerCheckout() {
+      fetch('/cart.js').then(function(r) { return r.json(); }).then(function(cart) {
+        var totalLbs = parseFloat((cart.total_weight * 0.00220462).toFixed(1));
+        var btn = document.getElementById('drawer-checkout-btn');
+        var msg = document.getElementById('drawer-wholesale-weight-msg');
+
+        if (btn) {
+          if (totalLbs < MIN_LBS) {
+            btn.disabled = true;
+            btn.style.opacity = '0.5';
+            btn.style.cursor = 'not-allowed';
+          } else {
+            btn.disabled = false;
+            btn.style.opacity = '';
+            btn.style.cursor = '';
+          }
+        }
+
+        if (msg) {
+          msg.style.display = 'block';
+          if (totalLbs < MIN_LBS) {
+            msg.style.background = '#fff3cd';
+            msg.style.border = '1px solid #ffc107';
+            msg.style.color = '#856404';
+            msg.innerHTML = '&#9888; Min wholesale order: 5,000 lbs. Cart: <strong>' + totalLbs.toFixed(1) + ' lbs</strong>';
+          } else {
+            msg.style.background = '#d1e7dd';
+            msg.style.border = '1px solid #0f5132';
+            msg.style.color = '#0f5132';
+            msg.innerHTML = '&#10003; Minimum met &mdash; <strong>' + totalLbs.toFixed(1) + ' lbs</strong>';
+          }
+        }
+      });
+    }
+
+    /* Run on page load */
+    document.addEventListener('DOMContentLoaded', updateDrawerCheckout);
+
+    /* Run on Shopify theme cart events */
+    document.addEventListener('cart:updated', updateDrawerCheckout);
+    document.addEventListener('ajaxProduct:added', updateDrawerCheckout);
+
+    /* Intercept fetch to cart endpoints for dynamic updates */
+    var _origFetch = window._wholesaleOrigFetch || window.fetch;
+    if (!window._wholesaleOrigFetch) {
+      window._wholesaleOrigFetch = window.fetch;
+      window.fetch = function() {
+        var result = _origFetch.apply(this, arguments);
+        var url = arguments[0];
+        if (url && typeof url === 'string' && (url.includes('/cart/add') || url.includes('/cart/change') || url.includes('/cart/update') || url.includes('/cart/clear'))) {
+          result.then(function() { setTimeout(updateDrawerCheckout, 300); });
+        }
+        return result;
+      };
+    }
+
+    /* Also intercept XMLHttpRequest for themes that use it */
+    var _origXHROpen = XMLHttpRequest.prototype.open;
+    XMLHttpRequest.prototype.open = function(method, url) {
+      if (url && typeof url === 'string' && (url.includes('/cart/add') || url.includes('/cart/change') || url.includes('/cart/update') || url.includes('/cart/clear'))) {
+        this.addEventListener('load', function() { setTimeout(updateDrawerCheckout, 300); });
+      }
+      return _origXHROpen.apply(this, arguments);
+    };
+
+    /* Also block form submission as a safety net */
+    document.addEventListener('submit', function(e) {
+      var form = e.target;
+      if (form && form.querySelector && form.querySelector('#drawer-checkout-btn[disabled]')) {
+        e.preventDefault();
+        e.stopPropagation();
+        alert('Minimum wholesale order is 5,000 lbs. Please add more items.');
+        return false;
+      }
+    }, true);
+  })();
+  </script>
+  {% endif %}
 {%- endif %}
-
-{% assign is_wholesale = false %}
-{% if customer %}
-  {% for tag in customer.tags %}
-    {% if tag == 'wholesale-approved' %}
-      {% assign is_wholesale = true %}
-    {% endif %}
-  {% endfor %}
-{% endif %}
-
-{% if is_wholesale %}
-  {%- assign cart_total_grams = 0 -%}
-  {%- for item in cart.items -%}
-    {%- assign item_grams = item.grams | times: item.quantity -%}
-    {%- assign cart_total_grams = cart_total_grams | plus: item_grams -%}
-  {%- endfor -%}
-  {%- assign cart_total_lbs = cart_total_grams | times: 0.00220462 | round: 1 -%}
-
-  
-{% endif %}
 
 {% schema %}
 {
