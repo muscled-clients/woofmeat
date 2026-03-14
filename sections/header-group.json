@@ -161,7 +161,7 @@
           "type": "promoted_text",
           "settings": {
             "submenu_name": "",
-            "block_position": "top",
+            "block_position": "bottom",
             "title": "",
             "heading_tag": "h3",
             "text": "<p>Wholesale foodservice distributor. <a href=\"/pages/contact\">Request wholesale access</a> to view pricing.</p>"
@@ -177,7 +177,7 @@
         "menu_secondary": "",
         "featured_link_label": "",
         "featured_link_color": "#db4827",
-        "enable_quick_sign_in": true,
+        "enable_quick_sign_in": false,
         "show_social_media": false,
         "social_media_icons_columns": 5,
         "enable_locale_selector": false,
