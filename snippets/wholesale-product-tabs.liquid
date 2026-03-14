@@ -34,7 +34,7 @@
 
 {%- comment -%} ── 1. What's in the box ── {%- endcomment -%}
 {%- if wh_how_packed != blank or prod.variants.first.barcode != blank or wh_net_weight != blank -%}
-<div class="accordion product-blocks__accordion" style="margin-top:0;">
+<div class="accordion product-blocks__accordion" style="margin-top:0; margin-bottom: 0;">
   <div class="accordion__inner" data-open="false">
     <button class="accordion__label" aria-expanded="false" aria-controls="tab-in-box-{{ prod.id }}">
       <h2 class="ff-heading fs-heading-5-base">Packaging & Weight</h2>
