@@ -188,7 +188,7 @@
           "settings": {
             "submenu_name": "",
             "block_position": "top",
-            "title": "Promoted text",
+            "title": "",
             "heading_tag": "h3",
             "text": "<p>Wholesale foodservice distributor. <a href=\"/pages/contact\">Request wholesale access</a> to view pricing.</p>"
           }
@@ -202,13 +202,13 @@
         "logo_width": 150,
         "menu_main": "main-menu",
         "menu_secondary": "",
-        "featured_link_label": "Sale",
+        "featured_link_label": "",
         "featured_link_color": "#db4827",
         "enable_quick_sign_in": true,
-        "show_social_media": true,
+        "show_social_media": false,
         "social_media_icons_columns": 5,
-        "enable_locale_selector": true,
-        "enable_country_selector": true
+        "enable_locale_selector": false,
+        "enable_country_selector": false
       }
     }
   },
