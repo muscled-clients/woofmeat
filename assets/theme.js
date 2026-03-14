@@ -9031,12 +9031,6 @@ register("header", {
         (_this$accountQuickVie = _this.accountQuickView) === null || _this$accountQuickVie === void 0 ? void 0 : _this$accountQuickVie.unload();
         _this.accountQuickView = AccountQuickView(n$2(selectors$E.accountQuickView));
       });
-    }), e$2(document, "apps:product-added-to-cart", function () {
-      cart.get().then(function (data) {
-        r$1("cart:updated", {
-          cart: data
-        });
-      });
     }), e$2(menuButtons, "click", function (event) {
       event.preventDefault();
       r$1("mobile-menu:open");
@@ -9782,7 +9776,7 @@ var selectors$v = {
   subtotal: ".quick-cart__footer-subtotal span",
   quantityInput: ".quick-cart .quantity-input__input",
   quantityItem: "[data-input-item]",
-  cartDiscounts: ".quick-cart__footer .quick-cart__item-discounts",
+  discounts: ".quick-cart__item-discounts",
   freeShippingBar: "[data-free-shipping-bar]",
   crossSells: "[data-cross-sells]"
 };
@@ -9817,9 +9811,6 @@ register("quick-cart", {
     }), c("quantity-update:remove", function (_, _ref3) {
       var key = _ref3.key;
       _this.handleItemRemoval(key);
-    }), e$2(document, "apps:product-added-to-cart", function () {
-      _this.refreshQuickCart();
-      r$1("quick-cart:open");
     })];
     this.quantityButtons = QuantityButtons(this.container);
     this.cartNoteToggle = CartNoteToggle(this.container);
@@ -9895,8 +9886,8 @@ register("quick-cart", {
         // Render subtotal
         updateInnerHTML("".concat(selectors$v.cartWrapper, " ").concat(selectors$v.subtotal), container);
 
-        // Render cart-level discounts
-        updateInnerHTML("".concat(selectors$v.cartWrapper, " ").concat(selectors$v.cartDiscounts), container);
+        // Render promotions
+        updateInnerHTML("".concat(selectors$v.cartWrapper, " ").concat(selectors$v.discounts), container);
 
         // Render cross sells
         if (crossSells) {
@@ -13725,7 +13716,7 @@ c("cart:updated", function (responseData) {
 
 // Make it easy to see exactly what theme version
 // this is by commit SHA
-window.SHA = "809551887c";
+window.SHA = "c08d0ad035";
 if (!sessionStorage.getItem("flu_stat_recorded") && !((_window$Shopify = window.Shopify) !== null && _window$Shopify !== void 0 && _window$Shopify.designMode)) {
   var _window$Shopify2, _window$Shopify3;
   // eslint-disable-next-line no-process-env

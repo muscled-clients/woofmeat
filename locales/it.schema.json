@@ -1634,15 +1634,6 @@
       },
       "name": "Informazioni di prodotto",
       "settings": {
-        "desktop_gallery_layout": {
-          "info": "Le miniature vengono sempre visualizzate sui dispositivi mobili.",
-          "label": "Layout della galleria desktop",
-          "options": {
-            "grid": "Griglia",
-            "stacked": "Impilati",
-            "thumbnails": "Miniature"
-          }
-        },
         "enable_gift_card_recipient": {
           "info": "Consente agli acquirenti di inviare i buoni regalo in una data programmata insieme a un messaggio personale. [Maggiori informazioni](https://help.shopify.com/manual/online-store/themes/customizing-themes/add-gift-card-recipient-fields)",
           "label": "Mostra il modulo informazioni del destinatario per i buoni regalo"
@@ -1710,13 +1701,11 @@
           "label": "Mostra le miniature nella galleria zoom"
         },
         "thumbnail_position": {
-          "info": "Si applica solo sul desktop quando il layout è impostato su \"Miniature\".",
           "label": "Posizione delle miniature",
           "option_bottom": "Sotto i media",
           "option_left": "A sinistra dei media"
         },
         "thumbnail_size": {
-          "info": "Si applica solo sul desktop quando il layout è impostato su \"Miniature\".",
           "label": "Dimensione dell'immagine in miniatura",
           "option_large": "Grande",
           "option_medium": "Media",
@@ -5244,7 +5233,7 @@
         "label": "Mostra sconto"
       },
       "show_filters": {
-        "info": "Consenti ai clienti di filtrare per opzioni di prodotto, tipo di prodotto, prezzo, disponibilità e altro ancora. [Scopri di più](https://help.fluorescent.co/cornerstone/collection-pages/filters-and-sorting).",
+        "info": "Consentire ai clienti di filtrare per opzioni di prodotto, tipo di prodotto, prezzo, disponibilità e altro ancora. [Filtri personalizzati](/admin/menu)",
         "label": "Abilita i filtri"
       },
       "show_item_count": {

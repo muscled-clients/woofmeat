@@ -14,7 +14,7 @@
        \__\/                     \__\/         \__\/         \__\/
 
   --------------------------------------------------------------------
-  #  Cornerstone v4.2.5
+  #  Cornerstone v4.2.3
   #  Documentation: https://help.fluorescent.co/v/cornerstone
   #  Purchase: https://themes.shopify.com/themes/cornerstone/
   #  A product by Fluorescent: https://fluorescent.co/
@@ -67,6 +67,8 @@
     {% endif -%}
 
     {{ content_for_header }}
+
+
   </head>
 
   <body class="template-{{ request.page_type | handle }}">
@@ -97,8 +99,7 @@
       {% render 'modal' %}
       {% render 'back-to-top' %}
     </div>
-  {% render 'wholesale-header-badge' %}
-</body>
+  </body>
 
   <link
     rel="preload"

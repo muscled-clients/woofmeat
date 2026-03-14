@@ -1634,15 +1634,6 @@
       },
       "name": "Produktübersicht",
       "settings": {
-        "desktop_gallery_layout": {
-          "info": "Miniaturansichten werden auf Mobilgeräten immer angezeigt.",
-          "label": "Desktop-Galerie-Layout",
-          "options": {
-            "grid": "Raster",
-            "stacked": "Gestapelt",
-            "thumbnails": "Vorschaubilder"
-          }
-        },
         "enable_gift_card_recipient": {
           "info": "So können Käufer Geschenkgutscheine an einem bestimmten Datum mit einer persönlichen Nachricht versenden. [Mehr Informationen](https://help.shopify.com/manual/online-store/themes/customizing-themes/add-gift-card-recipient-fields)",
           "label": "Formular für Empfängerinformationen für Geschenkgutscheine anzeigen"
@@ -1710,13 +1701,11 @@
           "label": "Miniaturansichten in der Zoom-Galerie anzeigen"
         },
         "thumbnail_position": {
-          "info": "Gilt nur auf Desktop-Computern, wenn das Layout auf „Miniaturansichten“ eingestellt ist.",
           "label": "Position der Miniaturansichten",
           "option_bottom": "Unterhalb der Medien",
           "option_left": "Links von den Medien"
         },
         "thumbnail_size": {
-          "info": "Gilt nur auf Desktop-Computern, wenn das Layout auf „Miniaturansichten“ eingestellt ist.",
           "label": "Größe der Vorschaubilder",
           "option_large": "Groß",
           "option_medium": "Mittel",
@@ -5244,7 +5233,7 @@
         "label": "Rabatt anzeigen"
       },
       "show_filters": {
-        "info": "Ermöglichen Sie Ihren Kunden, nach Produktoptionen, Produkttyp, Preis, Verfügbarkeit und mehr zu filtern. [Mehr erfahren](https://help.fluorescent.co/cornerstone/collection-pages/filters-and-sorting).",
+        "info": "Erlaube Kunden, nach Produktoptionen, Produkttyp, Preis, Verfügbarkeit und mehr zu filtern. [Filter anpassen](/admin/menus)",
         "label": "Filtern aktivieren"
       },
       "show_item_count": {

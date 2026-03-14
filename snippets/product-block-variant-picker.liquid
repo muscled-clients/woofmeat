@@ -64,7 +64,6 @@
               else
                 assign downcased_sibling_option_name = block.settings.siblings_option_name | strip | downcase
                 assign downcased_sibling_color_name = sibling_product.metafields.cornerstone.sibling_option_name | strip | downcase
-                assign sibling_value = blank
                 assign sibling_swatch_image_url = blank
 
                 for option in sibling_product.options_with_values
@@ -87,9 +86,9 @@
                 # Color
                 if sibling_value and sibling_value.swatch and sibling_value.swatch.color
                   echo 'background-color: [[bc]];' | replace: '[[bc]]', sibling_value.swatch.color
-                elsif custom_color_key_map contains downcased_sibling_color_name
+                elsif custom_color_key_map contains sibling_color_name
                   for color_name in custom_color_key_map
-                    if color_name == downcased_sibling_color_name
+                    if color_name == sibling_color_name
                       echo 'background-color: [[cc]];' | replace: '[[cc]]', custom_color_value_map[forloop.index0]
                       break
                     endif
@@ -167,31 +166,6 @@
 
         if variant_popup_content_exists and option_name == variant_popup_option
           assign show_popup_trigger = true
-        endif
-
-        # Hide "duplicate" variant options for sibling products with a single option value added to use category
-        # metafields for swatches.
-        if show_siblings
-          assign matches_sibling_value = false
-
-          if option.values.size == 1
-            assign option_single_value = true
-          else
-            assign option_single_value = false
-          endif
-
-          if option_single_value
-            assign option_value_downcased = option.values[0] | downcase | strip
-            assign sibling_downcased = product.metafields.stiletto.sibling_option_name | downcase | strip
-
-            if option_value_downcased == sibling_downcased
-              assign matches_sibling_value = true
-            endif
-          endif
-
-          if option_single_value and matches_sibling_value
-            assign hide_variant_option = true
-          endif
         endif
       -%}
 
@@ -385,15 +359,7 @@
       {%- endcapture -%}
 
       {%- capture rendered_option -%}
-        <div
-          class="
-            js-enabled
-            product__option
-            {% if hide_variant_option -%}
-              product__option--hidden-sibling-duplicate
-            {%- endif -%}
-          "
-          data-product-option>
+        <div class="js-enabled product__option" data-product-option>
           <div class="product__label-wrapper">
             <label class="product__label fs-body-100" for="option{{ option.position }}">
               {{ option.name }}:

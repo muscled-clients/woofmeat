@@ -61,12 +61,13 @@
             {{ product_block_header }}
           {%- endif %}
         {%- when 'price' -%}
-         {% render 'customer-tier',
-  prod: prod,
-  current_variant: current_variant,
-  show_discount: block.settings.show_discount,
-  discount_format: block.settings.discount_format
--%}
+          {% render 'product-block-price',
+            prod: prod,
+            block: block,
+            current_variant: current_variant,
+            is_quick: is_quick,
+            label: block.settings.label
+          -%}
         {%- when 'spacer' -%}
           <div
             class="product-block-spacer product__block"
@@ -121,7 +122,6 @@
           {%- endif %}
         {%- when 'description' -%}
           {% render 'product-block-description', prod: prod, block: block %}
-          {% render 'wholesale-product-tabs', prod: prod %}
         {%- when 'text-list-with-icons' -%}
           {% render 'section-block-text-list-with-icons', type: 'product', block: block %}
         {%- when 'product_labels' -%}
