@@ -1,40 +1,23 @@
-{% liquid
-  comment
-    Wholesale gate: only show prices to logged-in customers tagged 'wholesale-approved'.
-    Guests and unapproved customers see a "Contact for pricing" message instead.
-  endcomment
-  assign is_approved = false
-  if customer
-    for tag in customer.tags
-      if tag == 'wholesale-approved'
-        assign is_approved = true
-      endif
-    endfor
-  endif
--%}
+{% comment %}
+  PRODUCT PRICE — snippets/product-price.liquid
 
-{% if is_approved %}
-{% liquid
-  comment
-    Renders a product price display.
+  Called by tier-price.liquid when customer has no tier.
+  Also handles compare-at price, discounts, unit price.
 
-    Required parameters:
-      - prod: { Object } The associated product object
-      - current_variant: { Object } The current variant object.
-      - show_discount: { Boolean } Whether to show the discount display.
-      - discount_format: { String } The discount format. Can be:
-        - "sale_text"
-        - "percent_off"
-        - "minus_percent"
-        - "save_percent"
-        - "amount_off"
-        - "minus_amount"
-        - "save_amount"
-  endcomment
--%}
+  Required parameters:
+    - prod:            { Object }  The associated product object
+    - current_variant: { Object }  The current variant object
+    - show_discount:   { Boolean } Whether to show the discount display
+    - discount_format: { String }  The discount format. Can be:
+        "sale_text" / "percent_off" / "minus_percent" /
+        "save_percent" / "amount_off" / "minus_amount" / "save_amount"
+{% endcomment %}
 
 {%- if prod != blank -%}
-  <span class="visually-hidden" data-compare-text>{{ 'products.product.regular_price' | t }}</span>
+
+  <span class="visually-hidden" data-compare-text>
+    {{ 'products.product.regular_price' | t }}
+  </span>
 
   <s data-compare-price>
     {%- liquid
@@ -44,25 +27,24 @@
     -%}
   </s>
 
-  <span data-price>{{ current_variant.price | money }}</span>
+  <span data-price>
+    {{ current_variant.price | money }}
+  </span>
 
-  {% if show_discount -%}
+  {%- if show_discount -%}
     {% render 'get-display-discount',
       prod: prod,
       variant: current_variant,
       format: discount_format,
       wrapper_class: 'product__price-displayed-discount',
       use_data_attribute: true
-    -%}
-  {%- endif %}
+    %}
+  {%- endif -%}
 
   {% render 'unit-price', item: current_variant %}
-{%- else -%}
-  <span>{{ 9999 | money }}</span>
-{%- endif %}
 
-{% else %}
-  <span class="wholesale-price-hidden" style="font-size:0.9em;color:#666;">
-    <a href="/pages/contact" style="color:#444;text-decoration:underline;">Contact for pricing</a>
-  </span>
-{% endif %}
+{%- else -%}
+
+  <span data-price>{{ current_variant.price | money }}</span>
+
+{%- endif -%}
