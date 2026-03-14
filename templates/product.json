@@ -86,7 +86,7 @@
             "drop_shadow": "line",
             "show_quantity_selector": true,
             "show_quantity_in_cart": true,
-            "show_pickup_availability": true
+            "show_pickup_availability": false
           }
         },
         "payments_trust": {
