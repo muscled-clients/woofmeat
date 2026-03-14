@@ -965,8 +965,8 @@
         "section_header_heading_tag": "h2",
         "subheading": "",
         "section_header_subheading_tag": "h2",
-        "button_link": "/pages/brands",
-        "button_label": "View All Brands",
+        "button_link": "",
+        "button_label": "",
         "button_style": "primary",
         "maximum_content_width": 600,
         "collections": [
@@ -1001,6 +1001,14 @@
         "section_style_spacing_bottom": 36,
         "section_style_enable_animation": true
       }
+    },
+    "brands_button": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<div style=\"text-align:center;padding:0 20px 40px;\">\n  <a href=\"/pages/brands\" style=\"display:inline-block;padding:14px 36px;background:#1f4a37;color:#ffffff;text-decoration:none;border-radius:6px;font-weight:600;font-size:0.95em;letter-spacing:0.02em;\">View All Brands</a>\n</div>",
+        "section_style_spacing_top": 0,
+        "section_style_spacing_bottom": 0
+      }
     }
   },
   "order": [
@@ -1016,6 +1024,7 @@
     "featured_collection_nGGHbK",
     "featured_collection_media_2",
     "collection_list_2",
+    "brands_button",
     "recently_viewed_products_7m4enk",
     "blog_posts",
     "overlapping_media_with_content_2"
