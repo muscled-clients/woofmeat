@@ -835,52 +835,6 @@
         "section_style_enable_animation": true
       }
     },
-    "collection_list_2": {
-      "type": "collection-list",
-      "settings": {
-        "center_content": true,
-        "preheading": "",
-        "heading": "Shop by brand",
-        "section_header_heading_tag": "h2",
-        "subheading": "",
-        "section_header_subheading_tag": "h2",
-        "button_link": "",
-        "button_label": "",
-        "button_style": "primary",
-        "maximum_content_width": 600,
-        "collections": [
-          "brands",
-          "deepriver-snacks",
-          "century-snacks",
-          "hawaiian-host",
-          "tellus-products",
-          "hola-churros",
-          "goodnes",
-          "u-s-chemical",
-          "armand-hammer",
-          "pgpro",
-          "nestle-professional",
-          "cerelia"
-        ],
-        "num_columns": "6",
-        "num_rows": "2",
-        "enable_slider_desktop": false,
-        "num_columns_mobile": "2",
-        "num_rows_mobile": "3",
-        "enable_slider_mobile": false,
-        "show_product_counts": false,
-        "collection_item_style": "outlined",
-        "image_source": "collection",
-        "image_aspect_ratio": "landscape",
-        "image_circle_crop_enable": false,
-        "image_spacing": 0,
-        "title_font_type": "body",
-        "text_alignment": "center",
-        "section_style_spacing_top": 36,
-        "section_style_spacing_bottom": 36,
-        "section_style_enable_animation": true
-      }
-    },
     "recently_viewed_products_7m4enk": {
       "type": "recently-viewed-products",
       "name": "t:sections.recently_viewed.presets.name",
@@ -1001,6 +955,14 @@
         "section_style_spacing_bottom": 0,
         "section_style_enable_animation": true
       }
+    },
+    "brands_cta": {
+      "type": "rich-text",
+      "settings": {
+        "section_style_spacing_top": 36,
+        "section_style_spacing_bottom": 36,
+        "section_style_enable_animation": true
+      }
     }
   },
   "order": [
@@ -1015,7 +977,7 @@
     "grid_1",
     "featured_collection_nGGHbK",
     "featured_collection_media_2",
-    "collection_list_2",
+    "brands_cta",
     "recently_viewed_products_7m4enk",
     "blog_posts",
     "overlapping_media_with_content_2"
