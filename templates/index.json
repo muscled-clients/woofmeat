@@ -164,7 +164,7 @@
         "button_style": "primary",
         "maximum_content_width": 650,
         "collections": [
-          "bakery",
+          "bakery-category",
           "beverages",
           "cleaning",
           "disposables",
