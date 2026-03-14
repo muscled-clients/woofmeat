@@ -29,7 +29,7 @@
             "heading_tag": "h3",
             "heading_font_size": 5,
             "text": "<p>Cleaning and disposables included</p>",
-            "text_font_size": 5,
+            "text_font_size": 3,
             "button_1_button_link": "shopify://collections",
             "button_1_button_label": "Shop Now",
             "button_1_button_style": "primary",
