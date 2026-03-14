@@ -6,7 +6,7 @@
   assign is_approved = false
   if customer
     for tag in customer.tags
-      if tag == 'wholesale-approved'
+      if tag == 'Customer-tier'
         assign is_approved = true
       endif
     endfor
