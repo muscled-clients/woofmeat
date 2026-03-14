@@ -195,16 +195,6 @@
           render 'icon', icon: 'header-account', style: account_icon_style
         -%}
       </div>
-
-      <div class="header__icon-with-label-touch-label">
-        {%- liquid
-          if customer
-            echo 'general.header.account_label_account' | t
-          else
-            echo 'general.header.account_label_login' | t
-          endif
-        -%}
-      </div>
     </a>
   {%- endif %}
 {%- endcapture -%}
@@ -269,6 +259,18 @@
       </div>
     </a>
   {%- endif %}
+{%- capture wholesale_min_order_badge -%}
+  {%- assign cart_total_grams = cart.total_weight -%}
+  {%- assign cart_total_lbs = cart_total_grams | times: 0.00220462 | round: 1 -%}
+  <div class="header__min-order-badge" id="header-min-order-badge" style="display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:4px;font-size:0.72em;font-weight:600;white-space:nowrap;margin-left:6px;
+    {% if cart_total_lbs >= 5000 %}background:#d1e7dd;color:#0f5132;{% else %}background:#fff3cd;color:#856404;{% endif %}">
+    {% if cart_total_lbs >= 5000 %}&#10003;{% else %}&#9888;{% endif %}
+    <span>Min 5,000 lbs</span>
+    <span style="font-weight:400;">|</span>
+    <span id="header-cart-lbs">{{ cart_total_lbs }} lbs</span>
+  </div>
+{%- endcapture -%}
+
 {%- endcapture -%}
 
 {%- capture search_bar_desktop -%}
@@ -370,6 +372,7 @@
       echo cart_icon
     endif
   -%}
+  {{ wholesale_min_order_badge }}
 {%- endcapture -%}
 
 {% liquid
