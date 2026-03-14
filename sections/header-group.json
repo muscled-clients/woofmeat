@@ -17,8 +17,8 @@
         "announcement_1": {
           "type": "announcement",
           "settings": {
-            "title": "<p>We stock fair-trade coffee from local brands 🤎</p>",
-            "title_mobile": "<p>Free shipping on orders over $200</p>",
+            "title": "<p>Wholesale Distribution — Minimum 5,000 lb orders. <a href=\"/pages/contact\">Request Access</a></p>",
+            "title_mobile": "<p>Wholesale Distribution — <a href=\"/pages/contact\">Request Access</a></p>",
             "link": "",
             "enable_modal": false,
             "modal_link_text": "More info",
@@ -205,9 +205,15 @@
           "settings": {
             "submenu_name": "",
             "block_position": "top",
-            "title": "Promoted collections",
+            "title": "Shop by Category",
             "heading_tag": "h3",
-            "collections": [],
+            "collections": [
+              "gid://shopify/Collection/452043014365",
+              "gid://shopify/Collection/452044947677",
+              "gid://shopify/Collection/452090986717",
+              "gid://shopify/Collection/453674500317",
+              "gid://shopify/Collection/453607063773"
+            ],
             "layout": "2_col",
             "image_source": "collection",
             "image_aspect_ratio": "square",
@@ -220,22 +226,6 @@
             "image_overlay_override_color_tint": "#000000"
           }
         },
-        "promoted_products": {
-          "type": "promoted_products",
-          "settings": {
-            "submenu_name": "",
-            "block_position": "top",
-            "title": "Promoted products",
-            "heading_tag": "h3",
-            "products": [],
-            "image_size": "large",
-            "image_aspect_ratio": "use_theme_settings",
-            "layout": "columns",
-            "show_product_vendor": false,
-            "show_product_subtitles": false,
-            "show_product_prices": true
-          }
-        },
         "promoted_text": {
           "type": "promoted_text",
           "settings": {
@@ -243,13 +233,12 @@
             "block_position": "top",
             "title": "Promoted text",
             "heading_tag": "h3",
-            "text": "<p>Use this text to share announcements or information with your customers.</p>"
+            "text": "<p>Wholesale foodservice distributor. <a href=\"/pages/contact\">Request wholesale access</a> to view pricing.</p>"
           }
         }
       },
       "block_order": [
         "promoted_collections",
-        "promoted_products",
         "promoted_text"
       ],
       "settings": {
