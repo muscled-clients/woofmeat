@@ -746,7 +746,7 @@
         "button_position": "header",
         "collection": "snacks-candy",
         "maximum_products": 7,
-        "num_columns": "5",
+        "num_columns": "4",
         "num_columns_mobile": "2",
         "enable_slider_desktop": true,
         "enable_slider_mobile": true,
@@ -833,6 +833,60 @@
         "section_style_spacing_top": 28,
         "section_style_spacing_bottom": 28,
         "section_style_enable_animation": true
+      }
+    },
+    "collection_list_2": {
+      "type": "collection-list",
+      "settings": {
+        "center_content": true,
+        "preheading": "",
+        "heading": "Shop by brand",
+        "section_header_heading_tag": "h2",
+        "subheading": "",
+        "section_header_subheading_tag": "h2",
+        "button_link": "",
+        "button_label": "",
+        "button_style": "primary",
+        "maximum_content_width": 600,
+        "collections": [
+          "best-maid",
+          "dw-fine-pack",
+          "world-centric",
+          "hostess",
+          "davids-cookies",
+          "dixie",
+          "monin",
+          "ocean-spray",
+          "spindrift",
+          "5-hour-energy",
+          "chex-mix",
+          "cookies-united"
+        ],
+        "num_columns": "6",
+        "num_rows": "2",
+        "enable_slider_desktop": false,
+        "num_columns_mobile": "2",
+        "num_rows_mobile": "3",
+        "enable_slider_mobile": false,
+        "show_product_counts": false,
+        "collection_item_style": "outlined",
+        "image_source": "collection",
+        "image_aspect_ratio": "landscape",
+        "image_circle_crop_enable": false,
+        "image_spacing": 0,
+        "title_font_type": "body",
+        "text_alignment": "center",
+        "section_style_spacing_top": 36,
+        "section_style_spacing_bottom": 36,
+        "section_style_enable_animation": true
+      }
+    },
+    "brands_button": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<div style=\"text-align:center;padding:0 20px 40px;\">\n  <a href=\"/pages/brands\" style=\"display:inline-block;padding:14px 36px;background:#1f4a37;color:#ffffff;text-decoration:none;border-radius:6px;font-weight:600;font-size:0.95em;letter-spacing:0.02em;\">View All Brands</a>\n</div>",
+        "section_style_spacing_top": 0,
+        "section_style_spacing_bottom": 0
       }
     },
     "recently_viewed_products_7m4enk": {
@@ -954,60 +1008,6 @@
         "section_style_spacing_top": 0,
         "section_style_spacing_bottom": 0,
         "section_style_enable_animation": true
-      }
-    },
-    "collection_list_2": {
-      "type": "collection-list",
-      "settings": {
-        "center_content": true,
-        "preheading": "",
-        "heading": "Shop by brand",
-        "section_header_heading_tag": "h2",
-        "subheading": "",
-        "section_header_subheading_tag": "h2",
-        "button_link": "",
-        "button_label": "",
-        "button_style": "primary",
-        "maximum_content_width": 600,
-        "collections": [
-          "best-maid",
-          "dw-fine-pack",
-          "world-centric",
-          "hostess",
-          "davids-cookies",
-          "dixie",
-          "monin",
-          "ocean-spray",
-          "spindrift",
-          "5-hour-energy",
-          "chex-mix",
-          "cookies-united"
-        ],
-        "num_columns": "6",
-        "num_rows": "2",
-        "enable_slider_desktop": false,
-        "num_columns_mobile": "2",
-        "num_rows_mobile": "3",
-        "enable_slider_mobile": false,
-        "show_product_counts": false,
-        "collection_item_style": "outlined",
-        "image_source": "collection",
-        "image_aspect_ratio": "landscape",
-        "image_circle_crop_enable": false,
-        "image_spacing": 0,
-        "title_font_type": "body",
-        "text_alignment": "center",
-        "section_style_spacing_top": 36,
-        "section_style_spacing_bottom": 36,
-        "section_style_enable_animation": true
-      }
-    },
-    "brands_button": {
-      "type": "custom-liquid",
-      "settings": {
-        "custom_liquid": "<div style=\"text-align:center;padding:0 20px 40px;\">\n  <a href=\"/pages/brands\" style=\"display:inline-block;padding:14px 36px;background:#1f4a37;color:#ffffff;text-decoration:none;border-radius:6px;font-weight:600;font-size:0.95em;letter-spacing:0.02em;\">View All Brands</a>\n</div>",
-        "section_style_spacing_top": 0,
-        "section_style_spacing_bottom": 0
       }
     }
   },
