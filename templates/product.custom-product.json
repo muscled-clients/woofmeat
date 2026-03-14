@@ -1,0 +1,327 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product--default",
+      "blocks": {
+        "product_header": {
+          "type": "product_header",
+          "settings": {
+            "show_divider": true,
+            "show_vendor": true,
+            "show_sku": true,
+            "show_price": true,
+            "show_discount": true,
+            "discount_format": "percent_off",
+            "show_shop_pay": false,
+            "show_product_rating": false,
+            "show_rating_count": false,
+            "rating_style": "regular",
+            "show_sale_badge": true,
+            "show_new_badge": true,
+            "show_custom_badges": true,
+            "product_header_always_top_mobile": "above"
+          }
+        },
+        "product_labels": {
+          "type": "product_labels",
+          "settings": {
+            "heading": "",
+            "icon_size": 24,
+            "label_style": "block_heading",
+            "outline": true,
+            "icon_1": "delivery-truck-left",
+            "text_1": "Fast Shipping",
+            "icon_2": "shield-lock",
+            "text_2": "Secure payment",
+            "icon_3": "chat",
+            "text_3": "",
+            "icon_4": "none",
+            "text_4": "",
+            "icon_5": "none",
+            "text_5": "",
+            "icon_6": "none",
+            "text_6": ""
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "variant_popup_option": "Size",
+            "variant_popup_icon": "measuring-tape",
+            "variant_popup_text": "Size guide",
+            "variant_popup_page": "",
+            "swatch_size": "medium",
+            "siblings_show_product_image": true,
+            "siblings_option_name": "Color",
+            "chip_layout": "natural"
+          }
+        },
+        "inventory_counter": {
+          "type": "inventory-counter",
+          "settings": {
+            "label": "Availability:",
+            "inventory_max": "400",
+            "low_inventory_threshold": "20",
+            "indicator_style": "icon_with_text",
+            "show_status_bar": true,
+            "show_inventory_transfer": true,
+            "show_untracked_quantity": true
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": false,
+            "enable_sticky_atc_bar_desktop": true,
+            "enable_sticky_atc_bar_mobile": true,
+            "drop_shadow": "line",
+            "show_quantity_selector": true,
+            "show_quantity_in_cart": true,
+            "show_pickup_availability": true
+          }
+        },
+        "payments_trust": {
+          "type": "payments_and_trust",
+          "settings": {
+            "column_placement": "right",
+            "add_box": false,
+            "content_alignment": "left",
+            "show_payment_icons": true,
+            "payment_heading": "",
+            "payment_heading_icon": "none",
+            "payment_text": "<p>Accepted payments</p>",
+            "payment_text_position": "above",
+            "trust_heading": "",
+            "trust_heading_icon": "none",
+            "trust_text": "",
+            "trust_text_position": "above",
+            "image_size": 100,
+            "display_as_collapsible_row": false,
+            "expand_by_default": false,
+            "collapsible_row_title": "Payments & Trust"
+          }
+        },
+        "share": {
+          "type": "share",
+          "settings": {
+            "enable_os_share": true
+          }
+        },
+        "spacer": {
+          "type": "spacer",
+          "settings": {
+            "column_placement": "right",
+            "space": 4
+          }
+        },
+        "text_icon_columns": {
+          "type": "product_text_columns",
+          "settings": {
+            "column_placement": "left",
+            "add_box": false,
+            "add_dividers": true,
+            "icon_border": "circle",
+            "icon_border_style": "outlined",
+            "icon_border_color": "accent",
+            "icon_size": 24,
+            "icon_size_mobile": 20,
+            "icon_1": "delivery-truck-left",
+            "heading_1": "Free shipping",
+            "text_1": "<p>Free shipping on all orders over $75.</p>",
+            "icon_2": "paper-airplane",
+            "heading_2": "Easy returns",
+            "text_2": "<p>We offer a 30-day peace of mind returns.</p>",
+            "icon_3": "headphones-with-mic",
+            "heading_3": "Need help?",
+            "text_3": "<p>Need help? 24/7 Dedicated support. </p>"
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {
+            "column_placement": "right",
+            "title": "Description",
+            "text_font_class": "fs-body-100",
+            "truncate_num_lines": "5",
+            "display_as_collapsible_row": true,
+            "expand_by_default": true
+          }
+        },
+        "accordion-3": {
+          "type": "accordion",
+          "settings": {
+            "column_placement": "right",
+            "expand_by_default": false,
+            "heading": "Shipping & Returns",
+            "content": "<p><strong>Standard Shipping</strong><br/>Free Standard Shipping on orders over $250. Select “Free Shipping” at checkout.<br/><br/><strong>Free Easy Returns</strong><br/>Need to return an item? We make it easy. Email us and we'll send you a free return label with instructions.</p>",
+            "page_for_content": "",
+            "custom_liquid": ""
+          }
+        }
+      },
+      "block_order": [
+        "product_header",
+        "product_labels",
+        "variant_picker",
+        "inventory_counter",
+        "buy_buttons",
+        "payments_trust",
+        "share",
+        "spacer",
+        "text_icon_columns",
+        "description",
+        "accordion-3"
+      ],
+      "settings": {
+        "enable_sticky_product_details": true,
+        "show_breadcrumbs": true,
+        "show_navigation_buttons": true,
+        "gallery_size": "medium",
+        "desktop_gallery_layout": "thumbnails",
+        "thumbnail_position": "bottom",
+        "thumbnail_size": "large",
+        "enable_video_looping": true,
+        "enable_product_lightbox": true,
+        "show_thumbs_in_product_lightbox": true,
+        "image_aspect_ratio": "square",
+        "enable_multiple_variant_media": false,
+        "enable_gift_card_recipient": true,
+        "show_recommended_products_on_desktop": false,
+        "show_recommended_products_on_mobile": false,
+        "max_recommended_products": 3,
+        "enable_quick_view_recommended_products": true,
+        "recommended_products_heading": "You may also like",
+        "section_style_enable_animation": true
+      }
+    },
+    "product_tabs": {
+      "type": "product-tabs",
+      "blocks": {
+        "product_description": {
+          "type": "product_description",
+          "settings": {
+            "tab_heading": "Product description",
+            "content_width": "full",
+            "custom_width": 500,
+            "heading": "Product description",
+            "heading_tag": "h3",
+            "heading_font_size": 3,
+            "text_font_size": 3
+          }
+        },
+        "one_column": {
+          "type": "one_column",
+          "settings": {
+            "tab_heading": "1 column tab",
+            "content_width": "full",
+            "custom_width": 500,
+            "heading_column_1": "Single column",
+            "heading_tag_column_1": "h3",
+            "heading_font_size_column_1": 3,
+            "text_column_1": "<p>Add your tab content here.</p>",
+            "text_font_size_column_1": 3,
+            "page_for_content_column_1": "",
+            "custom_liquid_column_1": "",
+            "image_width_column_1": 50,
+            "image_position_column_1": "above_text"
+          }
+        },
+        "two_column": {
+          "type": "two_column",
+          "settings": {
+            "tab_heading": "2 column tab",
+            "content_vertical_alignment": "top",
+            "column_spacing": 28,
+            "heading_column_1": "First column",
+            "heading_tag_column_1": "h3",
+            "heading_font_size_column_1": 3,
+            "text_column_1": "<p>Add your tab content here.</p>",
+            "text_font_size_column_1": 3,
+            "page_for_content_column_1": "",
+            "custom_liquid_column_1": "",
+            "image_width_column_1": 50,
+            "image_position_column_1": "above_text",
+            "heading_column_2": "Second column",
+            "heading_tag_column_2": "h3",
+            "heading_font_size_column_2": 3,
+            "text_column_2": "<p>Add your tab content here.</p>",
+            "text_font_size_column_2": 3,
+            "page_for_content_column_2": "",
+            "custom_liquid_column_2": "",
+            "image_width_column_2": 50,
+            "image_position_column_2": "above_text"
+          }
+        },
+        "three_column": {
+          "type": "three_column",
+          "settings": {
+            "tab_heading": "3 column tab",
+            "content_vertical_alignment": "top",
+            "column_spacing": 28,
+            "heading_column_1": "First column",
+            "heading_tag_column_1": "h3",
+            "heading_font_size_column_1": 3,
+            "text_column_1": "<p>Add your tab content here.</p>",
+            "text_font_size_column_1": 3,
+            "page_for_content_column_1": "",
+            "custom_liquid_column_1": "",
+            "image_width_column_1": 50,
+            "image_position_column_1": "above_text",
+            "heading_column_2": "Second column",
+            "heading_tag_column_2": "h3",
+            "heading_font_size_column_2": 3,
+            "text_column_2": "<p>Add your tab content here.</p>",
+            "text_font_size_column_2": 3,
+            "page_for_content_column_2": "",
+            "custom_liquid_column_2": "",
+            "image_width_column_2": 50,
+            "image_position_column_2": "above_text",
+            "heading_column_3": "Third column",
+            "heading_tag_column_3": "h3",
+            "heading_font_size_column_3": 3,
+            "text_column_3": "<p>Add your tab content here.</p>",
+            "text_font_size_column_3": 3,
+            "page_for_content_column_3": "",
+            "custom_liquid_column_3": "",
+            "image_width_column_3": 50,
+            "image_position_column_3": "above_text"
+          }
+        }
+      },
+      "block_order": [
+        "product_description",
+        "one_column",
+        "two_column",
+        "three_column"
+      ],
+      "disabled": true,
+      "name": "t:sections.product_tabs.presets.name",
+      "settings": {
+        "tab_alignment": "left",
+        "tab_design": "line",
+        "text_font_type": "body",
+        "text_font_size": 6,
+        "color_scheme": "default",
+        "override_with_custom_colors": false,
+        "override_color_text": "#393939",
+        "override_color_background": "#ffffff",
+        "section_style_spacing_top": 36,
+        "section_style_spacing_bottom": 36,
+        "section_style_enable_animation": true
+      }
+    }
+  },
+  "order": [
+    "main",
+    "product_tabs"
+  ]
+}
