@@ -164,11 +164,11 @@
         "button_style": "primary",
         "maximum_content_width": 650,
         "collections": [
-          "bakery-category",
+          "bakery",
           "beverages",
           "cleaning",
           "disposables",
-          "snacks-candy-1"
+          "snacks-candy"
         ],
         "num_columns": "5",
         "num_rows": "all",
