@@ -1,1 +1,203 @@
-{"type":"footer","name":"t:groups.footer_group.name","sections":{"icon_text_columns":{"type":"icon-with-text-columns","blocks":{"column-1":{"type":"column","settings":{"icon":"checkmark-badge","link":"","accent":"","heading":"Best price","text":"<p>Rest assured, we offer unparalleled value with our price guaranteed.<\/p>"}},"column-3":{"type":"column","settings":{"icon":"package","link":"","accent":"","heading":"Easy Returns","text":"<p>We stand by your satisfaction with our exchange or money-back guarantee on all orders.<\/p>"}},"column-4":{"type":"column","settings":{"icon":"delivery-truck-left","link":"","accent":"","heading":"Fast shipping","text":"<p>Pair text with an image to focus on your chosen product, collection, or blog post.<\/p>"}}},"block_order":["column-1","column-3","column-4"],"settings":{"icon_border":"circle","icon_border_style":"outlined","icon_border_color":"accent","icon_size":24,"icon_size_mobile":24,"accent_font_size":3,"heading_font_size":2,"text_font_size":3,"desktop_alignment":"left_left_centered","columns_per_row":3,"content_width":"full","custom_width":1170,"color_scheme":"soft","override_with_custom_colors":false,"override_color_text":"#464646","override_color_background":"#ffffff","section_style_spacing_top":40,"section_style_spacing_bottom":40,"section_style_enable_animation":true}},"newsletter_compact":{"type":"newsletter-compact","blocks":{"content-1":{"type":"text_content","settings":{"width":"600","text_alignment":"left","accent":"","accent_divider_enable":true,"accent_divider_color":"accent","title":"Sign up for our Newsletter","heading_font_size":4,"heading_tag":"h3","text":"<p>Subscribe and save 10% on your first order! Stay updated with the latest coffee blends, brewing tips, and exclusive promotions – all delivered to your inbox.<\/p>","text_font_size":3}},"signup-1":{"type":"newsletter_signup","settings":{"enable_collect_customer_name":false,"signup_link_text":"Sign up","button_style":"solid","footer_text":"<p>By completing this form, you are signing up to receive our emails and can unsubscribe at any time.<\/p>"}}},"block_order":["content-1","signup-1"],"settings":{"spacing_mode":"between","color_forms":"default","color_scheme":"default","override_with_custom_colors":true,"override_color_text":"#ffffff","override_color_background":"#272727","background_image_focal_point":"image_presentation","background_image_mobile_focal_point":"image_presentation","image_overlay_tint_opacity":50,"image_overlay_tint_style":"solid","image_overlay_override_with_custom_colors":false,"image_overlay_override_color_text":"#ffffff","image_overlay_override_color_tint":"#000000","section_style_spacing_top":20,"section_style_spacing_bottom":20,"section_style_enable_animation":true}},"footer":{"type":"footer","blocks":{"links_1":{"type":"links","settings":{"collapse_on_mobile":true,"title":"Company","heading_tag_links":"h3","show_title_on_desktop":true,"link_list":"company"}},"links_2":{"type":"links","settings":{"collapse_on_mobile":true,"title":"Policies","heading_tag_links":"h3","show_title_on_desktop":true,"link_list":"policies"}},"links_3":{"type":"links","settings":{"collapse_on_mobile":true,"title":"Brands","heading_tag_links":"h3","show_title_on_desktop":true,"link_list":"brands"}},"links_4":{"type":"links","settings":{"collapse_on_mobile":true,"title":"Shop","heading_tag_links":"h3","show_title_on_desktop":true,"link_list":"footer"}},"contact":{"type":"contact","settings":{"title":"Contact us","heading_tag_contact":"h3","show_title_on_desktop":true,"text":"<p>Questions? We're here for you Monday - Friday 10am-6pm ET.<\/p>","contact_icon_1":"phone","contact_text_1":"+1 (416) 555-5555","contact_link_1":"","contact_icon_2":"envelope","contact_text_2":"support@cornerstone.co","contact_link_2":"","contact_icon_3":"pin","contact_text_3":"123 Queen Street","contact_link_3":"","show_social_icons":true,"social_icons_header":"Follow us","footer_social_heading_tag":"h3","enable_follow_on_shop":false}}},"block_order":["links_1","links_2","links_3","links_4","contact"],"custom_css":[],"settings":{"desktop_column_gap":72,"enable_locale_selector":true,"enable_country_selector":true,"show_payment_icons":true,"additional_copyright_text":"","subfooter_menu":"footer-menu"}}},"order":["icon_text_columns","newsletter_compact","footer"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "footer",
+  "name": "t:groups.footer_group.name",
+  "sections": {
+    "icon_text_columns": {
+      "type": "icon-with-text-columns",
+      "blocks": {
+        "column-1": {
+          "type": "column",
+          "settings": {
+            "icon": "checkmark-badge",
+            "link": "",
+            "accent": "",
+            "heading": "Best price",
+            "text": "<p>Rest assured, we offer unparalleled value with our price guaranteed.</p>"
+          }
+        },
+        "column-3": {
+          "type": "column",
+          "settings": {
+            "icon": "package",
+            "link": "",
+            "accent": "",
+            "heading": "Easy Returns",
+            "text": "<p>We stand by your satisfaction with our exchange or money-back guarantee on all orders.</p>"
+          }
+        },
+        "column-4": {
+          "type": "column",
+          "settings": {
+            "icon": "delivery-truck-left",
+            "link": "",
+            "accent": "",
+            "heading": "Fast shipping",
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "column-1",
+        "column-3",
+        "column-4"
+      ],
+      "settings": {
+        "icon_border": "circle",
+        "icon_border_style": "outlined",
+        "icon_border_color": "accent",
+        "icon_size": 24,
+        "icon_size_mobile": 24,
+        "accent_font_size": 3,
+        "heading_font_size": 2,
+        "text_font_size": 3,
+        "desktop_alignment": "left_left_centered",
+        "columns_per_row": 3,
+        "content_width": "full",
+        "custom_width": 1170,
+        "color_scheme": "soft",
+        "override_with_custom_colors": false,
+        "override_color_text": "#464646",
+        "override_color_background": "#ffffff",
+        "section_style_spacing_top": 40,
+        "section_style_spacing_bottom": 40,
+        "section_style_enable_animation": true
+      }
+    },
+    "newsletter_compact": {
+      "type": "newsletter-compact",
+      "blocks": {
+        "content-1": {
+          "type": "text_content",
+          "settings": {
+            "width": "600",
+            "text_alignment": "left",
+            "accent": "",
+            "accent_divider_enable": true,
+            "accent_divider_color": "accent",
+            "title": "Sign up for our Newsletter",
+            "heading_font_size": 4,
+            "heading_tag": "h3",
+            "text": "<p>Subscribe and save 10% on your first order! Stay updated with the latest coffee blends, brewing tips, and exclusive promotions – all delivered to your inbox.</p>",
+            "text_font_size": 3
+          }
+        },
+        "signup-1": {
+          "type": "newsletter_signup",
+          "settings": {
+            "enable_collect_customer_name": false,
+            "signup_link_text": "Sign up",
+            "button_style": "solid",
+            "footer_text": "<p>By completing this form, you are signing up to receive our emails and can unsubscribe at any time.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "content-1",
+        "signup-1"
+      ],
+      "settings": {
+        "spacing_mode": "between",
+        "color_forms": "default",
+        "color_scheme": "default",
+        "override_with_custom_colors": true,
+        "override_color_text": "#ffffff",
+        "override_color_background": "#272727",
+        "background_image_focal_point": "image_presentation",
+        "background_image_mobile_focal_point": "image_presentation",
+        "image_overlay_tint_opacity": 50,
+        "image_overlay_tint_style": "solid",
+        "image_overlay_override_with_custom_colors": false,
+        "image_overlay_override_color_text": "#ffffff",
+        "image_overlay_override_color_tint": "#000000",
+        "section_style_spacing_top": 20,
+        "section_style_spacing_bottom": 20,
+        "section_style_enable_animation": true
+      }
+    },
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "links_1": {
+          "type": "links",
+          "settings": {
+            "collapse_on_mobile": true,
+            "title": "Company",
+            "heading_tag_links": "h3",
+            "show_title_on_desktop": true,
+            "link_list": "company"
+          }
+        },
+        "links_2": {
+          "type": "links",
+          "settings": {
+            "collapse_on_mobile": true,
+            "title": "Policies",
+            "heading_tag_links": "h3",
+            "show_title_on_desktop": true,
+            "link_list": "policies"
+          }
+        },
+        "contact": {
+          "type": "contact",
+          "settings": {
+            "title": "Contact us",
+            "heading_tag_contact": "h3",
+            "show_title_on_desktop": true,
+            "text": "<p>Questions? We're here for you Monday - Friday 10am-6pm ET.</p>",
+            "contact_icon_1": "phone",
+            "contact_text_1": "+1 (416) 555-5555",
+            "contact_link_1": "",
+            "contact_icon_2": "envelope",
+            "contact_text_2": "support@cornerstone.co",
+            "contact_link_2": "",
+            "contact_icon_3": "pin",
+            "contact_text_3": "123 Queen Street",
+            "contact_link_3": "",
+            "show_social_icons": true,
+            "social_icons_header": "Follow us",
+            "footer_social_heading_tag": "h3",
+            "enable_follow_on_shop": false
+          }
+        },
+        "about_us": {
+          "type": "text",
+          "settings": {
+            "title": "Woofmeets Distribution",
+            "heading_tag_text": "h3",
+            "show_title_on_desktop": true,
+            "text": "<p>Your trusted wholesale partner for foodservice and retail. We connect brands with businesses, offering a curated selection of bakery, beverages, cleaning supplies, disposables, and snacks at competitive wholesale prices.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "about_us",
+        "links_1",
+        "links_2",
+        "contact"
+      ],
+      "custom_css": [],
+      "settings": {
+        "desktop_column_gap": 72,
+        "enable_locale_selector": true,
+        "enable_country_selector": true,
+        "show_payment_icons": true,
+        "additional_copyright_text": "",
+        "subfooter_menu": "footer-menu"
+      }
+    }
+  },
+  "order": [
+    "icon_text_columns",
+    "newsletter_compact",
+    "footer"
+  ]
+}
