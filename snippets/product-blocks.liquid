@@ -61,13 +61,12 @@
             {{ product_block_header }}
           {%- endif %}
         {%- when 'price' -%}
-          {% render 'product-block-price',
-            prod: prod,
-            block: block,
-            current_variant: current_variant,
-            is_quick: is_quick,
-            label: block.settings.label
-          -%}
+         {% render 'customer-tier',
+  prod: prod,
+  current_variant: current_variant,
+  show_discount: block.settings.show_discount,
+  discount_format: block.settings.discount_format
+-%}
         {%- when 'spacer' -%}
           <div
             class="product-block-spacer product__block"
