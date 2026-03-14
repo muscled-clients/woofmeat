@@ -4,6 +4,26 @@
   data-section-type="cart"
 >
   <div class="cart__container page__inner">
+
+    {%- comment -%} Wholesale: compute variables BEFORE they are used {%- endcomment -%}
+    {% assign is_wholesale = false %}
+    {% if customer %}
+      {% for tag in customer.tags %}
+        {% if tag == 'wholesale-approved' %}
+          {% assign is_wholesale = true %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+
+    {% if is_wholesale %}
+      {%- assign cart_total_grams = 0 -%}
+      {%- for item in cart.items -%}
+        {%- assign item_grams = item.grams | times: item.quantity -%}
+        {%- assign cart_total_grams = cart_total_grams | plus: item_grams -%}
+      {%- endfor -%}
+      {%- assign cart_total_lbs = cart_total_grams | times: 0.00220462 | round: 1 -%}
+    {% endif %}
+
     {% if cart.item_count > 0 -%}
       <form action="{{ routes.cart_url }}" method="post" data-form novalidate class="cart__form">
         <div class="cart__form-main-content">
@@ -105,6 +125,10 @@
                 -%}
               </p>
 
+              {% if is_wholesale %}
+                <div id="page-wholesale-weight-msg" style="display:none;margin:0 0 12px 0;padding:10px 14px;border-radius:6px;font-size:0.9em;font-weight:500;text-align:center;"></div>
+              {% endif %}
+
               <div class="cart__input-buttons">
                 <button
                   type="submit"
@@ -115,21 +139,45 @@
                   {{ 'cart.general.update' | t }}
                 </button>
 
-                <button
-                  type="submit"
-                  name="checkout"
-                  class="cart__submit btn btn--full btn--primary"
-                  aria-label="{{ 'cart.general.checkout' | t }}"
-                >
-                  {{ 'cart.general.checkout' | t }}
-                </button>
+                {% if is_wholesale %}
+                  <button
+                    type="submit"
+                    name="checkout"
+                    id="page-checkout-btn"
+                    class="cart__submit btn btn--full btn--primary"
+                    aria-label="{{ 'cart.general.checkout' | t }}"
+                    {% unless cart_total_lbs >= 5000 %}disabled style="opacity:0.5;cursor:not-allowed;"{% endunless %}
+                  >
+                    {{ 'cart.general.checkout' | t }}
+                  </button>
+                {% else %}
+                  <button
+                    type="submit"
+                    name="checkout"
+                    class="cart__submit btn btn--full btn--primary"
+                    aria-label="{{ 'cart.general.checkout' | t }}"
+                  >
+                    {{ 'cart.general.checkout' | t }}
+                  </button>
+                {% endif %}
               </div>
 
-              {% if additional_checkout_buttons -%}
-                <div class="additional-checkout-buttons additional-checkout-buttons--vertical">
-                  {{ content_for_additional_checkout_buttons }}
-                </div>
-              {%- endif %}
+              {% if is_wholesale %}
+                {%- comment -%} Hide additional checkout buttons (PayPal, etc.) when below minimum {%- endcomment -%}
+                {% if cart_total_lbs >= 5000 %}
+                  {% if additional_checkout_buttons -%}
+                    <div class="additional-checkout-buttons additional-checkout-buttons--vertical">
+                      {{ content_for_additional_checkout_buttons }}
+                    </div>
+                  {%- endif %}
+                {% endif %}
+              {% else %}
+                {% if additional_checkout_buttons -%}
+                  <div class="additional-checkout-buttons additional-checkout-buttons--vertical">
+                    {{ content_for_additional_checkout_buttons }}
+                  </div>
+                {%- endif %}
+              {% endif %}
             </div>
 
             {% liquid
@@ -173,65 +221,64 @@
   </div>
 </div>
 
-
-{%- comment -%} Wholesale minimum order weight check {%- endcomment -%}
-{% assign is_wholesale = false %}
-{% if customer %}
-  {% for tag in customer.tags %}
-    {% if tag == 'wholesale-approved' %}
-      {% assign is_wholesale = true %}
-    {% endif %}
-  {% endfor %}
-{% endif %}
-
 {% if is_wholesale %}
-<div id="wholesale-min-weight" style="display:none;margin:16px 0;padding:14px 18px;border-radius:6px;font-size:0.95em;font-weight:500;"></div>
-
 <script>
 (function() {
   var MIN_LBS = 5000;
 
-  function getCartWeight() {
-    // Shopify cart object injected into page
-    var items = {{ cart.items | json }};
-    var totalGrams = 0;
-    for (var i = 0; i < items.length; i++) {
-      // variant weight is in grams in Shopify's cart object
-      totalGrams += (items[i].variant.weight || 0) * items[i].quantity;
-    }
-    // Convert grams to lbs (1 lb = 453.592 g)
-    return totalGrams / 453.592;
+  function updatePageCheckout() {
+    fetch('/cart.js').then(function(r) { return r.json(); }).then(function(cart) {
+      var totalLbs = parseFloat((cart.total_weight * 0.00220462).toFixed(1));
+      var btn = document.getElementById('page-checkout-btn');
+      var msg = document.getElementById('page-wholesale-weight-msg');
+      var extraBtns = document.querySelector('.additional-checkout-buttons');
+
+      if (btn) {
+        if (totalLbs < MIN_LBS) {
+          btn.disabled = true;
+          btn.style.opacity = '0.5';
+          btn.style.cursor = 'not-allowed';
+        } else {
+          btn.disabled = false;
+          btn.style.opacity = '';
+          btn.style.cursor = '';
+        }
+      }
+
+      if (extraBtns) {
+        extraBtns.style.display = totalLbs < MIN_LBS ? 'none' : '';
+      }
+
+      if (msg) {
+        msg.style.display = 'block';
+        if (totalLbs < MIN_LBS) {
+          msg.style.background = '#fff3cd';
+          msg.style.border = '1px solid #ffc107';
+          msg.style.color = '#856404';
+          msg.innerHTML = '&#9888; Minimum wholesale order is 5,000 lbs. You currently have <strong>' + totalLbs.toFixed(1) + ' lbs</strong> in your cart.';
+        } else {
+          msg.style.background = '#d1e7dd';
+          msg.style.border = '1px solid #0f5132';
+          msg.style.color = '#0f5132';
+          msg.innerHTML = '&#10003; Minimum order met &mdash; <strong>' + totalLbs.toFixed(1) + ' lbs</strong>';
+        }
+      }
+    });
   }
 
-  function updateCheckout() {
-    var totalLbs = getCartWeight();
-    var banner = document.getElementById('wholesale-min-weight');
-    var checkoutBtn = document.querySelector('[name="checkout"]');
+  document.addEventListener('DOMContentLoaded', updatePageCheckout);
+  document.addEventListener('cart:updated', updatePageCheckout);
 
-    if (!banner || !checkoutBtn) return;
-
-    banner.style.display = 'block';
-
-    if (totalLbs < MIN_LBS) {
-      banner.style.background = '#fff3cd';
-      banner.style.border = '1px solid #ffc107';
-      banner.style.color = '#856404';
-      banner.innerHTML = '&#9888; Minimum wholesale order is 5,000 lbs. You currently have <strong>' + totalLbs.toFixed(1) + ' lbs</strong> in your cart.';
-      checkoutBtn.disabled = true;
-      checkoutBtn.style.opacity = '0.5';
-      checkoutBtn.style.cursor = 'not-allowed';
-    } else {
-      banner.style.background = '#d1e7dd';
-      banner.style.border = '1px solid #0f5132';
-      banner.style.color = '#0f5132';
-      banner.innerHTML = '&#10003; Minimum order met &mdash; <strong>' + totalLbs.toFixed(1) + ' lbs</strong> in cart.';
-      checkoutBtn.disabled = false;
-      checkoutBtn.style.opacity = '';
-      checkoutBtn.style.cursor = '';
+  /* Block form submission as safety net */
+  document.addEventListener('submit', function(e) {
+    var form = e.target;
+    if (form && form.querySelector && form.querySelector('#page-checkout-btn[disabled]')) {
+      e.preventDefault();
+      e.stopPropagation();
+      alert('Minimum wholesale order is 5,000 lbs. Please add more items.');
+      return false;
     }
-  }
-
-  document.addEventListener('DOMContentLoaded', updateCheckout);
+  }, true);
 })();
 </script>
 {% endif %}

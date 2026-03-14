@@ -17,19 +17,27 @@
         }
       }
       if (lbsEl) lbsEl.textContent = lbs + ' lbs';
+
+      /* Also dispatch a custom event so drawer/page checkout JS can react */
+      document.dispatchEvent(new CustomEvent('cart:updated'));
     });
   }
-  // Listen for cart updates
-  document.addEventListener('cart:updated', updateHeaderBadge);
+  /* Listen for cart update events */
   document.addEventListener('ajaxProduct:added', updateHeaderBadge);
-  // Also poll occasionally for cart drawer interactions
-  var origFetch = window.fetch;
-  window.fetch = function() {
-    var result = origFetch.apply(this, arguments);
-    if (arguments[0] && typeof arguments[0] === 'string' && (arguments[0].includes('/cart/add') || arguments[0].includes('/cart/change') || arguments[0].includes('/cart/update'))) {
-      result.then(function() { setTimeout(updateHeaderBadge, 500); });
-    }
-    return result;
-  };
+
+  /* Intercept fetch - use a shared flag to avoid double-wrapping */
+  if (!window._wholesaleOrigFetch) {
+    window._wholesaleOrigFetch = window.fetch;
+    window.fetch = function() {
+      var result = window._wholesaleOrigFetch.apply(this, arguments);
+      if (arguments[0] && typeof arguments[0] === 'string' && (arguments[0].includes('/cart/add') || arguments[0].includes('/cart/change') || arguments[0].includes('/cart/update') || arguments[0].includes('/cart/clear'))) {
+        result.then(function() { setTimeout(updateHeaderBadge, 500); });
+      }
+      return result;
+    };
+  }
+
+  /* Initial load */
+  document.addEventListener('DOMContentLoaded', updateHeaderBadge);
 })();
 </script>
