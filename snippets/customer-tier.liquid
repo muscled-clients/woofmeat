@@ -1,102 +1,79 @@
 {% comment %}
-  TIERED PRICING — snippets/tier-price.liquid
-  
-  Flow:
-    - Guest           → "Log in to see price"
-    - Logged in + tier  → shows tier price from metafield
-    - Logged in, no tier → falls through to product-price.liquid
-  
-  Priority: Tier 3 > Tier 2 > Tier 1
-  
-  Metafields used:
-    custom.tier_1 (Decimal — stores dollar value e.g. 5000.0)
-    custom.tier_2 (Decimal — stores dollar value e.g. 4000.0)
-    custom.tier_3 (Decimal — stores dollar value e.g. 3000.0)
+  TIERED PRICING LOGIC
+  Tier 3 > Tier 2 > Tier 1 — priority enforced correctly
 
   Required parameters:
-    - prod:            { Object }  The product object
-    - current_variant: { Object }  The current variant object
-    - show_discount:   { Boolean } Whether to show discount label
-    - discount_format: { String }  Discount format string
+    - prod: { Object } The associated product object
+    - current_variant: { Object } The current variant object
+    - show_discount: { Boolean } Whether to show the discount display
+    - discount_format: { String } The discount format
 {% endcomment %}
-
+{% if customer %}
 {%- liquid
   assign customer_price = null
-  assign tier_label     = ''
-  assign has_tier       = false
+  assign tier_label = ''
+  assign has_tier = false
 
   if customer
-    assign has_tier1 = false
-    assign has_tier2 = false
     assign has_tier3 = false
+    assign has_tier2 = false
+    assign has_tier1 = false
 
     for tag in customer.tags
       assign tag_lower = tag | downcase | strip
-      if tag_lower == 'tier1'
-        assign has_tier1 = true
+      if tag_lower == 'tier3'
+        assign has_tier3 = true
       endif
       if tag_lower == 'tier2'
         assign has_tier2 = true
       endif
-      if tag_lower == 'tier3'
-        assign has_tier3 = true
+      if tag_lower == 'tier1'
+        assign has_tier1 = true
       endif
     endfor
 
-    if has_tier3 and prod.metafields.custom.tier_3.value != blank
+    if has_tier3 and prod.metafields.custom.tier_3
       assign customer_price = prod.metafields.custom.tier_3.value
-      assign tier_label     = 'Tier 3'
-      assign has_tier       = true
-    elsif has_tier2 and prod.metafields.custom.tier_2.value != blank
+      assign tier_label = 'Tier 3'
+      assign has_tier = true
+    elsif has_tier2 and prod.metafields.custom.tier_2
       assign customer_price = prod.metafields.custom.tier_2.value
-      assign tier_label     = 'Tier 2'
-      assign has_tier       = true
-    elsif has_tier1 and prod.metafields.custom.tier_1.value != blank
+      assign tier_label = 'Tier 2'
+      assign has_tier = true
+    elsif has_tier1 and prod.metafields.custom.tier_1
       assign customer_price = prod.metafields.custom.tier_1.value
-      assign tier_label     = 'Tier 1'
-      assign has_tier       = true
+      assign tier_label = 'Tier 1'
+      assign has_tier = true
     endif
   endif
 -%}
 
-{% comment %} ── CASE 1: Guest / not logged in ── {% endcomment %}
-{% unless customer %}
-  <div class="tier-price-wrapper">
-    <a href="{{ routes.account_login_url }}"
-       style="font-size:14px; font-weight:600; color:inherit; text-decoration:underline;">
-      Log in to see price
-    </a>
+{% comment %} NORMAL PRICE — no tier tag {% endcomment %}
+{%- unless has_tier -%}
+  {% render 'product-price',
+    prod: prod,
+    current_variant: current_variant,
+    show_discount: show_discount,
+    discount_format: discount_format
+  -%}
+{%- endunless -%}
+
+{% comment %} TIER PRICE — customer has tier {% endcomment %}
+{%- if has_tier and customer_price -%}
+  <div style="padding: 4px 0;">
+    <small style="display:block; font-size:12px; color:gray; margin-bottom:6px; text-transform:uppercase; letter-spacing:0.05em;">
+      {{ tier_label }} Price
+    </small>
+    <span data-price style="font-size:inherit; font-weight:700;">
+      {{ customer_price | money }}
+    </span>
+    <s style="display:block; font-size:14px; color:gray; margin-top:6px;">
+      Regular: {{ current_variant.price | money }}
+    </s>
   </div>
-
+{%- endif -%}
 {% else %}
-
-  {% comment %} ── CASE 2: Logged in + has tier tag + metafield has value ── {% endcomment %}
-  {%- if has_tier and customer_price != blank -%}
-
-    {%- assign tier_price_cents = customer_price | times: 100 | round -%}
-
-    <div class="tier-price-wrapper">
-      <small class="tier-price__label">
-        {{ tier_label }} Price
-      </small>
-      <span class="tier-price__amount">
-        {{ tier_price_cents | money }}
-      </span>
-      <s class="tier-price__regular">
-        Regular: {{ current_variant.price | money }}
-      </s>
-    </div>
-
-  {% comment %} ── CASE 3: Logged in but no tier tag — show regular price ── {% endcomment %}
-  {%- else -%}
-
-    {% render 'product-price',
-      prod: prod,
-      current_variant: current_variant,
-      show_discount: show_discount,
-      discount_format: discount_format
-    %}
-
-  {%- endif -%}
-
-{% endunless %}
+  <a href="/account/login" style="font-size:14px; font-weight:600; color:inherit;">
+    Log in to see price
+  </a>
+{% endif %}
