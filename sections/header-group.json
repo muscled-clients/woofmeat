@@ -157,32 +157,6 @@
     "mobile-menu": {
       "type": "mobile-menu",
       "blocks": {
-        "promoted_collections": {
-          "type": "promoted_collections",
-          "settings": {
-            "submenu_name": "",
-            "block_position": "top",
-            "title": "Shop by Category",
-            "heading_tag": "h3",
-            "collections": [
-              "gid://shopify/Collection/452043014365",
-              "gid://shopify/Collection/452044947677",
-              "gid://shopify/Collection/452090986717",
-              "gid://shopify/Collection/453674500317",
-              "gid://shopify/Collection/453607063773"
-            ],
-            "layout": "2_col",
-            "image_source": "collection",
-            "image_aspect_ratio": "square",
-            "collection_title_style": "overlay",
-            "text_position": "flex-start_flex-end",
-            "image_overlay_tint_opacity": 50,
-            "image_overlay_tint_style": "solid",
-            "image_overlay_override_with_custom_colors": false,
-            "image_overlay_override_color_text": "#ffffff",
-            "image_overlay_override_color_tint": "#000000"
-          }
-        },
         "promoted_text": {
           "type": "promoted_text",
           "settings": {
@@ -195,7 +169,6 @@
         }
       },
       "block_order": [
-        "promoted_collections",
         "promoted_text"
       ],
       "settings": {
