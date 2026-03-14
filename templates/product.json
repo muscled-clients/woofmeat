@@ -156,28 +156,6 @@
             "expand_by_default": true
           }
         },
-        "accordion-1": {
-          "type": "accordion",
-          "settings": {
-            "column_placement": "right",
-            "expand_by_default": false,
-            "heading": "What's in the box",
-            "content": "<p>Add your collapsible row content here.</p>",
-            "page_for_content": "",
-            "custom_liquid": ""
-          }
-        },
-        "accordion-2": {
-          "type": "accordion",
-          "settings": {
-            "column_placement": "right",
-            "expand_by_default": false,
-            "heading": "Care and Usage",
-            "content": "<p>Add your collapsible row content here.</p>",
-            "page_for_content": "",
-            "custom_liquid": ""
-          }
-        },
         "accordion-3": {
           "type": "accordion",
           "settings": {
@@ -201,8 +179,6 @@
         "spacer",
         "text_icon_columns",
         "description",
-        "accordion-1",
-        "accordion-2",
         "accordion-3"
       ],
       "settings": {
