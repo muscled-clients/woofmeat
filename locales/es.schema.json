@@ -1634,15 +1634,6 @@
       },
       "name": "Resumen del producto",
       "settings": {
-        "desktop_gallery_layout": {
-          "info": "Las miniaturas siempre se muestran en dispositivos móviles.",
-          "label": "Diseño de galería de escritorio",
-          "options": {
-            "grid": "Cuadrícula",
-            "stacked": "Apilado",
-            "thumbnails": "Las miniaturas"
-          }
-        },
         "enable_gift_card_recipient": {
           "info": "Permite que los compradores envíen tarjetas de regalo en una fecha programada junto con un mensaje personal. [Más información](https://help.shopify.com/manual/online-store/themes/customizing-themes/add-gift-card-recipient-fields)",
           "label": "Mostrar el formulario de información de la persona destinataria para las tarjetas de regalo"
@@ -1710,13 +1701,11 @@
           "label": "Mostrar miniaturas en la galería de zoom"
         },
         "thumbnail_position": {
-          "info": "Solo se aplica en el escritorio cuando el diseño está configurado en \"Miniaturas\".",
           "label": "Posición de las miniaturas",
           "option_bottom": "Debajo de los medios",
           "option_left": "Izquierda de los medios"
         },
         "thumbnail_size": {
-          "info": "Solo se aplica en el escritorio cuando el diseño está configurado en \"Miniaturas\".",
           "label": "Tamaño de las miniaturas",
           "option_large": "Grande",
           "option_medium": "Mediana",
@@ -5244,7 +5233,7 @@
         "label": "Mostrar descuento"
       },
       "show_filters": {
-        "info": "Permite a los clientes filtrar por opciones de producto, tipo de producto, precio, disponibilidad y más. [Más información](https://help.fluorescent.co/cornerstone/collection-pages/filters-and-sorting).",
+        "info": "Permite a los clientes filtrar por opciones de producto, tipo de producto, precio, disponibilidad, etc. [Personalizar filtros](/admin/menus)",
         "label": "Habilitar filtrado"
       },
       "show_item_count": {

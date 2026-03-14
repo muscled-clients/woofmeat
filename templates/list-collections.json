@@ -1,73 +1,24 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "main": {
       "type": "main-list-collections",
-      "custom_css": [],
-      "name": "Bakery Collection",
       "settings": {
-        "display_type": "custom",
-        "collections": [
-          "bakery",
-          "crust-doughs",
-          "pies",
-          "cupcakes",
-          "muffins-scones-croissants",
-          "cheesecakes",
-          "buns-rolls-biscuits",
-          "bagels-pretzels",
-          "tortillas-flatbreads-wraps",
-          "loaves-sliced-bread",
-          "donuts-pastries",
-          "brownies-bars",
-          "cookies",
-          "cookie-doughs",
-          "sweet-batters"
-        ],
+        "display_type": "all",
+        "collections": [],
         "num_columns": "5",
         "num_columns_mobile": "2",
-        "num_rows": "3",
-        "show_product_counts": false,
-        "collection_item_style": "outlined",
-        "image_source": "collection",
+        "num_rows": "5",
+        "show_product_counts": true,
+        "collection_item_style": "plain",
+        "image_source": "product",
         "image_aspect_ratio": "square",
-        "image_circle_crop_enable": false,
+        "image_circle_crop_enable": true,
         "image_spacing": 10,
-        "title_font_type": "body",
+        "title_font_type": "heading",
         "text_alignment": "center",
-        "section_style_enable_animation": true
-      }
-    },
-    "recently_viewed_products_ij48Ex": {
-      "type": "recently-viewed-products",
-      "name": "t:sections.recently_viewed.presets.name",
-      "settings": {
-        "center_content": false,
-        "preheading": "",
-        "heading": "Trending Items",
-        "section_header_heading_tag": "h2",
-        "subheading": "",
-        "section_header_subheading_tag": "h2",
-        "maximum_content_width": 650,
-        "maximum_products": 5,
-        "num_columns": "5",
-        "num_columns_mobile": "2",
-        "section_style_spacing_top": 36,
-        "section_style_spacing_bottom": 36,
         "section_style_enable_animation": true
       }
     }
   },
-  "order": [
-    "main",
-    "recently_viewed_products_ij48Ex"
-  ]
+  "order": ["main"]
 }

@@ -96,7 +96,7 @@
         -%}
 
         <a
-          href="{% if show_meganav and meganav_settings.header_link_link != blank %}{{ meganav_settings.header_link_link }}{% else %}{{ link.url }}{% endif %}"
+          href="{{ link.url }}"
           class="{{ submenu_trigger_class }}"
           data-link
           data-parent

@@ -7323,11 +7323,7 @@ body.header-transparent #main > .shopify-section:first-child .collection-banner_
   list-style:none;
   color:var(--color-products-sale-price);
 }
-.quick-cart__item-discounts:empty{
-    display:none;
-    margin:0;
-  }
-.quick-cart__item-discounts:not(:empty):after{
+.quick-cart__item-discounts:after{
     content:"";
     position:absolute;
     top:0;
@@ -10297,9 +10293,6 @@ button.btn.video__pause{
 .product__option + .product__option{
   margin-top:calc(4px * 6);
   margin-top:var(--spacing-6);
-}
-.product__option--hidden-sibling-duplicate{
-  display:none;
 }
 .product__color-swatches,
 .product__color-chips{

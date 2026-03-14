@@ -1,57 +1,9 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
-    "banner": {
-      "type": "main-collection-banner",
-      "settings": {
-        "show_breadcrumbs": true,
-        "show_collection_description": true,
-        "collection_description_truncate_num_lines": "2",
-        "show_collection_image": false,
-        "background_image_focal_point": "image_presentation",
-        "background_image_mobile_focal_point": "image_presentation",
-        "image_height_type": "custom",
-        "custom_height_desktop": "350px",
-        "custom_height_mobile": "250px",
-        "text_position": "flex-start_flex-end",
-        "text_position_mobile": "flex-start_flex-end",
-        "image_overlay_tint_opacity": 70,
-        "image_overlay_tint_style": "gradient_up",
-        "image_overlay_override_with_custom_colors": false,
-        "image_overlay_override_color_text": "#ffffff",
-        "image_overlay_override_color_tint": "#000000",
-        "section_style_spacing_top": 0,
-        "section_style_spacing_bottom": 0,
-        "section_style_enable_animation": true
-      }
-    },
-    "subcollections": {
-      "type": "main-collection-subcollections",
-      "settings": {
-        "num_columns": "5",
-        "num_columns_mobile": "2",
-        "show_product_counts": false,
-        "collection_item_style": "plain",
-        "image_source": "collection",
-        "image_aspect_ratio": "square",
-        "image_circle_crop_enable": false,
-        "image_spacing": 10,
-        "title_font_type": "body",
-        "text_alignment": "center",
-        "section_style_enable_animation": true
-      }
+    "main": {
+      "type": "sc-subcollections-grid",
+      "settings": {}
     }
   },
-  "order": [
-    "banner",
-    "subcollections"
-  ]
+  "order": ["main"]
 }

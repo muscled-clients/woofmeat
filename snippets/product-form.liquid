@@ -60,7 +60,7 @@
           {{ block.settings.label }}:&nbsp;
 
           {%- case block.settings.field_type -%}
-            {%- when 'text' -%}
+            {%- when 'text', 'textarea' -%}
               <input
                 type="text"
                 class="input"
@@ -68,15 +68,6 @@
                 name="properties[{{ block.settings.label }}]"
                 data-custom-option-target="{{ block.id }}"
               >
-
-            {%- when 'textarea' -%}
-              <textarea
-                class="input"
-                placeholder="{{ block.settings.placeholder }}"
-                name="properties[{{ block.settings.label }}]"
-                data-custom-option-target="{{ block.id }}"
-              ></textarea>
-
             {%- when 'checkbox' -%}
               <input
                 type="checkbox"
@@ -232,6 +223,7 @@
           data-lang-available="{{ product_available_label }}"
           data-lang-unavailable="{{ 'product.unavailable' | t }}"
           data-lang-sold-out="{{ 'product.sold_out' | t }}"
+          data-item-weight="{{product.first_available_variant.weight_in_unit}}"
         >
           <span data-add-to-cart-text>{{ add_to_cart_text }}</span>
 
@@ -241,6 +233,9 @@
 
           {% render 'icon', icon: 'checkmark' %}
         </button>
+        <p class="weight-msg-show" style="display:none; color:red; font-size:13px;">
+          &nbsp;
+        </p>
       </div>
     </div>
   </div>

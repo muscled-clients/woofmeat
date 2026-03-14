@@ -91,7 +91,7 @@
     {%- endif %}
 
     {% if block.settings.testimonial != blank -%}
-      <div class="testimonial-item__testimonial rte non-page-rte">
+      <div class="testimonial-item__testimonial">
         {% if truncate -%}
           {% render 'truncate-wrapper',
             content: block.settings.testimonial,

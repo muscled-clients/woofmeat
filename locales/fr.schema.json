@@ -1634,15 +1634,6 @@
       },
       "name": "Aperçu du produit",
       "settings": {
-        "desktop_gallery_layout": {
-          "info": "Les vignettes sont toujours affichées sur les appareils mobiles.",
-          "label": "Mise en page de la galerie de bureau",
-          "options": {
-            "grid": "Grille",
-            "stacked": "Empilé",
-            "thumbnails": "Les vignettes"
-          }
-        },
         "enable_gift_card_recipient": {
           "info": "Permet aux acheteurs d’envoyer des cartes-cadeaux à une date prévue ainsi qu’un message personnel. [En savoir plus](https://help.shopify.com/manual/online-store/themes/customizing-themes/add-gift-card-recipient-fields)",
           "label": "Afficher le formulaire d’information sur le destinataire pour les cartes‑cadeaux"
@@ -1710,13 +1701,11 @@
           "label": "Afficher les vignettes dans la galerie zoom"
         },
         "thumbnail_position": {
-          "info": "S'applique uniquement sur ordinateur de bureau lorsque la mise en page est définie sur « Vignettes ».",
           "label": "Position des vignettes",
           "option_bottom": "Sous les médias",
           "option_left": "Gauche des médias"
         },
         "thumbnail_size": {
-          "info": "S'applique uniquement sur ordinateur de bureau lorsque la mise en page est définie sur « Vignettes ».",
           "label": "Taille de la vignette",
           "option_large": "Grand",
           "option_medium": "Moyen",
@@ -5244,7 +5233,7 @@
         "label": "Afficher la réduction"
       },
       "show_filters": {
-        "info": "Permettez à vos clients de filtrer les produits par options, type de produit, prix, disponibilité, etc. [En savoir plus](https://help.fluorescent.co/cornerstone/collection-pages/filters-and-sorting).",
+        "info": "Permettez aux clients de filtrer par options de produit, type de produit, prix, disponibilité, etc. [Personnalisez les filtres](/admin/menus)",
         "label": "Activer le filtrage"
       },
       "show_item_count": {

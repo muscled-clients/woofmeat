@@ -29,12 +29,21 @@
 -%}
 
 {% capture product_type_dropdown_content %}
-<option value="" selected>All Categories</option>
-<option value="/collections/bakery" data-nav="true">Bakery</option>
-<option value="/collections/beverages" data-nav="true">Beverages</option>
-<option value="/collections/cleaning" data-nav="true">Cleaning</option>
-<option value="/collections/disposables" data-nav="true">Disposables</option>
-<option value="/collections/snacks-candy" data-nav="true">Snacks & Candy</option>
+{% assign default_all_types_label = 'search.all_products' | t %}
+
+<option disabled>{{ 'search.search_within' | t }}</option>
+<option value selected>
+  {{ settings.header_search_product_type_all_label | default: default_all_types_label }}
+</option>
+{%- for product_type in product_types -%}
+  {% assign cleaned_type = product_type | strip %}
+  {% if all_product_types contains cleaned_type and cleaned_type != '' %}
+    <option value="{{ cleaned_type | escape }}" id="{{ product_type | handleize }}">
+      {{ cleaned_type | escape }}
+    </option>
+  {% endif %}
+{%- endfor -%}
+
 {% endcapture %}
 <div
   class="
@@ -252,16 +261,3 @@
     </div>
   </div>
 </div>
-
-<script>
-(function() {
-  document.querySelectorAll('.quick-search__type-select').forEach(function(sel) {
-    sel.addEventListener('change', function() {
-      var opt = this.options[this.selectedIndex];
-      if (opt && opt.dataset.nav === 'true' && opt.value) {
-        window.location.href = opt.value;
-      }
-    });
-  });
-})();
-</script>
