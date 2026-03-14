@@ -15,6 +15,7 @@
   assign wh_cube              = prod.metafields.dotfoods.cube_ft3
   assign wh_pallet            = prod.metafields.dotfoods.pallet_config
   assign wh_country           = prod.metafields.dotfoods.country_of_origin
+  assign wh_net_weight        = prod.metafields.dotfoods.net_weight
   assign wh_price_ds          = prod.metafields.dotfoods.price_drop_ship
   assign wh_price_5k          = prod.metafields.dotfoods.price_5_000_lbs
   assign wh_price_10k         = prod.metafields.dotfoods.price_10_000_lbs
@@ -32,11 +33,11 @@
 -%}
 
 {%- comment -%} ── 1. What's in the box ── {%- endcomment -%}
-{%- if wh_how_packed != blank or prod.variants.first.barcode != blank -%}
+{%- if wh_how_packed != blank or prod.variants.first.barcode != blank or wh_net_weight != blank -%}
 <div class="accordion product-blocks__accordion" style="margin-top:0;">
   <div class="accordion__inner" data-open="false">
     <button class="accordion__label" aria-expanded="false" aria-controls="tab-in-box-{{ prod.id }}">
-      <h2 class="ff-heading fs-heading-5-base">What's in the box</h2>
+      <h2 class="ff-heading fs-heading-5-base">Packaging & Weight</h2>
       <div class="accordion__label-icons" style="--icon-width:15px;--icon-height:15px;">
         {%- render 'icon', icon: 'chevron' -%}
       </div>
@@ -55,6 +56,17 @@
           <td style="padding:8px 4px;">{{ prod.variants.first.barcode }}</td>
         </tr>
         {%- endif -%}
+        {%- if wh_net_weight != blank -%}
+        <tr style="border-bottom:1px solid #eee;">
+          <td style="padding:8px 4px;font-weight:600;">Shipping Weight</td>
+          <td style="padding:8px 4px;">{{ prod.metafields.dotfoods.shipping_weight }}</td>
+        </tr>
+        <tr style="border-bottom:1px solid #eee;">
+          <td style="padding:8px 4px;font-weight:600;">Net Weight</td>
+          <td style="padding:8px 4px;">{{ wh_net_weight }}</td>
+        </tr>
+        {%- endif -%}
+        
       </table>
     </div>
   </div>
