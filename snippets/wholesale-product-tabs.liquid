@@ -1,0 +1,169 @@
+
+{%- comment -%}
+  wholesale-product-tabs.liquid
+  Renders 3 accordion tabs for wholesale product pages:
+  1. What's in the box (How Packed + Case GTIN)
+  2. Product Specs (Temperature, Shelf Life, Dimensions, Cube, Pallet Config, Country of Origin)
+  3. Pricing by Volume (5 price tiers — only for wholesale-approved customers)
+{%- endcomment -%}
+
+{%- liquid
+  assign wh_how_packed        = prod.metafields.dotfoods.how_packed
+  assign wh_temperature       = prod.metafields.dotfoods.temperature
+  assign wh_shelf_life        = prod.metafields.dotfoods.shelf_life
+  assign wh_dimensions        = prod.metafields.dotfoods.dimensions
+  assign wh_cube              = prod.metafields.dotfoods.cube_ft3
+  assign wh_pallet            = prod.metafields.dotfoods.pallet_config
+  assign wh_country           = prod.metafields.dotfoods.country_of_origin
+  assign wh_price_ds          = prod.metafields.dotfoods.price_drop_ship
+  assign wh_price_5k          = prod.metafields.dotfoods.price_5_000_lbs
+  assign wh_price_10k         = prod.metafields.dotfoods.price_10_000_lbs
+  assign wh_price_20k         = prod.metafields.dotfoods.price_20_000_lbs
+  assign wh_price_40k         = prod.metafields.dotfoods.price_40_000_lbs
+
+  assign is_wholesale = false
+  if customer
+    for tag in customer.tags
+      if tag == 'wholesale-approved'
+        assign is_wholesale = true
+      endif
+    endfor
+  endif
+-%}
+
+{%- comment -%} ── 1. What's in the box ── {%- endcomment -%}
+{%- if wh_how_packed != blank or prod.variants.first.barcode != blank -%}
+<div class="accordion product-blocks__accordion" style="margin-top:0;">
+  <div class="accordion__inner" data-open="false">
+    <button class="accordion__label" aria-expanded="false" aria-controls="tab-in-box-{{ prod.id }}">
+      <h2 class="ff-heading fs-heading-5-base">What's in the box</h2>
+      <div class="accordion__label-icons" style="--icon-width:15px;--icon-height:15px;">
+        {%- render 'icon', icon: 'chevron' -%}
+      </div>
+    </button>
+    <div class="accordion__content rte non-page-rte" aria-hidden="true" id="tab-in-box-{{ prod.id }}" style="display:none;">
+      <table style="width:100%;border-collapse:collapse;font-size:0.9em;">
+        {%- if wh_how_packed != blank -%}
+        <tr style="border-bottom:1px solid #eee;">
+          <td style="padding:8px 4px;font-weight:600;width:45%;">How Packed</td>
+          <td style="padding:8px 4px;">{{ wh_how_packed }}</td>
+        </tr>
+        {%- endif -%}
+        {%- if prod.variants.first.barcode != blank -%}
+        <tr style="border-bottom:1px solid #eee;">
+          <td style="padding:8px 4px;font-weight:600;">Case GTIN</td>
+          <td style="padding:8px 4px;">{{ prod.variants.first.barcode }}</td>
+        </tr>
+        {%- endif -%}
+      </table>
+    </div>
+  </div>
+</div>
+{%- endif -%}
+
+{%- comment -%} ── 2. Product Specs ── {%- endcomment -%}
+{%- if wh_temperature != blank or wh_shelf_life != blank or wh_dimensions != blank or wh_cube != blank or wh_pallet != blank or wh_country != blank -%}
+<div class="accordion product-blocks__accordion" style="margin-top:0;">
+  <div class="accordion__inner" data-open="false">
+    <button class="accordion__label" aria-expanded="false" aria-controls="tab-specs-{{ prod.id }}">
+      <h2 class="ff-heading fs-heading-5-base">Product Specs</h2>
+      <div class="accordion__label-icons" style="--icon-width:15px;--icon-height:15px;">
+        {%- render 'icon', icon: 'chevron' -%}
+      </div>
+    </button>
+    <div class="accordion__content rte non-page-rte" aria-hidden="true" id="tab-specs-{{ prod.id }}" style="display:none;">
+      <table style="width:100%;border-collapse:collapse;font-size:0.9em;">
+        {%- if wh_temperature != blank -%}
+        <tr style="border-bottom:1px solid #eee;">
+          <td style="padding:8px 4px;font-weight:600;width:45%;">Temperature</td>
+          <td style="padding:8px 4px;">{{ wh_temperature }}</td>
+        </tr>
+        {%- endif -%}
+        {%- if wh_shelf_life != blank -%}
+        <tr style="border-bottom:1px solid #eee;">
+          <td style="padding:8px 4px;font-weight:600;">Shelf Life</td>
+          <td style="padding:8px 4px;">{{ wh_shelf_life }}</td>
+        </tr>
+        {%- endif -%}
+        {%- if wh_dimensions != blank -%}
+        <tr style="border-bottom:1px solid #eee;">
+          <td style="padding:8px 4px;font-weight:600;">Dimensions</td>
+          <td style="padding:8px 4px;">{{ wh_dimensions }}</td>
+        </tr>
+        {%- endif -%}
+        {%- if wh_cube != blank -%}
+        <tr style="border-bottom:1px solid #eee;">
+          <td style="padding:8px 4px;font-weight:600;">Cube</td>
+          <td style="padding:8px 4px;">{{ wh_cube }}</td>
+        </tr>
+        {%- endif -%}
+        {%- if wh_pallet != blank -%}
+        <tr style="border-bottom:1px solid #eee;">
+          <td style="padding:8px 4px;font-weight:600;">Pallet Config</td>
+          <td style="padding:8px 4px;">{{ wh_pallet }}</td>
+        </tr>
+        {%- endif -%}
+        {%- if wh_country != blank -%}
+        <tr>
+          <td style="padding:8px 4px;font-weight:600;">Country of Origin</td>
+          <td style="padding:8px 4px;">{{ wh_country }}</td>
+        </tr>
+        {%- endif -%}
+      </table>
+    </div>
+  </div>
+</div>
+{%- endif -%}
+
+{%- comment -%} ── 3. Pricing by Volume (wholesale-approved only) ── {%- endcomment -%}
+{%- if is_wholesale and wh_price_ds != blank -%}
+<div class="accordion product-blocks__accordion" style="margin-top:0;">
+  <div class="accordion__inner" data-open="false">
+    <button class="accordion__label" aria-expanded="false" aria-controls="tab-pricing-{{ prod.id }}">
+      <h2 class="ff-heading fs-heading-5-base">Pricing by Volume</h2>
+      <div class="accordion__label-icons" style="--icon-width:15px;--icon-height:15px;">
+        {%- render 'icon', icon: 'chevron' -%}
+      </div>
+    </button>
+    <div class="accordion__content rte non-page-rte" aria-hidden="true" id="tab-pricing-{{ prod.id }}" style="display:none;">
+      <table style="width:100%;border-collapse:collapse;font-size:0.9em;">
+        <tr style="background:#f5f5f5;">
+          <th style="padding:8px 4px;text-align:left;font-weight:600;">Order Volume</th>
+          <th style="padding:8px 4px;text-align:right;font-weight:600;">Price / Case</th>
+        </tr>
+        {%- if wh_price_ds != blank -%}
+        <tr style="border-bottom:1px solid #eee;">
+          <td style="padding:8px 4px;">Drop Ship</td>
+          <td style="padding:8px 4px;text-align:right;">{{ wh_price_ds }}</td>
+        </tr>
+        {%- endif -%}
+        {%- if wh_price_5k != blank -%}
+        <tr style="border-bottom:1px solid #eee;">
+          <td style="padding:8px 4px;">5,000 lbs</td>
+          <td style="padding:8px 4px;text-align:right;">{{ wh_price_5k }}</td>
+        </tr>
+        {%- endif -%}
+        {%- if wh_price_10k != blank -%}
+        <tr style="border-bottom:1px solid #eee;">
+          <td style="padding:8px 4px;">10,000 lbs</td>
+          <td style="padding:8px 4px;text-align:right;">{{ wh_price_10k }}</td>
+        </tr>
+        {%- endif -%}
+        {%- if wh_price_20k != blank -%}
+        <tr style="border-bottom:1px solid #eee;">
+          <td style="padding:8px 4px;">20,000 lbs</td>
+          <td style="padding:8px 4px;text-align:right;">{{ wh_price_20k }}</td>
+        </tr>
+        {%- endif -%}
+        {%- if wh_price_40k != blank -%}
+        <tr>
+          <td style="padding:8px 4px;">40,000 lbs</td>
+          <td style="padding:8px 4px;text-align:right;">{{ wh_price_40k }}</td>
+        </tr>
+        {%- endif -%}
+      </table>
+      <p style="font-size:0.8em;color:#888;margin-top:8px;">* Prices per case. Based on total order weight.</p>
+    </div>
+  </div>
+</div>
+{%- endif -%}

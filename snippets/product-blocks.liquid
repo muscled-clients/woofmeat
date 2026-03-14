@@ -121,6 +121,7 @@
           {%- endif %}
         {%- when 'description' -%}
           {% render 'product-block-description', prod: prod, block: block %}
+          {% render 'wholesale-product-tabs', prod: prod %}
         {%- when 'text-list-with-icons' -%}
           {% render 'section-block-text-list-with-icons', type: 'product', block: block %}
         {%- when 'product_labels' -%}
