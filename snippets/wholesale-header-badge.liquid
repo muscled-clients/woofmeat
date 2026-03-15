@@ -1,43 +1,54 @@
-{%- comment -%}Updates the header min order badge when cart changes{%- endcomment -%}
+{%- comment -%}Intercepts cart API calls and triggers wholesale UI updates{%- endcomment -%}
 <script>
 (function() {
-  var MIN_LBS = 5000;
-  function updateHeaderBadge() {
-    fetch('/cart.js').then(function(r){return r.json()}).then(function(cart) {
-      var lbs = (cart.total_weight * 0.00220462).toFixed(1);
-      var badge = document.getElementById('header-min-order-badge');
-      var lbsEl = document.getElementById('header-cart-lbs');
-      if (badge) {
-        if (parseFloat(lbs) >= MIN_LBS) {
-          badge.style.background = '#d1e7dd';
-          badge.style.color = '#0f5132';
-        } else {
-          badge.style.background = '#fff3cd';
-          badge.style.color = '#856404';
+  function triggerUpdate() {
+    if (window._updateWholesaleUI) {
+      window._updateWholesaleUI();
+    } else {
+      /* Fallback: update header badge directly */
+      fetch('/cart.js').then(function(r){return r.json()}).then(function(cart) {
+        var lbs = (cart.total_weight * 0.00220462).toFixed(1);
+        var met = parseFloat(lbs) >= 5000;
+        var badge = document.getElementById('header-min-order-badge');
+        var lbsEl = document.getElementById('header-cart-lbs');
+        if (badge) {
+          badge.style.background = met ? '#d1e7dd' : '#fff3cd';
+          badge.style.color = met ? '#0f5132' : '#856404';
         }
-      }
-      if (lbsEl) lbsEl.textContent = lbs + ' lbs';
-
-      /* Also dispatch a custom event so drawer/page checkout JS can react */
-      document.dispatchEvent(new CustomEvent('cart:updated'));
-    });
+        if (lbsEl) lbsEl.textContent = lbs + ' lbs';
+        document.dispatchEvent(new CustomEvent('cart:updated'));
+      });
+    }
   }
-  /* Listen for cart update events */
-  document.addEventListener('ajaxProduct:added', updateHeaderBadge);
 
-  /* Intercept fetch - use a shared flag to avoid double-wrapping */
+  /* Intercept fetch — single shared wrapper */
   if (!window._wholesaleOrigFetch) {
     window._wholesaleOrigFetch = window.fetch;
     window.fetch = function() {
       var result = window._wholesaleOrigFetch.apply(this, arguments);
-      if (arguments[0] && typeof arguments[0] === 'string' && (arguments[0].includes('/cart/add') || arguments[0].includes('/cart/change') || arguments[0].includes('/cart/update') || arguments[0].includes('/cart/clear'))) {
-        result.then(function() { setTimeout(updateHeaderBadge, 500); });
+      var url = arguments[0];
+      if (url && typeof url === 'string' && (url.includes('/cart/add') || url.includes('/cart/change') || url.includes('/cart/update') || url.includes('/cart/clear'))) {
+        result.then(function() { setTimeout(triggerUpdate, 400); });
       }
       return result;
     };
   }
 
-  /* Initial load */
-  document.addEventListener('DOMContentLoaded', updateHeaderBadge);
+  /* Intercept XHR */
+  var _origXHR = XMLHttpRequest.prototype.open;
+  XMLHttpRequest.prototype.open = function(method, url) {
+    if (url && typeof url === 'string' && (url.includes('/cart/add') || url.includes('/cart/change') || url.includes('/cart/update') || url.includes('/cart/clear'))) {
+      this.addEventListener('load', function() { setTimeout(triggerUpdate, 400); });
+    }
+    return _origXHR.apply(this, arguments);
+  };
+
+  /* Initial load + events */
+  document.addEventListener('ajaxProduct:added', triggerUpdate);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', triggerUpdate);
+  } else {
+    triggerUpdate();
+  }
 })();
 </script>
