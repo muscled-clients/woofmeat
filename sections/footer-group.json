@@ -126,6 +126,22 @@
     "footer": {
       "type": "footer",
       "blocks": {
+        "about_us": {
+          "type": "text",
+          "settings": {
+            "collapse_on_mobile": true,
+            "title": "Woofmeets Distribution",
+            "heading_tag_text": "h3",
+            "show_title_on_desktop": true,
+            "text": "<p>Your trusted wholesale partner for foodservice and retail. We connect brands with businesses, offering a curated selection of bakery, beverages, cleaning supplies, disposables, and snacks at competitive wholesale prices.</p>",
+            "image_max_width": 200,
+            "image_placement": "below_text",
+            "show_social_icons": false,
+            "social_icons_header": "Follow us",
+            "footer_social_heading_tag": "h3",
+            "enable_follow_on_shop": true
+          }
+        },
         "links_1": {
           "type": "links",
           "settings": {
@@ -160,21 +176,12 @@
             "contact_text_2": "wholesale@woofmeetsdistribution.com",
             "contact_link_2": "",
             "contact_icon_3": "pin",
-            "contact_text_3": "18410 Jamaica Ave, Hollis, NY 11423",
+            "contact_text_3": "1500 Old Country Rd, Westbury, NY 11590",
             "contact_link_3": "",
             "show_social_icons": true,
             "social_icons_header": "Follow us",
             "footer_social_heading_tag": "h3",
             "enable_follow_on_shop": false
-          }
-        },
-        "about_us": {
-          "type": "text",
-          "settings": {
-            "title": "Woofmeets Distribution",
-            "heading_tag_text": "h3",
-            "show_title_on_desktop": true,
-            "text": "<p>Your trusted wholesale partner for foodservice and retail. We connect brands with businesses, offering a curated selection of bakery, beverages, cleaning supplies, disposables, and snacks at competitive wholesale prices.</p>"
           }
         }
       },
