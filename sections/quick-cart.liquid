@@ -160,25 +160,24 @@
               </p>
 
               {% if is_wholesale %}
-                <div id="drawer-wholesale-weight-msg" style="display:block;margin:0 0 12px 0;padding:10px 14px;border-radius:6px;font-size:0.9em;font-weight:500;text-align:center;{% if cart_total_lbs < 5000 %}background:#fff3cd;border:1px solid #ffc107;color:#856404;{% else %}background:#d1e7dd;border:1px solid #0f5132;color:#0f5132;{% endif %}">
-                  {% if cart_total_lbs < 5000 %}
-                    &#9888; Min wholesale order: 5,000 lbs. Cart: <strong>{{ cart_total_lbs }} lbs</strong>
-                  {% else %}
-                    &#10003; Minimum met &mdash; <strong>{{ cart_total_lbs }} lbs</strong>
-                  {% endif %}
-                </div>
-
                 <button
                   type="submit"
                   name="checkout"
                   id="drawer-checkout-btn"
                   class="quick-cart__submit btn btn--full btn--primary"
                   aria-label="{{ 'cart.general.checkout' | t }}"
-                  style="display:block !important;visibility:visible !important;{% if cart_total_lbs < 5000 %}opacity:0.5;cursor:not-allowed;{% endif %}"
+                  style="{% if cart_total_lbs < 5000 %}opacity:0.5;cursor:not-allowed;{% endif %}"
                   {% if cart_total_lbs < 5000 %}disabled{% endif %}
                 >
                   {{ 'cart.general.checkout' | t }}
                 </button>
+                <div id="drawer-wholesale-weight-msg" style="margin:10px 0 0 0;padding:10px 14px;border-radius:6px;font-size:0.9em;font-weight:500;text-align:center;{% if cart_total_lbs < 5000 %}background:#fff3cd;border:1px solid #ffc107;color:#856404;{% else %}background:#d1e7dd;border:1px solid #0f5132;color:#0f5132;{% endif %}">
+                  {% if cart_total_lbs < 5000 %}
+                    &#9888; Min order: 5,000 lbs &mdash; Cart: <strong>{{ cart_total_lbs }} lbs</strong>
+                  {% else %}
+                    &#10003; Minimum met &mdash; <strong>{{ cart_total_lbs }} lbs</strong>
+                  {% endif %}
+                </div>
               {% else %}
                 <button
                   type="submit"
